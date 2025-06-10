@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b501bd1a70ff8b645b194801dcf4bf96, type: 3}
+  m_Name: Goblin_Male
+  m_EditorClassIdentifier: 
+  animationName: Goblin_Male
+  overrideController: {fileID: 22100000, guid: 25784ba97e2db2f40a45e5e249bd21a0, type: 2}
+  animationClips:
+  - clipName: Attack
+    clip: {fileID: 7400000, guid: a685f6ccfb11e43498850d8b44c4252f, type: 3}
+  - clipName: Damage
+    clip: {fileID: 7400000, guid: 55e87de746eaa574a9affbbe173dcbbd, type: 3}
+  - clipName: Idle
+    clip: {fileID: 7400000, guid: 5c0b1be3522a16f4c8519b02a90a980d, type: 3}
+  - clipName: Move
+    clip: {fileID: 7400000, guid: 347deb13f172b5b418bf8b5c60941b68, type: 3}
+  - clipName: Death
+    clip: {fileID: 7400000, guid: 9a26352c93a81e947b73b8e47cc931bb, type: 3}
+  - clipName: Evade
+    clip: {fileID: 7400000, guid: a1550f3512055cd4a95ecb62e3444617, type: 3}
