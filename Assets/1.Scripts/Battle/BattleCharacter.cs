@@ -18,7 +18,10 @@ public enum BattleActionType
 
 public abstract class BattleCharacter : MonoBehaviour
 {
-    [Header("Character Team Settings")]
+    [Header("Character Location Settings")]
+    [SerializeField] private Transform characterDefaultLocation;
+    
+    [Space(10), Header("Character Team Settings")]
     [SerializeField] private BattleCharacterType characterType = BattleCharacterType.Player;
     public BattleCharacterType CharacterType
     {
