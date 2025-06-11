@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class BattlePlayer : BattleCharacter
 {
@@ -32,6 +33,8 @@ public class BattlePlayer : BattleCharacter
     ActionType NextAction = ActionType.MainMenu;
 
     private BattleCharacter targetCharacter = null;
+
+    public override BattleCharacterType CharacterType => BattleCharacterType.Player;
 
     protected override IEnumerator UpdateBattleActionCoroutine()
     {
@@ -113,9 +116,36 @@ public class BattlePlayer : BattleCharacter
         {
             yield return null;
         }
+        
+        yield return StartCoroutine(PlayAttackAnimation());
+        
         Activated = false;
         
         yield break;
+    }
+    
+    IEnumerator PlayAttackAnimation()
+    {
+        director.Play();
+        yield return WaitForTimeline(director);
+
+        Debug.Log("타임라인 종료됨, 다음 단계 진행");
+    }
+
+
+    public static IEnumerator WaitForTimeline(PlayableDirector director)
+    {
+        bool isDone = false;
+
+        void OnStopped(PlayableDirector _) => isDone = true;
+
+        director.stopped += OnStopped;
+
+        // 이미 재생 중인 경우만 대기
+        if (director.state == PlayState.Playing)
+            yield return new WaitUntil(() => isDone);
+
+        director.stopped -= OnStopped;
     }
 
     

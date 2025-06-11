@@ -10,6 +10,8 @@ public class BattleMonster : BattleCharacter
     }
 
     // Update is called once per frame
+    public override BattleCharacterType CharacterType => BattleCharacterType.Enemy;
+
     void Update()
     {
         

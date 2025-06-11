@@ -1112,6 +1112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2202213804664698316}
   - component: {fileID: 6486315394965474195}
+  - component: {fileID: 8185986045375615913}
   m_Layer: 0
   m_Name: Monster_Goblin_Male
   m_TagString: Untagged
@@ -1134,6 +1135,7 @@ Transform:
   m_Children:
   - {fileID: 6607236894929705477}
   - {fileID: 6979656237842710908}
+  - {fileID: 5974466230376314574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6486315394965474195
@@ -1149,7 +1151,7 @@ Animator:
   m_Controller: {fileID: 22100000, guid: 65bb4aa968db2ed4eb8f7e1fcf04f3ec, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -1158,6 +1160,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8185986045375615913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755322294461624750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013cf27843686bd4aab897457f205f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterDefaultLocation: {fileID: 0}
+  characterCamera: {fileID: 2385305177945867400}
+  maxHp: 100
 --- !u!1 &2795702345204599767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,6 +1418,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4222204320916906564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3562069345450769564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5974466230376314574}
+  - component: {fileID: 2385305177945867400}
+  m_Layer: 0
+  m_Name: GoblinMaleCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5974466230376314574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562069345450769564}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.053516157, y: -0.94168514, z: 0.18041104, w: -0.27895698}
+  m_LocalPosition: {x: -1.1606445, y: 2.276044, z: 2.1976738}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2202213804664698316}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2385305177945867400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562069345450769564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 1
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &3894424345299631562
 GameObject:
   m_ObjectHideFlags: 0

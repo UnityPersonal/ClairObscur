@@ -22,9 +22,13 @@ public class MoveToTargetBehaviour : PlayableBehaviour
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
         if (actor == null || target == null) return;
+        if(playerData == null) return;
 
+        Transform trackBinding = playerData as Transform;
+        if (trackBinding == null) return;
+        
         double time = playable.GetTime();
-        double t = time / duration;
-        actor.position = Vector3.Lerp(startPos, endPos, (float)t);
+        double t = time / playable.GetDuration();
+        trackBinding.position = Vector3.Lerp(startPos, endPos, (float)t);
     }
 }

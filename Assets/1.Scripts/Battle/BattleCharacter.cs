@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Playables;
 
 [System.Serializable]
 public enum BattleCharacterType
@@ -25,12 +26,10 @@ public abstract class BattleCharacter : MonoBehaviour
     [Space(10), Header("Character Camera Settings")]
     [SerializeField] private CinemachineCamera characterCamera;
     
-    [Space(10), Header("Character Team Settings")]
-    [SerializeField] private BattleCharacterType characterType = BattleCharacterType.Player;
-    public BattleCharacterType CharacterType
-    {
-        get { return characterType; }
-    }
+    [Space(10), Header("Character Timeline Settings")]
+    [SerializeField] protected PlayableDirector director;
+    
+    abstract public  BattleCharacterType CharacterType { get; }
 
     [Space(10), Header("Character Status")]
     [SerializeField] private int maxHp = 100;
