@@ -101,8 +101,6 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator UpdateTurnCoroutine(BattleCharacter currentTureCharacter = null)
     {
-        Debug.Log("BattleManager ::: UpdateTurnCoroutine");
-        
         if (currentTureCharacter == null)
         {
             Debug.LogError("BattleManager ::: UpdateTurnCoroutine - currentTureCharacter is null");
@@ -110,7 +108,7 @@ public class BattleManager : MonoBehaviour
         }
 
         currentTureCharacter.StartTurn();
-        while (currentTureCharacter.Activated == false)
+        while (currentTureCharacter.Activated == true)
         {
             // Logic to update the turn, e.g., processing player actions, enemy actions, etc.
             yield return null;

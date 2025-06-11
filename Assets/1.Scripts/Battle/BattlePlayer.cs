@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BattlePlayer : BattleCharacter
@@ -41,7 +42,7 @@ public class BattlePlayer : BattleCharacter
             switch (NextAction)
             {
                 case ActionType.MainMenu:
-                    yield return StartCoroutine(MainMenuCoroutine()) ;
+                    yield return StartCoroutine(MainMenuCoroutine());
                     break;
                 case ActionType.Attack:
                     yield return StartCoroutine(AttackCoroutine());
@@ -57,23 +58,32 @@ public class BattlePlayer : BattleCharacter
                     break;
             }
         }
-        
+        Debug.Log($"BattlePlayer Turn Ended");
     }
 
     private IEnumerator MainMenuCoroutine()
     {
-        while (IsDead == false)
-        {
-            yield return null;
-        }
+        NextAction = ActionType.TargetSelect;
+        yield break;
     }
 
     private IEnumerator TargetSelectCoroutine()
     {
-        while (IsDead == false)
+        // 액션을 취할 대상을 선택합니다.
+        // 상대 진영에서 적을 랜덤으로 선택합니다.
+        var enemyList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Enemy];
+        foreach (var character in enemyList)
         {
-            yield return null;
+            if (character.IsDead == false)
+            {
+                targetCharacter = character;
+                break;
+            }
         }
+        
+        Debug.Log($"BattlePlayer ::: TargetSelectCoroutine {name} selected target {targetCharacter.name}.");
+        NextAction = ActionType.Attack;
+        yield break;
     }
 
     private IEnumerator SkillSelectCoroutine()
@@ -96,11 +106,16 @@ public class BattlePlayer : BattleCharacter
     
     private IEnumerator AttackCoroutine()
     {
-        while (IsDead == false)
+        // 대상하게 공격을 수행합니다.
+        Debug.Log($"BattlePlayer ::: AttackCoroutine {name} is attacking {targetCharacter.name}.");
+        BattleEventManager.OnAttack( new AttackEventArgs(10, this, targetCharacter));
+        while (Input.GetKeyDown(KeyCode.Space) == false)
         {
             yield return null;
         }
         Activated = false;
+        
+        yield break;
     }
 
     

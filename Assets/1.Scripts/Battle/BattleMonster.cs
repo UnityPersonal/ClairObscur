@@ -44,7 +44,12 @@ public class BattleMonster : BattleCharacter
     
     private IEnumerator AttackCoroutine()
     {
+        while (Input.GetKeyDown(KeyCode.Space) == false)
+        {
+            yield return null;
+        }
         BattleEventManager.OnAttack(new AttackEventArgs(10, this, targetCharacter));
-        yield break;
+        
+        Activated = false; 
     }
 }
