@@ -13,12 +13,28 @@ MonoBehaviour:
   m_Name: MoveToTargetClip(Clone)(Clone)
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 0c348edb81f9d234da28451b1a01a640
+    exposedName: cc25b844e818bde4ea752acb4ba65fb2
     defaultValue: {fileID: 0}
   target:
-    exposedName: 5bd952d0e4daabc4d921c4488db49157
+    exposedName: 814d90bd81be71d4e98e0ed1c4025231
     defaultValue: {fileID: 0}
   duration: 1
+--- !u!114 &-8187276881665420740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 3.466666666666667
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 1cf36bbdd7e49204da1451aac2d1c825, type: 2}
 --- !u!114 &-6218320608750063102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,25 +170,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -238,7 +236,8 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Run
   m_Markers:
-    m_Objects: []
+    m_Objects:
+    - {fileID: -8187276881665420740}
   m_InfiniteClipPreExtrapolation: 0
   m_InfiniteClipPostExtrapolation: 0
   m_InfiniteClipOffsetPosition: {x: 0, y: 0, z: 0}
@@ -439,9 +438,9 @@ MonoBehaviour:
   m_Name: MoveToTargetClip
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 08f8089db180ed940845b22490b62030
+    exposedName: 10796574c96852a4480f7fbdd2327756
     defaultValue: {fileID: 0}
   target:
-    exposedName: e422f57f851f4624c886d9ec2ebee36a
+    exposedName: 8fa43cb4a9b57df4b863e541e72e52cb
     defaultValue: {fileID: 0}
   duration: 1

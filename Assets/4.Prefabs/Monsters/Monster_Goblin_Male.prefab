@@ -1113,6 +1113,7 @@ GameObject:
   - component: {fileID: 2202213804664698316}
   - component: {fileID: 6486315394965474195}
   - component: {fileID: 8185986045375615913}
+  - component: {fileID: 1308755081754487285}
   m_Layer: 0
   m_Name: Monster_Goblin_Male
   m_TagString: Untagged
@@ -1133,6 +1134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3307754163940240811}
   - {fileID: 6607236894929705477}
   - {fileID: 6979656237842710908}
   - {fileID: 5974466230376314574}
@@ -1173,8 +1175,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterDefaultLocation: {fileID: 0}
+  characterHitTransform: {fileID: 0}
   characterCamera: {fileID: 2385305177945867400}
+  director: {fileID: 3881541714389588597}
+  animator: {fileID: 6486315394965474195}
   maxHp: 100
+--- !u!114 &1308755081754487285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755322294461624750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1cf36bbdd7e49204da1451aac2d1c825, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8185986045375615913}
+          m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
+          m_MethodName: OnEmittedBeginAttackSignal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2795702345204599767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1528,63 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!1 &3616888847748532305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3307754163940240811}
+  - component: {fileID: 3881541714389588597}
+  m_Layer: 0
+  m_Name: Monster1TimelinePlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3307754163940240811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616888847748532305}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2202213804664698316}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &3881541714389588597
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616888847748532305}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 93b274476dacf084c91d1392d8617f63, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -4924759947063163285, guid: 93b274476dacf084c91d1392d8617f63, type: 2}
+    value: {fileID: 6486315394965474195}
+  - key: {fileID: 5108311241551401036, guid: 93b274476dacf084c91d1392d8617f63, type: 2}
+    value: {fileID: 2202213804664698316}
+  m_ExposedReferences:
+    m_References:
+    - cec4aada880176a4cb9dea5306077988: {fileID: 0}
+    - 9b36b287c036cab46b634d600049c464: {fileID: 0}
+    - cb41d29c1f6e4584ba43862c928d312f: {fileID: 0}
+    - 58739d9050c66e54f8a07b71f54cda3a: {fileID: 0}
 --- !u!1 &3894424345299631562
 GameObject:
   m_ObjectHideFlags: 0

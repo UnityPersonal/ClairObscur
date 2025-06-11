@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MoveToTargetClip(Clone)(Clone)
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 0c348edb81f9d234da28451b1a01a640
+    exposedName: d190d819e017d674e9a330dee051e2b4
     defaultValue: {fileID: 0}
   target:
-    exposedName: 5bd952d0e4daabc4d921c4488db49157
+    exposedName: 2ea3dc5c7446ca34d8c340300fc51ea6
     defaultValue: {fileID: 0}
   duration: 1
 --- !u!114 &-6218320608750063102
@@ -172,25 +172,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -217,25 +199,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -274,7 +238,8 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Run_B
   m_Markers:
-    m_Objects: []
+    m_Objects:
+    - {fileID: 8552139063324921189}
   m_InfiniteClipPreExtrapolation: 0
   m_InfiniteClipPostExtrapolation: 0
   m_InfiniteClipOffsetPosition: {x: 0, y: 0, z: 0}
@@ -475,9 +440,25 @@ MonoBehaviour:
   m_Name: MoveToTargetClip
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 08f8089db180ed940845b22490b62030
+    exposedName: a33dae530f2dbdc4bb85c642f5daa0fe
     defaultValue: {fileID: 0}
   target:
-    exposedName: e422f57f851f4624c886d9ec2ebee36a
+    exposedName: dbdbd81e338c57e4d9ca5bb65c835bf1
     defaultValue: {fileID: 0}
   duration: 1
+--- !u!114 &8552139063324921189
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 1.6833333333333333
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 1cf36bbdd7e49204da1451aac2d1c825, type: 2}

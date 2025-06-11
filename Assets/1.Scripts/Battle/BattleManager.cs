@@ -88,8 +88,11 @@ public class BattleManager : MonoBehaviour
             if (battlePriorityQueue.Count > 0)
             {
                 BattleCharacter currentTureCharacter = battlePriorityQueue.Dequeue();
-                yield return StartCoroutine(UpdateTurnCoroutine(currentTureCharacter));
-                battlePriorityQueue.Enqueue(currentTureCharacter);
+                if (currentTureCharacter.IsDead == false)
+                {
+                    yield return StartCoroutine(UpdateTurnCoroutine(currentTureCharacter));
+                    battlePriorityQueue.Enqueue(currentTureCharacter);    
+                }
             }
             
             CheckEndTurn();

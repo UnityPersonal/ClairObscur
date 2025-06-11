@@ -21,13 +21,22 @@ public enum BattleActionType
 public abstract class BattleCharacter : MonoBehaviour
 {
     [Header("Character Location Settings")]
-    [SerializeField] private Transform characterDefaultLocation;
+    [SerializeField] protected Transform characterDefaultLocation;
+    [SerializeField] protected Transform characterHitTransform;
+    public Transform CharacterHitTransform { get { return characterHitTransform; } }
     
     [Space(10), Header("Character Camera Settings")]
     [SerializeField] private CinemachineCamera characterCamera;
     
     [Space(10), Header("Character Timeline Settings")]
     [SerializeField] protected PlayableDirector director;
+    
+    [Space(10), Header("Character Animation Settings")]
+    [SerializeField] protected Animator animator;
+
+
+    abstract public void OnEmittedBeginAttackSignal();
+    
     
     abstract public  BattleCharacterType CharacterType { get; }
 
@@ -49,9 +58,27 @@ public abstract class BattleCharacter : MonoBehaviour
     }
 
     protected bool IsAttacking = false;
-    
-    // Update is called once per frame
-    void Update()
+
+    protected abstract void OnAttack(AttackEventArgs args);
+
+
+    protected virtual void OnEnable()
+    {
+        var callbacks = BattleEventManager.Callbacks;
+        callbacks.OnAttack += OnAttack;
+    }
+
+    protected virtual void OnDisable()
+    {
+        
+    }
+
+    protected virtual void Start()
+    {
+        
+    }
+
+    protected virtual void Update()
     {
         if(Activated == false)
         {
