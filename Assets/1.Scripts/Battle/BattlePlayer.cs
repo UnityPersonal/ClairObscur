@@ -45,6 +45,18 @@ public class BattlePlayer : BattleCharacter
         BattleEventManager.OnAttack( new AttackEventArgs(10, this, targetCharacter));
     }
 
+    public override void OnEmittedBeginDefendSignal()
+    {
+        // begin defend 시 처리
+        // activate?
+        Activated = true;
+    }
+
+    public override void OnEmittedEndDefendSignal()
+    {
+        Activated = false;
+    }
+
     public override BattleCharacterType CharacterType => BattleCharacterType.Player;
     public override BattleCharacter TargetCharacter => targetCharacter;
 
@@ -121,90 +133,8 @@ public class BattlePlayer : BattleCharacter
         Activated = false;
     }
     
-    private IEnumerator AttackCoroutine()
-    {
-        // 대상하게 공격을 수행합니다.
-        Debug.Log($"BattlePlayer ::: AttackCoroutine {name} is attacking {targetCharacter.name}.");
-        while (Input.GetKeyDown(KeyCode.Space) == false)
-        {
-            yield return null;
-        }
-        
-        yield return StartCoroutine(PlayAttackAnimation());
-        
-        Activated = false;
-        
-        yield break;
-    }
     
-    IEnumerator PlayAttackAnimation()
-    {
-        // 1. TimelineAsset 가져오기
-        var timeline = director.playableAsset as TimelineAsset;
-        // 2. 모든 트랙 순회
-        foreach (var track in timeline.GetOutputTracks())
-        {
-            // MoveToTargetTrack만 처리
-            if (track is MoveToTargetTrack)
-            {
-                // 3. 트랙의 모든 클립 순회
-                foreach (var clip in track.GetClips())
-                {
-                    // MoveToTargetClip만 처리
-                    var moveClip = clip.asset as MoveToTargetClip;
-                    if (moveClip != null)
-                    {
-                        // 4. actor, target 동적 할당
-                        moveClip.actor.exposedName = UnityEditor.GUID.Generate().ToString();
-                        moveClip.target.exposedName = UnityEditor.GUID.Generate().ToString();
-
-                        if (clip.displayName.Equals("GoTo"))
-                        {
-                            director.SetReferenceValue(moveClip.actor.exposedName, characterDefaultLocation);
-                            director.SetReferenceValue(moveClip.target.exposedName, targetCharacter.CharacterHitTransform);
-                        }
-                        else if (clip.displayName.Equals("ReturnTo"))
-                        {
-                            director.SetReferenceValue(moveClip.actor.exposedName, targetCharacter.CharacterHitTransform);
-                            director.SetReferenceValue(moveClip.target.exposedName, characterDefaultLocation);
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"clip displayName '{clip.displayName}' does not match expected names.");
-                        }
-                        
-                    }
-                    
-                }
-            }
-
-            if (track is BattleSignalEmitTrack)
-            {
-                director.SetGenericBinding(track, TimelineEventListener.Instance);
-            }
-        }
-
-        director.Play();
-        yield return WaitForTimeline(director);
-
-        Debug.Log("타임라인 종료됨, 다음 단계 진행");
-    }
-
-
-    public static IEnumerator WaitForTimeline(PlayableDirector director)
-    {
-        bool isDone = false;
-
-        void OnStopped(PlayableDirector _) => isDone = true;
-
-        director.stopped += OnStopped;
-
-        // 이미 재생 중인 경우만 대기
-        if (director.state == PlayState.Playing)
-            yield return new WaitUntil(() => isDone);
-
-        director.stopped -= OnStopped;
-    }
+    
 
     
 }

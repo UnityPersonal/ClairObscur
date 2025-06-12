@@ -19,16 +19,26 @@ public class TimelineEventListener : MonoBehaviour
         
     }
     
+    public void OnDefendEndReceived()
+    {
+        // Defend End signal 수신 시 처리
+        Debug.Log("OnDefendEndReceived");
+        
+        BattleManager.Instance.CurrentTurnCharacter.TargetCharacter.OnEmittedEndDefendSignal();
+    }
+    
     public void OnDefendReceived()
     {
+        
         // Defend signal 수신 시 처리
         Debug.Log("OnDefendReceived");
+        BattleManager.Instance.CurrentTurnCharacter.TargetCharacter.OnEmittedBeginDefendSignal();
+
     }
     
     public void OnAttackReceived()
     {
-        // Attack signal 수신 시 처리
-        Debug.Log("OnAttackReceived");
+        BattleManager.Instance.CurrentTurnCharacter.OnEmittedBeginAttackSignal();
     }
     
     public void OnSignalReceived(SignalAsset signal)
