@@ -79,13 +79,12 @@ public class AttackEventArgs : GameEventArgs
 
 public class TakeDamageEventArgs : GameEventArgs
 {
-    public BattleCharacter Attacker { get; private set; }
+    public BattleCharacter Target { get; private set; }
     public int Damage { get; private set; }
-    public int CurrentHp { get; private set; }
     
-    public TakeDamageEventArgs(int damage, int currentHp)
+    public TakeDamageEventArgs(BattleCharacter target, int damage)
     {
+        Target = target;
         Damage = damage;
-        CurrentHp = currentHp;
     }
 }
