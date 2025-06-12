@@ -27,7 +27,6 @@ public class BattleMonster : BattleCharacter
 
     public override void OnEmittedBeginDefendSignal()
     {
-        
     }
 
     public override void OnEmittedEndDefendSignal()
@@ -47,9 +46,11 @@ public class BattleMonster : BattleCharacter
         yield return StartCoroutine(SelectTargetCoroutine());
         
         yield return StartCoroutine(AttackCoroutine());
-        
-        
-        Activated = false;
+    }
+
+    protected override IEnumerator UpdateDefendActionCoroutine()
+    {
+        yield break;
     }
 
     private BattleCharacter targetCharacter = null;

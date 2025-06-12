@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c45b9394573ed49a3ec250c04f65fe, type: 3}
+  m_Name: WarriorActionTable
+  m_EditorClassIdentifier: 
+  actionDataList:
+  - {fileID: 11400000, guid: df559a133a68afa4bb949129c97fdfe9, type: 2}
+  - {fileID: 11400000, guid: 44366b8d97b59b24192aa23fcab057f0, type: 2}
+  - {fileID: 11400000, guid: 7fa5fbda9e7812148a6026b4979674d0, type: 2}

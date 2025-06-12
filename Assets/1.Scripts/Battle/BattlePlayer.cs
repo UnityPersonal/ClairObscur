@@ -9,14 +9,20 @@ using Random = UnityEngine.Random;
 
 public class BattlePlayer : BattleCharacter
 {
+    [SerializeField] Transform dodgeTransform;
     enum ActionType
     {
+        None,
         MainMenu,
         Attack,
         SkillSelect,
         TargetSelect,
         SkillActive,
     }
+
+    private bool isDefending = false;
+    public bool IsDodging { get; private set; } = false;
+    public bool IsParrying { get; private set; } = false;
 
     protected override void OnEnable()
     {
@@ -47,14 +53,26 @@ public class BattlePlayer : BattleCharacter
 
     public override void OnEmittedBeginDefendSignal()
     {
-        // begin defend 시 처리
-        // activate?
-        Activated = true;
+        Debug.Log("OnEmittedBeginDefendSignal");
+        isDefending = true;
     }
 
     public override void OnEmittedEndDefendSignal()
     {
-        Activated = false;
+        Debug.Log("OnEmittedEndDefendSignal");
+        isDefending = false;
+    }
+
+    public void OnEmittedBeginDodgeSignal()
+    {
+        IsDodging = true;
+        animator.SetTrigger("Dodge");
+        
+    }
+    
+    public void OnEmittedEndDodgeSignal()
+    {
+        IsDodging = false;
     }
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Player;
@@ -88,6 +106,91 @@ public class BattlePlayer : BattleCharacter
         Debug.Log($"BattlePlayer Turn Ended");
     }
 
+    protected override IEnumerator UpdateDefendActionCoroutine()
+    {
+        while (gameObject.activeInHierarchy)
+        {
+            // dodge
+            if (isDefending && Input.GetKeyDown(KeyCode.Q))
+            {
+                // 방어 중인 상태에서 처리할 로직을 여기에 작성합니다.
+                // 예를 들어, 방어 애니메이션을 재생하거나 방어 상태를 표시하는 UI 업데이트 등을 할 수 있습니다.
+                Debug.Log($"{name} is dodge.");
+                yield return StartCoroutine(DodgeCoroutine());
+                
+            }
+            // parry
+            else if (isDefending && Input.GetKeyDown(KeyCode.R))
+            {
+                Debug.Log($"{name} is parrying.");
+                yield return StartCoroutine(ParryingCoroutine());
+            }
+            yield return null;
+        }
+    }
+    
+    protected IEnumerator DodgeCoroutine()
+    {
+        var actionData =  actionLUT.GetActionData(ActionDataType.Dodge);
+        var timeline = actionData.actionTimeline;
+        director.playableAsset = timeline;
+        foreach (var track in timeline.GetOutputTracks())
+        {
+            if (track is AnimationTrack animationTrack)
+            {
+                Debug.Log($"AnimationTrack found: {animationTrack.name}");
+                director.SetGenericBinding(animationTrack, animator);
+            }
+            
+            // MoveToTargetTrack만 처리
+            if (track is MoveToTargetTrack)
+            {
+                director.SetGenericBinding(track, transform);
+
+                // 3. 트랙의 모든 클립 순회
+                foreach (var clip in track.GetClips())
+                {
+                    // MoveToTargetClip만 처리
+                    var moveClip = clip.asset as MoveToTargetClip;
+                    if (moveClip != null)
+                    {
+                        // 4. actor, target 동적 할당
+                        moveClip.actor.exposedName = UnityEditor.GUID.Generate().ToString();
+                        moveClip.target.exposedName = UnityEditor.GUID.Generate().ToString();
+
+                        if (clip.displayName.Equals("GoTo"))
+                        {
+                            director.SetReferenceValue(moveClip.actor.exposedName, characterDefaultLocation);
+                            director.SetReferenceValue(moveClip.target.exposedName, dodgeTransform);
+                        }
+                        else if (clip.displayName.Equals("ReturnTo"))
+                        {
+                            director.SetReferenceValue(moveClip.actor.exposedName, dodgeTransform);
+                            director.SetReferenceValue(moveClip.target.exposedName, characterDefaultLocation);
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"clip displayName '{clip.displayName}' does not match expected names.");
+                        }
+                    }
+                }
+            }
+
+            if (track is MoveToTargetTrack moveToTargetTrack)
+            {
+                director.SetGenericBinding(track, transform);
+            }
+        }
+        
+        director.Play();
+        yield return WaitForTimeline(director);
+    }
+
+    private IEnumerator ParryingCoroutine()
+    {
+        yield break;
+    }
+
     private IEnumerator MainMenuCoroutine()
     {
         NextAction = ActionType.TargetSelect;
@@ -96,8 +199,6 @@ public class BattlePlayer : BattleCharacter
 
     private IEnumerator TargetSelectCoroutine()
     {
-        // 액션을 취할 대상을 선택합니다.
-        // 상대 진영에서 적을 랜덤으로 선택합니다.
         var enemyList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Enemy];
         List<BattleCharacter> alivedEnemyList = new List<BattleCharacter>();        
         foreach (var character in enemyList)

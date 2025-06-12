@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.Cinemachine;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -34,7 +35,7 @@ public abstract class BattleCharacter : MonoBehaviour
     
     [Space(10), Header("Character Animation Settings")]
     [SerializeField] protected Animator animator;
-
+    [SerializeField] protected ActionDataTable actionLUT;
 
     abstract public void OnEmittedBeginAttackSignal();
     abstract public void OnEmittedBeginDefendSignal();
@@ -55,16 +56,11 @@ public abstract class BattleCharacter : MonoBehaviour
             currentHp = Mathf.Clamp(value, 0, maxHp);
         }
     }
-    
-    public bool IsDead 
-    {
-        get { return currentHp <= 0; }
-    }
 
+    public bool IsDead => currentHp <= 0;
     protected bool IsAttacking = false;
 
     protected abstract void OnAttack(AttackEventArgs args);
-
 
     protected virtual void OnEnable()
     {
@@ -72,15 +68,9 @@ public abstract class BattleCharacter : MonoBehaviour
         callbacks.OnAttack += OnAttack;
     }
 
-    protected virtual void OnDisable()
-    {
-        
-    }
+    protected virtual void OnDisable() {}
 
-    protected virtual void Start()
-    {
-        
-    }
+    protected virtual void Start() {}
 
     protected virtual void Update()
     {
@@ -136,10 +126,14 @@ public abstract class BattleCharacter : MonoBehaviour
         Debug.Log($"BattleCharacter ::: StartTurn {name}");
         Activated = true;
         StartCoroutine(UpdateBattleActionCoroutine());
+        StartCoroutine(UpdateDefendActionCoroutine());
     }
 
     protected abstract IEnumerator UpdateBattleActionCoroutine();
-
+    protected abstract IEnumerator UpdateDefendActionCoroutine();
+    
+    
+    
     protected IEnumerator AttackCoroutine()
     {
         while (Input.GetKeyDown(KeyCode.Space) == false)
@@ -148,13 +142,22 @@ public abstract class BattleCharacter : MonoBehaviour
         }
         
         // 1. TimelineAsset 가져오기
-        var timeline = director.playableAsset as TimelineAsset;
+        var actionData = actionLUT.GetActionData(ActionDataType.Attack);
+        var timeline = actionData.actionTimeline;
+        director.playableAsset = timeline;
         // 2. 모든 트랙 순회
         foreach (var track in timeline.GetOutputTracks())
         {
+            if (track is AnimationTrack animationTrack)
+            {
+                director.SetGenericBinding(animationTrack, animator);
+            }
+            
             // MoveToTargetTrack만 처리
             if (track is MoveToTargetTrack)
             {
+                director.SetGenericBinding(track, transform);
+
                 // 3. 트랙의 모든 클립 순회
                 foreach (var clip in track.GetClips())
                 {
@@ -188,6 +191,7 @@ public abstract class BattleCharacter : MonoBehaviour
 
             if (track is BattleSignalEmitTrack)
             {
+                Debug.Log("BattleSignalEmitTrack found, binding to TimelineEventListener.");
                 director.SetGenericBinding(track, TimelineEventListener.Instance);
             }
         }

@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6df3186f89898f54b9748d5558c1fe22, type: 3}
-  m_Name: AttackPatternData
+  m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
+  m_Name: WarriorParrying
   m_EditorClassIdentifier: 
-  DodgeStartTime: 0
-  DodgeEndTime: 0
-  ParryStartTime: 0
-  ParryEndTime: 0
-  IsJump: 0
+  actionDataType: 2
+  actionTimeline: {fileID: 11400000, guid: def32181bafa737479d6d6a1dcb8c28a, type: 2}
