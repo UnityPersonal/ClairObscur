@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public static class BattleEventManager 
+public class BattleEventManager : MonoSingleton<BattleEventManager>
 {
     public class EventCallbacks
     {
@@ -14,45 +14,45 @@ public static class BattleEventManager
         public Action<TakeDamageEventArgs> OnTakeDamage;
     }
 
-    private static EventCallbacks s_callbacks = new EventCallbacks();
+    private EventCallbacks s_callbacks = new EventCallbacks();
     
     public static EventCallbacks Callbacks
     {
-        get { return s_callbacks; }
+        get { return Instance.s_callbacks; }
     }
     
     static public void OnTakeDamage(TakeDamageEventArgs args)
     {
-        s_callbacks.OnTakeDamage?.Invoke(args);
+        Instance.s_callbacks.OnTakeDamage?.Invoke(args);
     }
     
     static public void OnFocus(FocusEventArgs args)
     {
-        s_callbacks.OnFocus?.Invoke(args);
+        Instance.s_callbacks.OnFocus?.Invoke(args);
     }
     
     static public void OnAttack(AttackEventArgs args)
     {
-        s_callbacks.OnAttack?.Invoke(args);
+        Instance.s_callbacks.OnAttack?.Invoke(args);
     }
     
     static public void OnEvade(EvadeEventArgs args)
     {
-        s_callbacks.OnEvade?.Invoke(args);
+        Instance.s_callbacks.OnEvade?.Invoke(args);
     }
     
     static public void OnParry(ParryEventArgs args)
     {
-        s_callbacks.OnParry?.Invoke(args);
+        Instance.s_callbacks.OnParry?.Invoke(args);
     }
     
     static public void OnJump(JumpEventArgs args)
     {
-        s_callbacks.OnJump?.Invoke(args);
+        Instance.s_callbacks.OnJump?.Invoke(args);
     }
     
     static public void OnShoot(ShootEventArgs args)
     {
-        s_callbacks.OnShoot?.Invoke(args);
+        Instance.s_callbacks.OnShoot?.Invoke(args);
     }
 }

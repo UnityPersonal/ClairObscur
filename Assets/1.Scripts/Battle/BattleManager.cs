@@ -4,21 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BattleManager : MonoBehaviour
+public class BattleManager : MonoSingleton<BattleManager>
 {
-    private static BattleManager _instance;
-
-    public static BattleManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<BattleManager>();
-            }
-            return _instance;
-        }
-    }
+    [SerializeField] GameResultUI gameResultUI;
     
     private bool IsEndBattle { get; set; } = false;
 
@@ -65,21 +53,31 @@ public class BattleManager : MonoBehaviour
     
     void CheckEndTurn()
     {
-        foreach (var group in characterGroup)
-        {
-            for (int i = 0; i < group.Value.Count; i++)
-            {
-                
-            }
-        }
+        var players = characterGroup[BattleCharacterType.Player];
+        int playerDeadCount = 0;
         
-        // Logic to check if the battle has ended, e.g., all enemies defeated or player defeated
-        // If the battle ends, set IsEndBattle to true
-        // Example:
-        // if (allEnemiesDefeated || playerDefeated)
-        // {
-        //     IsEndBattle = true;
-        // }
+        foreach (var player in players)
+            if (player.IsDead) playerDeadCount++;
+        
+        if(playerDeadCount == players.Count)
+        {
+            IsEndBattle = true;
+            Debug.Log("All players are dead. Battle ended.");
+            return;
+        }
+
+        var enemies = characterGroup[BattleCharacterType.Enemy];
+        int enemyDeadCount = 0;
+        
+        foreach (var enemy in enemies)
+            if (enemy.IsDead) enemyDeadCount++;
+
+        if (enemyDeadCount == enemies.Count)
+        {
+            gameResultUI.gameObject.SetActive(true);
+            gameResultUI.UpdateUI();
+            IsEndBattle = true;
+        }
     }
 
     IEnumerator UpdateBattleLoopCoroutine()
@@ -105,6 +103,7 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
         
+        Debug.Log("Battle Ended.");
     }
 
 
