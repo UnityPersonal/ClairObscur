@@ -51,12 +51,28 @@ MonoBehaviour:
   m_Name: MoveToTargetClip
   m_EditorClassIdentifier: 
   actor:
-    exposedName: bd0e54e1e64bf9149943b1fc769a33ae
+    exposedName: 4c7b884186ce1384ea124c8f51ec3e09
     defaultValue: {fileID: 0}
   target:
-    exposedName: cefdf917f134cc74b80ca336e4fe4099
+    exposedName: 4ec3894bba63fe447b9ff031782df2ce
     defaultValue: {fileID: 0}
   duration: 1
+--- !u!114 &-5120867973548366096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 1.2333333333333334
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 0846ce1fd69441343aca52c40faa7565, type: 2}
 --- !u!114 &-4924759947063163285
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,7 +131,25 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -270,6 +304,7 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -8086983426216902336}
+    - {fileID: -5120867973548366096}
   m_InfiniteClipPreExtrapolation: 0
   m_InfiniteClipPostExtrapolation: 0
   m_InfiniteClipOffsetPosition: {x: 0, y: 0, z: 0}
@@ -345,10 +380,10 @@ MonoBehaviour:
   m_Name: MoveToTargetClip(Clone)(Clone)
   m_EditorClassIdentifier: 
   actor:
-    exposedName: ee2d4cfdfe0b1994aae4628cf341351a
+    exposedName: 14c18d34e9055314999b8fa65c1e5d62
     defaultValue: {fileID: 0}
   target:
-    exposedName: c6627f0092992e241b8dcd05ec6e1f43
+    exposedName: cde183fca21c5ff4bbba8d962c97ca91
     defaultValue: {fileID: 0}
   duration: 1
 --- !u!114 &5108311241551401036

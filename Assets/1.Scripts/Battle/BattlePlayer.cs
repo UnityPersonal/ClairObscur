@@ -21,7 +21,6 @@ public class BattlePlayer : BattleCharacter
     protected override void OnEnable()
     {
         base.OnEnable();
-        
     }
 
     protected override void OnAttack(AttackEventArgs args)
@@ -30,6 +29,9 @@ public class BattlePlayer : BattleCharacter
         {
             Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
             animator.SetTrigger("Hit");
+            BattleEventManager.OnTakeDamage(
+                new TakeDamageEventArgs(this, args.Damage)
+            );
         }
     }
 
@@ -44,6 +46,7 @@ public class BattlePlayer : BattleCharacter
     }
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Player;
+    public override BattleCharacter TargetCharacter => targetCharacter;
 
     protected override IEnumerator UpdateBattleActionCoroutine()
     {
@@ -171,7 +174,13 @@ public class BattlePlayer : BattleCharacter
                         }
                         
                     }
+                    
                 }
+            }
+
+            if (track is BattleSignalEmitTrack)
+            {
+                director.SetGenericBinding(track, TimelineEventListener.Instance);
             }
         }
 

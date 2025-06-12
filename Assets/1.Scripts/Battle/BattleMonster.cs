@@ -12,6 +12,10 @@ public class BattleMonster : BattleCharacter
         {
             Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
             animator.SetTrigger("Hit");
+            
+            BattleEventManager.OnTakeDamage(
+                new TakeDamageEventArgs(this, args.Damage)
+                );
         }
     }
 
@@ -22,6 +26,11 @@ public class BattleMonster : BattleCharacter
     }
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Enemy;
+
+    public override BattleCharacter TargetCharacter
+    {
+        get { return targetCharacter; }
+    }
 
 
     protected override IEnumerator UpdateBattleActionCoroutine()

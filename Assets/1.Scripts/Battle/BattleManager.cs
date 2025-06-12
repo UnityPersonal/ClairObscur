@@ -32,6 +32,12 @@ public class BattleManager : MonoBehaviour
     {
         get { return characterGroup; }
     }
+
+    public BattleCharacter CurrentTurnCharacter
+    {
+        get;
+        private set;
+    } = null;
     
     void Start()
     {
@@ -87,11 +93,11 @@ public class BattleManager : MonoBehaviour
             // 적은 자동 선택 액션을 수행한다.
             if (battlePriorityQueue.Count > 0)
             {
-                BattleCharacter currentTureCharacter = battlePriorityQueue.Dequeue();
-                if (currentTureCharacter.IsDead == false)
+                CurrentTurnCharacter = battlePriorityQueue.Dequeue();
+                if (CurrentTurnCharacter.IsDead == false)
                 {
-                    yield return StartCoroutine(UpdateTurnCoroutine(currentTureCharacter));
-                    battlePriorityQueue.Enqueue(currentTureCharacter);    
+                    yield return StartCoroutine(UpdateTurnCoroutine());
+                    battlePriorityQueue.Enqueue(CurrentTurnCharacter);    
                 }
             }
             
@@ -102,16 +108,10 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    IEnumerator UpdateTurnCoroutine(BattleCharacter currentTureCharacter = null)
+    IEnumerator UpdateTurnCoroutine()
     {
-        if (currentTureCharacter == null)
-        {
-            Debug.LogError("BattleManager ::: UpdateTurnCoroutine - currentTureCharacter is null");
-            yield break;
-        }
-
-        currentTureCharacter.StartTurn();
-        while (currentTureCharacter.Activated == true)
+        CurrentTurnCharacter.StartTurn();
+        while (CurrentTurnCharacter.Activated == true)
         {
             // Logic to update the turn, e.g., processing player actions, enemy actions, etc.
             yield return null;

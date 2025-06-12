@@ -30,6 +30,6 @@ public class MoveToTargetBehaviour : PlayableBehaviour
         double time = playable.GetTime();
         double t = time / playable.GetDuration();
         trackBinding.position = Vector3.Lerp(startPos, endPos, (float)t);
-        Debug.Log(trackBinding.position);
+        //Debug.Log(trackBinding.position);
     }
 }

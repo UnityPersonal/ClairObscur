@@ -21,6 +21,11 @@ public static class BattleEventManager
         get { return s_callbacks; }
     }
     
+    static public void OnTakeDamage(TakeDamageEventArgs args)
+    {
+        s_callbacks.OnTakeDamage?.Invoke(args);
+    }
+    
     static public void OnFocus(FocusEventArgs args)
     {
         s_callbacks.OnFocus?.Invoke(args);

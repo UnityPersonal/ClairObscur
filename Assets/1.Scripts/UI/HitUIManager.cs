@@ -9,19 +9,12 @@ public class HitUIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        BattleEventManager.Callbacks.OnTakeDamage += OnTakeDamage;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     void OnTakeDamage(TakeDamageEventArgs args)
     {
         var hitUI = Instantiate(hitUIPrefab, canvas.transform);
-        var rt = hitUI.GetComponent<RectTransform>();
-        rt.anchoredPosition = UIUtils.WorldToCanvasPosition(canvas, args.Target.transform.position);
+        hitUI.Set( canvas, args.Target.transform, args.Damage);
     }
 }

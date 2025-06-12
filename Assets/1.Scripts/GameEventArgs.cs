@@ -82,6 +82,10 @@ public class TakeDamageEventArgs : GameEventArgs
     public BattleCharacter Target { get; private set; }
     public int Damage { get; private set; }
     
+    public bool Dodged { get; set; } = false;
+    public bool Parried { get; set; } = false;
+    public bool Jumped { get; set; } = false;
+    
     public TakeDamageEventArgs(BattleCharacter target, int damage)
     {
         Target = target;

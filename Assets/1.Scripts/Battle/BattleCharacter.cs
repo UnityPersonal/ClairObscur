@@ -36,9 +36,10 @@ public abstract class BattleCharacter : MonoBehaviour
 
 
     abstract public void OnEmittedBeginAttackSignal();
-    
-    
+
     abstract public  BattleCharacterType CharacterType { get; }
+    abstract public BattleCharacter TargetCharacter { get; }
+    
 
     [Space(10), Header("Character Status")]
     [SerializeField] private int maxHp = 100;
