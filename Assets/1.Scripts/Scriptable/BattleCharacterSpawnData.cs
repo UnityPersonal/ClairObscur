@@ -14,6 +14,7 @@ public class BattleCharacterSpawnTable : ScriptableObject
     
     public BattleCharacter GetCharacterSample(string spawnName)
     {
+        spawnName = spawnName.ToLower();
         foreach (var spawnData in spawnDatas)
         {
             if (spawnData.spawnName == spawnName)
