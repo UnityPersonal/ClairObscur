@@ -12,7 +12,10 @@ public static class UIUtils
 
         RectTransform canvasRect = canvas.GetComponent<RectTransform>();
         Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : camera, out localPoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect,
+            screenPoint,
+            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : camera, out localPoint);
 
         return localPoint;
     }

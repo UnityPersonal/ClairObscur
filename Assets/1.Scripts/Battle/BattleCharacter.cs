@@ -22,6 +22,10 @@ public enum BattleActionType
 
 public abstract class BattleCharacter : MonoBehaviour
 {
+    [Header("Character Settings")]
+    [SerializeField] protected string characterName;
+    public string CharacterName => characterName;
+    
     [Header("Character Location Settings")]
     [SerializeField] protected Transform characterDefaultLocation;
     [SerializeField] protected Transform characterHitTransform;
@@ -47,6 +51,7 @@ public abstract class BattleCharacter : MonoBehaviour
 
     [Space(10), Header("Character Status")]
     [SerializeField] private int maxHp = 100;
+    public int MaxHp => maxHp;
     private int currentHp = 100;
     public int CurrentHp 
     {
@@ -56,6 +61,10 @@ public abstract class BattleCharacter : MonoBehaviour
             currentHp = Mathf.Clamp(value, 0, maxHp);
         }
     }
+    
+    public int Level { get; protected set; } = 1;
+    public int CurrentExp { get; protected set; } = 0;
+    public int NextExp => CharacterLevelTable.GetCharacterGrowthData(Level).Exp;
 
     public bool IsDead => currentHp <= 0;
     protected bool IsAttacking = false;
