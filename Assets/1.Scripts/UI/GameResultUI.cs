@@ -17,9 +17,7 @@ public class GameResultUI : MonoBehaviour
     {
         continueButton.onClick.AddListener(() =>
         {
-            Debug.Log("Continue button clicked");
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
-            // 여기에서 월드씬으로 넘어가는 처리 필요
+            GameManager.Instance.GoToWorldScene();
         });
     }
 
