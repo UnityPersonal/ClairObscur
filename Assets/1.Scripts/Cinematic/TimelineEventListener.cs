@@ -2,23 +2,8 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class TimelineEventListener : MonoBehaviour
+public class TimelineEventListener : MonoSingleton<TimelineEventListener>
 {
-    static private TimelineEventListener _instance;
-
-    static public TimelineEventListener Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<TimelineEventListener>();
-            }
-            return _instance;
-        }
-        
-    }
-    
     public void OnDefendEndReceived()
     {
         // Defend End signal 수신 시 처리

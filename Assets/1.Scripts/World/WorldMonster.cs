@@ -6,4 +6,6 @@ public class WorldMonster : WorldCharacter
     protected override void UpdateMovement()
     {
     }
+    
+    
 }

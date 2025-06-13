@@ -35,7 +35,7 @@ public class HitUI : MonoBehaviour
             return;
         }
         
-        offset += Time.deltaTime * Vector3.up ;
+        offset += Vector3.up * (Time.deltaTime * animationSpeed) ;
         rectTransform.anchoredPosition = UIUtils.WorldToCanvasPosition(canvasComponent, attacher.position + offset);
     }
 }

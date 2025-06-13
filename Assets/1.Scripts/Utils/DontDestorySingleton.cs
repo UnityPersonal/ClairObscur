@@ -11,7 +11,7 @@ public class DontDestorySingleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<T>();
+                instance = FindAnyObjectByType<T>();
                 if (instance == null)
                 {
                     GameObject obj = new GameObject(typeof(T).Name);

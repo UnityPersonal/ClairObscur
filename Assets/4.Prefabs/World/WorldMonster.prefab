@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6991301745688577032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4296519312656483227}
+  - component: {fileID: 8302677439116053924}
+  m_Layer: 0
+  m_Name: WorldMonster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4296519312656483227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991301745688577032}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 6.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3840323648401318683}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &8302677439116053924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991301745688577032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b66845d0dd80848a9c260aedd1e459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleCharacters:
+  - {fileID: 8963553760644772876, guid: 2ae0c4fac729e0140b9bbf79664df3b1, type: 3}
+  - {fileID: 6347335964158684448, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
+--- !u!1001 &3153724578417481431
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4296519312656483227}
+    m_Modifications:
+    - target: {fileID: 1308755081754487285, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755322294461624750, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_Name
+      value: Monster_Goblin_MaleAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6486315394965474195, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8185986045375615913, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+    - {fileID: 1308755081754487285, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 3616888847748532305, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2755322294461624750, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7252074469976342579}
+  m_SourcePrefab: {fileID: 100100000, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+--- !u!1 &1006722519545636729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2755322294461624750, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+  m_PrefabInstance: {fileID: 3153724578417481431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7252074469976342579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006722519545636729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1cf36bbdd7e49204da1451aac2d1c825, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
+          m_MethodName: OnEmittedBeginAttackSignal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!4 &3840323648401318683 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2202213804664698316, guid: ce6ee67144c60254cbb5b26ca3e63844, type: 3}
+  m_PrefabInstance: {fileID: 3153724578417481431}
+  m_PrefabAsset: {fileID: 0}
