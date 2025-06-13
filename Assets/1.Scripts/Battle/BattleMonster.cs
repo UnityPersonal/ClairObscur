@@ -110,7 +110,11 @@ public class BattleMonster : BattleCharacter
                 break;
             }
         }
-        yield break; // Placeholder for actual logic
+        
+        while (Input.GetKeyDown(KeyCode.Space) == false)
+        {
+            yield return null;
+        }
     }
     
 }

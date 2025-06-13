@@ -8,7 +8,8 @@ public enum ActionDataType
     Parry,
     JumpAttack,
     JumpDodge,
-    Shoot
+    Shoot,
+    Skill
 }
 
 [CreateAssetMenu(fileName = "ActionData", menuName = "Scriptable Objects/ActionData")]

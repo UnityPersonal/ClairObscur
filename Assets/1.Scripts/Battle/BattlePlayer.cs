@@ -19,6 +19,15 @@ public class BattlePlayer : BattleCharacter
         TargetSelect,
         SkillActive,
     }
+    
+    enum AttackType
+    {
+        Normal,
+        Skill1,
+        Skill2,
+        Skill3,
+    }
+    AttackType currentAttackType = AttackType.Normal;
 
     private bool isDefending = false;
     public bool IsDodging { get; private set; } = false;
@@ -48,7 +57,18 @@ public class BattlePlayer : BattleCharacter
     {
     }
 
-    ActionType NextAction = ActionType.MainMenu;
+    ActionType PreviousActionType = ActionType.MainMenu;
+
+    private ActionType nextAction = ActionType.MainMenu;
+    ActionType NextAction
+    {
+        get => nextAction;
+        set
+        {
+            PreviousActionType = nextAction;
+            nextAction = value;
+        }
+    }
 
     private BattleCharacter targetCharacter = null;
 
@@ -206,10 +226,61 @@ public class BattlePlayer : BattleCharacter
         yield break;
     }
 
+    private IEnumerator SkillSelectCoroutine()
+    {
+        var menu = SkillMenuSelectUI.Instance;
+        menu.gameObject.SetActive(true);
+        yield return StartCoroutine(menu.UpdateSelectUI(this));
+        var selectType = menu.CurrentSelectType;
+        switch (selectType)
+        {
+            case SkillMenuSelectUI.SelectType.Skill1:
+                currentAttackType = AttackType.Skill1;
+                NextAction = ActionType.TargetSelect;
+                break;
+            case SkillMenuSelectUI.SelectType.Skill2:
+                currentAttackType = AttackType.Skill2;
+                NextAction = ActionType.TargetSelect;
+                break;
+            case SkillMenuSelectUI.SelectType.Skill3:
+                currentAttackType = AttackType.Skill3;
+                NextAction = ActionType.TargetSelect;
+                break;
+            case SkillMenuSelectUI.SelectType.MainMenu:
+                NextAction = ActionType.MainMenu;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        menu.gameObject.SetActive(false);
+    }
+    
     private IEnumerator MainMenuCoroutine()
     {
-        NextAction = ActionType.TargetSelect;
-        yield break;
+        var menu = MainMenulSelectUI.Instance;
+        
+        menu.gameObject.SetActive(true);
+        yield return StartCoroutine(menu.UpdateSelectUI(this));
+        
+        var selectType = menu.CurrentSelectType;
+        switch (selectType)
+        {
+            case MainMenulSelectUI.SelectType.Attack:
+                currentAttackType = AttackType.Normal;
+                NextAction = ActionType.TargetSelect;
+                break;
+            case MainMenulSelectUI.SelectType.Skill:
+                NextAction = ActionType.SkillSelect;
+                break;
+            case MainMenulSelectUI.SelectType.Item:
+                NextAction = ActionType.MainMenu;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        menu.gameObject.SetActive(false);
     }
 
     private IEnumerator TargetSelectCoroutine()
@@ -223,20 +294,54 @@ public class BattlePlayer : BattleCharacter
                 alivedEnemyList.Add(character);
             }
         }
-        // 살아있는 적중에 랜덤으로 타겟을 지정한다.
-        targetCharacter = alivedEnemyList[Random.Range(0, alivedEnemyList.Count)];
-        
-        Debug.Log($"BattlePlayer ::: TargetSelectCoroutine {name} selected target {targetCharacter.name}.");
-        NextAction = ActionType.Attack;
-        yield break;
-    }
 
-    private IEnumerator SkillSelectCoroutine()
-    {
-        while (IsDead == false)
+        bool isTargetSelected = false;
+        int currentIndex = 0;
+        alivedEnemyList[currentIndex].OnFocusIn();
+        while (isTargetSelected == false)
         {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                alivedEnemyList[currentIndex].OnFocusOut();
+                
+                currentIndex--;
+                currentIndex = Math.Clamp(currentIndex,0 , alivedEnemyList.Count-1);
+                
+                alivedEnemyList[currentIndex].OnFocusIn();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                alivedEnemyList[currentIndex].OnFocusOut();
+                
+                currentIndex++;
+                currentIndex = Math.Clamp(currentIndex,0 , alivedEnemyList.Count-1);
+                
+                alivedEnemyList[currentIndex].OnFocusIn();
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                alivedEnemyList[currentIndex].OnFocusOut();
+                isTargetSelected = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                alivedEnemyList[currentIndex].OnFocusOut();
+                break;
+            }
             yield return null;
         }
+        
+        //targetCharacter = alivedEnemyList[Random.Range(0, alivedEnemyList.Count)];
+        if (isTargetSelected)
+        {
+            targetCharacter = alivedEnemyList[currentIndex];
+            NextAction = ActionType.Attack;
+        }
+        else
+        {
+            NextAction = PreviousActionType;
+        }
+        yield return new WaitForSeconds(0.5f);
     }
 
     

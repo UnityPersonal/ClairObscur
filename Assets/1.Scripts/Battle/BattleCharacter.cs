@@ -123,12 +123,8 @@ public abstract class BattleCharacter : MonoBehaviour
         CurrentHp -= damage;
     }
   
-    
-    public void OnFocused(BattleCharacter focusedCharacter)
-    {
-        Debug.Log($"BattleCharacter ::: OnFocused: {focusedCharacter.name}");
-        // Logic to handle when this character is focused, e.g., highlighting the character
-    }
+    public void OnFocusIn() => characterCamera.Priority = 30;
+    public void OnFocusOut() => characterCamera.Priority = 0;
 
     bool _activated = false;
     public bool Activated
@@ -172,10 +168,6 @@ public abstract class BattleCharacter : MonoBehaviour
     
     protected IEnumerator AttackCoroutine()
     {
-        while (Input.GetKeyDown(KeyCode.Space) == false)
-        {
-            yield return null;
-        }
         
         // 1. TimelineAsset 가져오기
         var actionData = actionLUT.GetActionData(ActionDataType.Attack);
