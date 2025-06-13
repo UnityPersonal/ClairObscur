@@ -15,6 +15,19 @@ public class HitUIManager : MonoBehaviour
     void OnTakeDamage(TakeDamageEventArgs args)
     {
         var hitUI = Instantiate(hitUIPrefab, canvas.transform);
-        hitUI.Set( canvas, args.Target.transform, args.Damage);
+        string damageText = args.Damage.ToString();
+        if (args.Parried)
+        {
+            damageText = "PARRIED";
+        }
+        else if (args.Dodged)
+        {
+            damageText = "DODGED";
+        }
+        else if (args.Jumped)
+        {
+            damageText = "JUMPED";
+        }
+        hitUI.Set( canvas, args.Target.transform, damageText);
     }
 }

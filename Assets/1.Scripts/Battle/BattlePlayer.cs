@@ -24,6 +24,7 @@ public class BattlePlayer : BattleCharacter
     public bool IsDodging { get; private set; } = false;
     public bool IsParrying { get; private set; } = false;
 
+    
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -35,20 +36,31 @@ public class BattlePlayer : BattleCharacter
         {
             Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
             animator.SetTrigger("Hit");
-            BattleEventManager.OnTakeDamage(
-                new TakeDamageEventArgs(this, args.Damage)
-            );
+            TakeDamage(args.Damage, args.Dodged, args.Parried, args.Jumped);
         }
     }
 
+    protected override void OnDodge(DodgeEventArgs args)
+    {
+    }
     
+    protected override void OnDeath(DeathEventArgs args)
+    {
+    }
+
     ActionType NextAction = ActionType.MainMenu;
 
     private BattleCharacter targetCharacter = null;
 
     public override void OnEmittedBeginAttackSignal()
     {
-        BattleEventManager.OnAttack( new AttackEventArgs(10, this, targetCharacter));
+        int damage = 10;
+        BattleEventManager.OnAttack( new AttackEventArgs
+        (
+            damage : damage,
+            attacker: this,
+            target: targetCharacter
+        ));
     }
 
     public override void OnEmittedBeginDefendSignal()
@@ -182,7 +194,10 @@ public class BattlePlayer : BattleCharacter
             }
         }
         
+        DodgeEventArgs dodgeEventArgs = new DodgeEventArgs(Time.time);
+        BattleEventManager.OnDodge(dodgeEventArgs);
         director.Play();
+        Debug.Log($"<color=red>{gameObject.name} Dodge Play </color>");
         yield return WaitForTimeline(director);
     }
 

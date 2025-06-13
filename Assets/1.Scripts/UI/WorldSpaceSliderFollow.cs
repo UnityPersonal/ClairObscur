@@ -11,8 +11,7 @@ public class WorldSpaceSliderFollow : MonoBehaviour
     public float maxScale = 2.0f;
     public Vector3 offset = new Vector3(0, 2f, 0); // 오브젝트 위에 위치하도록 오프셋
     public Slider slider;
-    
-    
+
     private RectTransform rectTransform;
     Vector3 initialPosition;
     Canvas canvas;
@@ -33,6 +32,9 @@ public class WorldSpaceSliderFollow : MonoBehaviour
         var uiWorldPosition = target.position + offset;
         transform.position = uiWorldPosition;
         transform.LookAt(mainCamera.transform);
+        
+        
+        slider.value = character.CurrentHp / (float)character.MaxHp;
         //transform.localScale = Vector3.one;
         // 1. 타겟 오브젝트 위에 UI 배치
         //rectTransform.anchoredPosition 

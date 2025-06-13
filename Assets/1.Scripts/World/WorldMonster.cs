@@ -1,16 +1,10 @@
 using UnityEngine;
 
-public class WorldMonster : MonoBehaviour
+public class WorldMonster : WorldCharacter
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // navigation 기반으로 이동 동작 구현
+    protected override void Movement()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        throw new System.NotImplementedException();
     }
 }

@@ -103,7 +103,6 @@ public class BattleManager : MonoSingleton<BattleManager>
             yield return null;
         }
         
-        Debug.Log("Battle Ended.");
     }
 
 

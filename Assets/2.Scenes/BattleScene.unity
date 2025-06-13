@@ -129,6 +129,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7580098774794196731, guid: ffd37c7b90a2d0640b6fd6bf3f616b80, type: 3}
   m_PrefabInstance: {fileID: 6338304678526466771}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &86922054 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7391304805292231118, guid: ffd37c7b90a2d0640b6fd6bf3f616b80, type: 3}
+  m_PrefabInstance: {fileID: 6338304678526466771}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b9efe64b14c424b8fa8899e5b03276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &89096844
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +513,10 @@ PlayableDirector:
   - key: {fileID: 7302051882935339145, guid: fa27706f0584f3745b3410b0e3214c46, type: 2}
     value: {fileID: 107115988}
   - key: {fileID: -493941610448716339, guid: fa27706f0584f3745b3410b0e3214c46, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 234590368576227607, guid: 7203c95597350f84289500f7f6c822ef, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4812968152216394465, guid: 7203c95597350f84289500f7f6c822ef, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -5042,11 +5057,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54caa77757c7a646af2d1c6bef2a001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameResultUI: {fileID: 0}
+  gameResultUI: {fileID: 86922054}
   battleCharacters:
-  - {fileID: 862102770}
   - {fileID: 107115987}
   - {fileID: 675888798}
+  - {fileID: 862102770}
   - {fileID: 896972685}
 --- !u!4 &1121818654
 Transform:
@@ -5057,7 +5072,7 @@ Transform:
   m_GameObject: {fileID: 1121818652}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.391855, y: 3.5693946, z: 2.7737515}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7159,7 +7174,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3433699963719833894, guid: ffd37c7b90a2d0640b6fd6bf3f616b80, type: 3}
+    - {fileID: 1160372346050089256, guid: ffd37c7b90a2d0640b6fd6bf3f616b80, type: 3}
+    - {fileID: 2844012485839836882, guid: ffd37c7b90a2d0640b6fd6bf3f616b80, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd37c7b90a2d0640b6fd6bf3f616b80, type: 3}
@@ -7794,7 +7812,7 @@ PrefabInstance:
     - target: {fileID: 4585037014776748887, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
       propertyPath: m_SceneBindings.Array.data[2].value
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 89096846}
     - target: {fileID: 4585037014776748887, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.size
       value: 8
@@ -8082,6 +8100,10 @@ PrefabInstance:
     - target: {fileID: 6094231879677702478, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.755818
+      objectReference: {fileID: 0}
+    - target: {fileID: 6347335964158684448, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
+      propertyPath: maxHp
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6347335964158684448, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
       propertyPath: actionLUT
@@ -8483,6 +8505,10 @@ PrefabInstance:
     - target: {fileID: 7235099305234976526, guid: 2ae0c4fac729e0140b9bbf79664df3b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963553760644772876, guid: 2ae0c4fac729e0140b9bbf79664df3b1, type: 3}
+      propertyPath: maxHp
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8963553760644772876, guid: 2ae0c4fac729e0140b9bbf79664df3b1, type: 3}
       propertyPath: characterHitTransform

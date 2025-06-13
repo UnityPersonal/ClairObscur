@@ -22,7 +22,7 @@ public class MonsterController : MonoBehaviour
         
     }
     
-    public void OnEvade(EvadeEventArgs args)
+    public void OnEvade(DodgeEventArgs args)
     {
         Debug.Log("MonsterController ::: OnEvade");
         animator.SetTrigger("Evade");

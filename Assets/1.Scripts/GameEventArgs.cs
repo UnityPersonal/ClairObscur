@@ -14,9 +14,9 @@ public class TimingEventArgs : GameEventArgs
     }
 }
 
-public class EvadeEventArgs : TimingEventArgs
+public class DodgeEventArgs : TimingEventArgs
 {
-    public EvadeEventArgs(float evadeTime) 
+    public DodgeEventArgs(float evadeTime) 
         : base(evadeTime)
     {
     }
@@ -69,11 +69,25 @@ public class AttackEventArgs : GameEventArgs
     public BattleCharacter Attacker { get; private set; }
     public BattleCharacter Target { get; private set; }
     
-    public AttackEventArgs(int damage, BattleCharacter attacker,  BattleCharacter target)
+    public bool Dodged { get; set; } = false;
+    public bool Parried { get; set; } = false;
+    public bool Jumped { get; set; } = false;
+    
+    public AttackEventArgs(
+        int damage,
+        BattleCharacter attacker,
+        BattleCharacter target,
+        bool dodged = false,
+        bool parried = false,
+        bool jumped = false
+        )
     {
         Damage = damage;
         Attacker = attacker;
         Target = target;
+        Dodged = dodged;
+        Parried = parried;
+        Jumped = jumped;
     }
 }
 
@@ -81,14 +95,31 @@ public class TakeDamageEventArgs : GameEventArgs
 {
     public BattleCharacter Target { get; private set; }
     public int Damage { get; private set; }
-    
     public bool Dodged { get; set; } = false;
     public bool Parried { get; set; } = false;
     public bool Jumped { get; set; } = false;
     
-    public TakeDamageEventArgs(BattleCharacter target, int damage)
+    public TakeDamageEventArgs(
+        BattleCharacter target,
+        int damage,
+        bool dodged,
+        bool parried,
+        bool jumped)
     {
         Target = target;
         Damage = damage;
+        Dodged = dodged;
+        Parried = parried;
+        Jumped = jumped;
+    }
+}
+
+public class DeathEventArgs : GameEventArgs
+{
+    public BattleCharacter Target { get; private set; }
+    
+    public DeathEventArgs(BattleCharacter target)
+    {
+        Target = target;
     }
 }

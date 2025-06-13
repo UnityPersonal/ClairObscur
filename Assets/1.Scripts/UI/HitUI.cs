@@ -18,11 +18,11 @@ public class HitUI : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void Set(Canvas canvas, Transform attacher, int damage)
+    public void Set(Canvas canvas, Transform attacher, string damage)
     {
         this.canvasComponent = canvas;
         this.attacher = attacher;
-        damageText.text = damage.ToString();
+        damageText.text = damage;
     }
 
     // Update is called once per frame

@@ -59,6 +59,12 @@ public abstract class BattleCharacter : MonoBehaviour
         protected set 
         {
             currentHp = Mathf.Clamp(value, 0, maxHp);
+            if (currentHp <= 0)
+            {
+                DeathEventArgs deathArgs = new DeathEventArgs(this);
+                animator.SetTrigger("Death");
+                BattleEventManager.OnDeath(deathArgs);
+            }
         }
     }
     
@@ -70,17 +76,25 @@ public abstract class BattleCharacter : MonoBehaviour
     protected bool IsAttacking = false;
 
     protected abstract void OnAttack(AttackEventArgs args);
+    protected abstract void OnDodge(DodgeEventArgs args);
+    protected abstract void OnDeath(DeathEventArgs args);
 
     protected virtual void OnEnable()
     {
         var callbacks = BattleEventManager.Callbacks;
         callbacks.OnAttack += OnAttack;
+        callbacks.OnDodge += OnDodge;
+        callbacks.OnDeath += OnDeath;
     }
 
     protected virtual void OnDisable() {}
 
-    protected virtual void Start() {}
-
+    protected virtual void Start()
+    {
+        currentHp = maxHp;
+        StartCoroutine(UpdateDefendActionCoroutine());
+    }
+    
     protected virtual void Update()
     {
         if(Activated == false)
@@ -96,10 +110,19 @@ public abstract class BattleCharacter : MonoBehaviour
         // Logic for character actions during the turn
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isDodged = false, bool isParried = false, bool isJumped = false)
     {
-        currentHp -= damage;
+        if (IsDead == true) return;
+
+        // 데미지를 받았을 때 이벤트를 발생시킨다.
+        TakeDamageEventArgs args = 
+            new TakeDamageEventArgs(this, damage, isDodged, isParried, isJumped);
+        BattleEventManager.OnTakeDamage(args);
+        
+        // 현재 체력을 감소시킨다.
+        CurrentHp -= damage;
     }
+  
     
     public void OnFocused(BattleCharacter focusedCharacter)
     {
@@ -135,13 +158,17 @@ public abstract class BattleCharacter : MonoBehaviour
         Debug.Log($"BattleCharacter ::: StartTurn {name}");
         Activated = true;
         StartCoroutine(UpdateBattleActionCoroutine());
-        StartCoroutine(UpdateDefendActionCoroutine());
     }
 
     protected abstract IEnumerator UpdateBattleActionCoroutine();
     protected abstract IEnumerator UpdateDefendActionCoroutine();
-    
-    
+
+
+    protected IEnumerator TimerCoroutine(float waitTime, Action callback)
+    {
+        yield return new WaitForSeconds(waitTime);
+        callback?.Invoke();
+    }
     
     protected IEnumerator AttackCoroutine()
     {

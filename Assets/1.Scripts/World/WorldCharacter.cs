@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class WorldCharacter : MonoBehaviour
+public abstract class WorldCharacter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // 월드 캐릭터에는 배틀씬으로 넘어갈때 스폰할 캐릭터의 정보를 들고 있다.
+    [SerializeField] private BattleCharacter[] battleCharacters;
+    
+    // 배틀씬으로 전환시 캐릭터 정보를 넘겨준다.
+    protected abstract void Movement();
+    
 }

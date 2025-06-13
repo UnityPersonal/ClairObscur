@@ -35,10 +35,10 @@ MonoBehaviour:
   m_Name: MoveToTargetClip
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 4c7b884186ce1384ea124c8f51ec3e09
+    exposedName: 119435e207e31254e8437de9b66cb2fe
     defaultValue: {fileID: 0}
   target:
-    exposedName: 4ec3894bba63fe447b9ff031782df2ce
+    exposedName: ce411228ed6fd6743976532f513be267
     defaultValue: {fileID: 0}
   duration: 1
 --- !u!114 &-4924759947063163285
@@ -126,49 +126,13 @@ MonoBehaviour:
     m_BlendOutDuration: 0.10000000000000009
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -195,25 +159,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -468,10 +414,10 @@ MonoBehaviour:
   m_Name: MoveToTargetClip(Clone)(Clone)
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 14c18d34e9055314999b8fa65c1e5d62
+    exposedName: d56746ab0c3ea664abc95af0e1d67875
     defaultValue: {fileID: 0}
   target:
-    exposedName: cde183fca21c5ff4bbba8d962c97ca91
+    exposedName: 7b0806c6959d42344b88eb755900d83c
     defaultValue: {fileID: 0}
   duration: 1
 --- !u!114 &5108311241551401036
