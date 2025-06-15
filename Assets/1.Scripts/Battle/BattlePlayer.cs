@@ -39,20 +39,22 @@ public class BattlePlayer : BattleCharacter
         base.OnEnable();
     }
 
-    protected override void OnAttack(AttackEventArgs args)
+    protected override void OnTakedDamage()
     {
-        if (args.Target.Equals(this) == true)
-        {
-            Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
-            animator.SetTrigger("Hit");
-            TakeDamage(args.Damage, args.AttackTime, args.AttackType);
-        }
     }
 
-    protected override void OnDodge(DodgeEventArgs args)
+    protected override void OnDodged()
     {
     }
-    
+
+    protected override void OnParried()
+    {
+    }
+
+    protected override void OnJumped()
+    {
+    }
+
     protected override void OnDeath(DeathEventArgs args)
     {
     }

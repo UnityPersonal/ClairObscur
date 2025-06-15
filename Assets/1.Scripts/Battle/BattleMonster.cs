@@ -7,22 +7,23 @@ using UnityEngine.Timeline;
 public class BattleMonster : BattleCharacter
 {
     
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    protected override void OnAttack(AttackEventArgs args)
-    {
-        if(args.Target.Equals(this) == true)
-        {
-            Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
-            TakeDamage(args.Damage, args.AttackTime, args.AttackType);
-        }
-    }
-
-    protected override void OnDodge(DodgeEventArgs args)
-    {
-    }
-
     protected override void OnDeath(DeathEventArgs args)
+    {
+    }
+
+    protected override void OnTakedDamage()
+    {
+    }
+
+    protected override void OnDodged()
+    {
+    }
+
+    protected override void OnParried()
+    {
+    }
+
+    protected override void OnJumped()
     {
     }
 

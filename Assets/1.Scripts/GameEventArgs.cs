@@ -35,7 +35,7 @@ public class ParryEventArgs : TimingEventArgs
 public class JumpEventArgs : TimingEventArgs
 {
     
-    public JumpEventArgs(float jumpTime)
+    public JumpEventArgs(BattleCharacter character, float jumpTime)
         : base(jumpTime)
     {
     }

@@ -91,15 +91,12 @@ public abstract class BattleCharacter : MonoBehaviour
     public float JumpActionTime { get; protected set; }= 0;
     
 
-    protected abstract void OnAttack(AttackEventArgs args);
-    protected abstract void OnDodge(DodgeEventArgs args);
     protected abstract void OnDeath(DeathEventArgs args);
 
     protected virtual void OnEnable()
     {
         var callbacks = BattleEventManager.Callbacks;
         callbacks.OnAttack += OnAttack;
-        callbacks.OnDodge += OnDodge;
         callbacks.OnDeath += OnDeath;
     }
 
@@ -125,8 +122,22 @@ public abstract class BattleCharacter : MonoBehaviour
         
         // Logic for character actions during the turn
     }
+    
+    protected abstract void OnTakedDamage();
+    protected abstract void OnDodged();
+    protected abstract void OnParried();
+    protected abstract void OnJumped();
 
-    public void TakeDamage(int damage, float attackTime, BattleAttackType attackType)
+    private void OnAttack(AttackEventArgs args)
+    {
+        if (args.Target.Equals(this) == true)
+        {
+            Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
+            DefendAttack(args.Damage, args.AttackTime, args.AttackType);
+        }
+    }
+    
+    public void DefendAttack(int damage, float attackTime, BattleAttackType attackType)
     {
         if (IsDead == true) return;
 
@@ -136,40 +147,39 @@ public abstract class BattleCharacter : MonoBehaviour
             {
                 if ((attackTime - DodgeActionTime) <= AttackDelay)
                 {
-                    // 회피성공
-                    
                     DodgeEventArgs dodgeArgs = new DodgeEventArgs(this, attackTime);
                     BattleEventManager.OnDodge(dodgeArgs);
                     return;
                 }
-                else if ((attackTime - ParryActionTime) <= ParryDelay)
+                if ((attackTime - ParryActionTime) <= ParryDelay)
                 {
-                    // 패링 성공
                     ParryEventArgs parryArgs = new ParryEventArgs(this, attackTime);
-
+                    BattleEventManager.OnParry(parryArgs);
                     return;
                 }
                 // 공격 적중
                 TakeDamageEventArgs takeDamageArgs = 
                     new TakeDamageEventArgs(this, damage);
+                
                 animator.SetTrigger("Hit");
+                BattleEventManager.OnTakeDamage(takeDamageArgs);
+                
+                CurrentHp -= damage;
                 break;
             }
             case BattleAttackType.Jump:
+                if ((attackTime - JumpActionTime) <= AttackDelay)
+                {
+                    JumpEventArgs jumpArgs = new JumpEventArgs(this, attackTime);
+                    BattleEventManager.OnJump(jumpArgs);
+                    return;
+                }
                 break;
             case BattleAttackType.Gradient:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(attackType), attackType, null);
         }
-
-        // 데미지를 받았을 때 이벤트를 발생시킨다.
-        TakeDamageEventArgs args = 
-            new TakeDamageEventArgs(this, damage);
-        BattleEventManager.OnTakeDamage(args);
-        
-        // 현재 체력을 감소시킨다.
-        CurrentHp -= damage;
     }
   
     public void OnFocusIn() => characterCamera.Priority = 30;
