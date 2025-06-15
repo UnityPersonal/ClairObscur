@@ -45,7 +45,7 @@ public class BattlePlayer : BattleCharacter
         {
             Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
             animator.SetTrigger("Hit");
-            TakeDamage(args.Damage, args.Dodged, args.Parried, args.Jumped);
+            TakeDamage(args.Damage, args.AttackTime, args.AttackType);
         }
     }
 
@@ -75,9 +75,12 @@ public class BattlePlayer : BattleCharacter
     public override void OnEmittedBeginAttackSignal()
     {
         int damage = 10;
+        float attackTime = Time.time;
         BattleEventManager.OnAttack( new AttackEventArgs
         (
             damage : damage,
+            attackTime: attackTime,
+            attackType: BattleAttackType.Normal,
             attacker: this,
             target: targetCharacter
         ));
@@ -142,8 +145,15 @@ public class BattlePlayer : BattleCharacter
     {
         while (gameObject.activeInHierarchy)
         {
+            if(isDefending == false)
+            {
+                // 방어 중이 아닐 때는 대기
+                yield return null;
+                continue;
+            }
+            
             // dodge
-            if (isDefending && Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 // 방어 중인 상태에서 처리할 로직을 여기에 작성합니다.
                 // 예를 들어, 방어 애니메이션을 재생하거나 방어 상태를 표시하는 UI 업데이트 등을 할 수 있습니다.
@@ -152,11 +162,18 @@ public class BattlePlayer : BattleCharacter
                 
             }
             // parry
-            else if (isDefending && Input.GetKeyDown(KeyCode.R))
+            else if (Input.GetKeyDown(KeyCode.R))
             {
                 Debug.Log($"{name} is parrying.");
                 yield return StartCoroutine(ParryingCoroutine());
             }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log($"{name} is jumping.");
+                yield return StartCoroutine(JumpingCoroutine());
+                // 방어 애니메이션을 재생하거나 방어 상태를 표시하는 UI 업데이트 등을 할 수 있습니다.
+            }
+            
             yield return null;
         }
     }
@@ -214,8 +231,7 @@ public class BattlePlayer : BattleCharacter
             }
         }
         
-        DodgeEventArgs dodgeEventArgs = new DodgeEventArgs(Time.time);
-        BattleEventManager.OnDodge(dodgeEventArgs);
+        DodgeActionTime = Time.time; // 가장 최근 회피 시간을 캐싱한다.
         director.Play();
         Debug.Log($"<color=red>{gameObject.name} Dodge Play </color>");
         yield return WaitForTimeline(director);
@@ -223,6 +239,13 @@ public class BattlePlayer : BattleCharacter
 
     private IEnumerator ParryingCoroutine()
     {
+        ParryActionTime = Time.time; // 가장 최근 패링 시간을 캐싱한다.
+        yield break;
+    }
+    
+    private IEnumerator JumpingCoroutine()
+    {
+        JumpActionTime = Time.time; // 가장 최근 점프 시간을 캐싱한다.
         yield break;
     }
 

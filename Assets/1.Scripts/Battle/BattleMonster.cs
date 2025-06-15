@@ -6,8 +6,7 @@ using UnityEngine.Timeline;
 
 public class BattleMonster : BattleCharacter
 {
-    const float AttackDelay = 0.33f; // Delay before the monster can attack again
-    const float ParryDelay = 0.16f; // Delay before the monster can attack again
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void OnAttack(AttackEventArgs args)
@@ -15,22 +14,12 @@ public class BattleMonster : BattleCharacter
         if(args.Target.Equals(this) == true)
         {
             Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
-            animator.SetTrigger("Hit");
-            TakeDamage(args.Damage, args.Dodged, args.Parried, args.Jumped);
+            TakeDamage(args.Damage, args.AttackTime, args.AttackType);
         }
     }
 
-    private readonly List<float> dogeTimes = new List<float>();
-    private readonly List<float> parryTimes = new List<float>();
-    private readonly List<float> jumpTimes = new List<float>();
-    
     protected override void OnDodge(DodgeEventArgs args)
     {
-        // 방어 캐릭터가 회피를 발동한 타이밍을 캐싱해둔다.
-        if (Activated == true)
-        {
-            dogeTimes.Add(args.Time);
-        }
     }
 
     protected override void OnDeath(DeathEventArgs args)
@@ -42,29 +31,14 @@ public class BattleMonster : BattleCharacter
     {
         int damage = 10;
         float attackTime = Time.time;
-        bool isDodged = false;
-        bool isParried = false;
-        bool isJumped = false;
-        foreach (float dodgeTime in dogeTimes)
-        {
-            if(attackTime - dodgeTime <= AttackDelay)
-            {
-                Debug.Log($"{name} dodged sucees!");
-                damage = 0; // 공격 피해를 0으로 설정한다.
-                isDodged = true;
-                break;
-                // todo: 패링 판정도 추가되어야 한다.
-            }
-        }
         
         BattleEventManager.OnAttack( new AttackEventArgs
         (
             damage : damage,
+            attackTime: attackTime,
+            attackType: BattleAttackType.Normal, // todo: 공격 종류에 따라 다르게 설정
             attacker: this,
-            target: targetCharacter,
-            dodged: isDodged,
-            parried: isParried,
-            jumped: isJumped
+            target: targetCharacter
         ));
     }
 
@@ -82,11 +56,6 @@ public class BattleMonster : BattleCharacter
 
     protected override IEnumerator UpdateBattleActionCoroutine()
     {
-        // Reset action states
-        dogeTimes.Clear();
-        parryTimes.Clear();
-        jumpTimes.Clear();
-        
         yield return StartCoroutine(SelectTargetCoroutine());
         
         yield return StartCoroutine(AttackCoroutine());

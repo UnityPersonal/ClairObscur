@@ -16,7 +16,7 @@ public class TimingEventArgs : GameEventArgs
 
 public class DodgeEventArgs : TimingEventArgs
 {
-    public DodgeEventArgs(float evadeTime) 
+    public DodgeEventArgs(BattleCharacter character, float evadeTime) 
         : base(evadeTime)
     {
     }
@@ -24,9 +24,11 @@ public class DodgeEventArgs : TimingEventArgs
 
 public class ParryEventArgs : TimingEventArgs
 {
-    public ParryEventArgs(float parryTime)
+    public BattleCharacter Character { get; private set; }
+    public ParryEventArgs(BattleCharacter character, float parryTime)
         : base(parryTime)
     {
+        Character = character;
     }
 }
 
@@ -65,29 +67,25 @@ public class FocusEventArgs : GameEventArgs
 public class AttackEventArgs : GameEventArgs
 {
     public int Damage { get; private set; }
-    
+
+    public BattleAttackType AttackType { get; private set; }
+    public float AttackTime { get; private set; } = 0f; // 공격이 시작된 시간
     public BattleCharacter Attacker { get; private set; }
     public BattleCharacter Target { get; private set; }
     
-    public bool Dodged { get; set; } = false;
-    public bool Parried { get; set; } = false;
-    public bool Jumped { get; set; } = false;
-    
     public AttackEventArgs(
         int damage,
+        float attackTime,
+        BattleAttackType attackType,
         BattleCharacter attacker,
-        BattleCharacter target,
-        bool dodged = false,
-        bool parried = false,
-        bool jumped = false
+        BattleCharacter target
         )
     {
         Damage = damage;
+        AttackTime = attackTime;
+        AttackType = attackType;
         Attacker = attacker;
         Target = target;
-        Dodged = dodged;
-        Parried = parried;
-        Jumped = jumped;
     }
 }
 
@@ -101,16 +99,11 @@ public class TakeDamageEventArgs : GameEventArgs
     
     public TakeDamageEventArgs(
         BattleCharacter target,
-        int damage,
-        bool dodged,
-        bool parried,
-        bool jumped)
+        int damage
+        )
     {
         Target = target;
         Damage = damage;
-        Dodged = dodged;
-        Parried = parried;
-        Jumped = jumped;
     }
 }
 
