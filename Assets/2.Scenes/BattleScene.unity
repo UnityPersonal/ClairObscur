@@ -454,13 +454,17 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1003168044528812415, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1706455312216612966, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
       insertIndex: 0
       addedObject: {fileID: 220189135}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1706455312216612962, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 107115990}
     - targetCorrespondingSourceObject: {fileID: 618443095382005065, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 362092608}
@@ -470,17 +474,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1706455312216612962, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
   m_PrefabInstance: {fileID: 107115985}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &107115987 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1003168044528812415, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
-  m_PrefabInstance: {fileID: 107115985}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107115986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73af2f43079407540a710170fb88a2cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &107115988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1706455312216612966, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
@@ -491,6 +484,27 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5783884911296104992, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
   m_PrefabInstance: {fileID: 107115985}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &107115990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107115986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f076cff0b4816f941827e7281e226a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 
+  characterDefaultLocation: {fileID: 1840858927}
+  characterHitTransform: {fileID: 1009426356}
+  characterCamera: {fileID: 982977939}
+  director: {fileID: 220189137}
+  animator: {fileID: 107115989}
+  actionLUT: {fileID: 11400000, guid: 077304515b6bbbc4388b0437c00b281a, type: 2}
+  maxHp: 100
+  dodgeTransform: {fileID: 300808903}
 --- !u!1 &187808954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,7 +1228,7 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 107115987}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: BattlePlayer, Assembly-CSharp
           m_MethodName: OnEmittedBeginAttackSignal
           m_Mode: 1
@@ -5388,6 +5402,17 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &982977939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 825381818720762032, guid: a4da89dfadd57d54697f67a317b0884d, type: 3}
+  m_PrefabInstance: {fileID: 107115985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &996364149
 GameObject:
   m_ObjectHideFlags: 0
@@ -5832,7 +5857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameResultUI: {fileID: 86922054}
   battleCharacters:
-  - {fileID: 107115987}
+  - {fileID: 107115990}
   - {fileID: 675888798}
   - {fileID: 862102770}
   - {fileID: 896972685}
@@ -6757,7 +6782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4646fab672752034699fd4b305647344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 107115987}
+  character: {fileID: 0}
   target: {fileID: 107115988}
   mainCamera: {fileID: 330585545}
   scaleFactor: 2.5

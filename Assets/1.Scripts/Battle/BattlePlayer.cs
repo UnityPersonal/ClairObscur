@@ -30,9 +30,6 @@ public class BattlePlayer : BattleCharacter
     AttackType currentAttackType = AttackType.Normal;
 
     private bool isDefending = false;
-    public bool IsDodging { get; private set; } = false;
-    public bool IsParrying { get; private set; } = false;
-
     
     protected override void OnEnable()
     {
@@ -98,18 +95,6 @@ public class BattlePlayer : BattleCharacter
     {
         Debug.Log("OnEmittedEndDefendSignal");
         isDefending = false;
-    }
-
-    public void OnEmittedBeginDodgeSignal()
-    {
-        IsDodging = true;
-        animator.SetTrigger("Dodge");
-        
-    }
-    
-    public void OnEmittedEndDodgeSignal()
-    {
-        IsDodging = false;
     }
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Player;
@@ -369,7 +354,6 @@ public class BattlePlayer : BattleCharacter
         yield return new WaitForSeconds(0.5f);
     }
 
-    
     private IEnumerator SkillActiveCoroutine()
     {
         while (IsDead == false)
