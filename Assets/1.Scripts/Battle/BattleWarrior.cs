@@ -73,7 +73,7 @@ public class BattleWarrior : BattlePlayer
     
     private void OnTakeDamage(TakeDamageEventArgs args)
     {
-        if ((Activated == true) &&  (args.Target == TargetCharacter))
+        if ((Activated == true) &&  (args.Target == PlayerTargetCharacter))
         {
             ChangeGaurdCount(1);
         }

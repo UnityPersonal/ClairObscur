@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 using Random = UnityEngine.Random;
 
@@ -11,7 +12,7 @@ public class BattlePlayer : BattleCharacter
 {
     [SerializeField] Transform dodgeTransform;
     [SerializeField] SkillData[] skills;
-    enum ActionType
+    public enum ActionType
     {
         None,
         MainMenu,
@@ -21,19 +22,13 @@ public class BattlePlayer : BattleCharacter
         SkillActive,
     }
     private bool isDefending = false;
+
+    private readonly Dictionary<ActionType, PlayerState> playerStatesTable 
+        = new Dictionary<ActionType, PlayerState>();
+
+    protected override void OnTakedDamage() {}
     
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
-
-    protected override void OnTakedDamage()
-    {
-    }
-
-    protected override void OnDodged()
-    {
-    }
+    protected override void OnDodged() {}
     
     protected bool BeginParryingAttack = false;
     protected override void OnParried()
@@ -42,13 +37,11 @@ public class BattlePlayer : BattleCharacter
         BeginParryingAttack = true;
     }
 
-    protected override void OnJumped()
-    {
-    }
+    protected override void OnJumped() {}
 
     public override TimelineAsset GetCurrentActionTimeline()
     {
-        switch (currentAttackType)
+        switch (CurrentAttackType)
         {
             case BattleAttackType.Normal:
                 var actionData = actionLUT.GetActionData(ActionDataType.Attack);
@@ -69,17 +62,15 @@ public class BattlePlayer : BattleCharacter
 
     protected override int GetCurrentDamage()
     {
-        return 10;
+        return 10; // todo: 스킬, 장비, 상태, 직업, 데미지 연동
     }
 
-    protected override void OnDeath(DeathEventArgs args)
-    {
-    }
+    protected override void OnDeath(DeathEventArgs args) {}
 
-    ActionType PreviousActionType = ActionType.MainMenu;
+    public ActionType PreviousActionType { get; set; } = ActionType.MainMenu;
 
     private ActionType nextAction = ActionType.MainMenu;
-    ActionType NextAction
+    public ActionType NextAction
     {
         get => nextAction;
         set
@@ -88,8 +79,17 @@ public class BattlePlayer : BattleCharacter
             nextAction = value;
         }
     }
+    public BattleCharacter PlayerTargetCharacter { get; set; }= null;
 
-    private BattleCharacter targetCharacter = null;
+    protected override void Start()
+    {
+        base.Start();
+        var stateContainer = new GameObject("PlayerStates");
+        playerStatesTable[ActionType.Attack] = stateContainer.AddComponent<PlayerAttackState>();
+        playerStatesTable[ActionType.MainMenu] = stateContainer.AddComponent<PlayerMainMenuState>();
+        playerStatesTable[ActionType.SkillSelect] = stateContainer.AddComponent<PlayerSkillSelectState>();
+        playerStatesTable[ActionType.TargetSelect] = stateContainer.AddComponent<PlayerTargetSelectState>();
+    }
 
     public override void OnBeginAttackSignal()
     {
@@ -98,9 +98,9 @@ public class BattlePlayer : BattleCharacter
         (
             damage : GetCurrentDamage(),
             attackTime: attackTime,
-            attackType: currentAttackType,
+            attackType: CurrentAttackType,
             attacker: this,
-            target: targetCharacter
+            target: PlayerTargetCharacter
         ));
     }
 
@@ -119,32 +119,16 @@ public class BattlePlayer : BattleCharacter
     public override void OnCheckParriedSignal() {}
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Player;
-    public override BattleCharacter TargetCharacter => targetCharacter;
+    public override BattleCharacter TargetCharacter => PlayerTargetCharacter;
 
     protected override IEnumerator UpdateBattleActionCoroutine()
     {
         NextAction =  ActionType.MainMenu; 
-        
+
         while (Activated && !IsDead)
         {
-            switch (NextAction)
-            {
-                case ActionType.MainMenu:
-                    yield return StartCoroutine(MainMenuCoroutine());
-                    break;
-                case ActionType.Attack:
-                    yield return StartCoroutine(AttackCoroutine());
-                    break;
-                case ActionType.SkillSelect:
-                    yield return StartCoroutine(SkillSelectCoroutine());
-                    break;
-                case ActionType.TargetSelect:
-                    yield return StartCoroutine(TargetSelectCoroutine());
-                    break;
-                case ActionType.SkillActive:
-                    yield return StartCoroutine(SkillActiveCoroutine());
-                    break;
-            }
+            var state = playerStatesTable[NextAction];
+            yield return StartCoroutine(state.Execute(this));
         }
         Debug.Log($"BattlePlayer Turn Ended");
     }
@@ -222,124 +206,6 @@ public class BattlePlayer : BattleCharacter
     {
         JumpActionTime = Time.time; // 가장 최근 점프 시간을 캐싱한다.
         yield break;
-    }
-
-    private IEnumerator SkillSelectCoroutine()
-    {
-        var menu = SkillMenuSelectUI.Instance;
-        menu.gameObject.SetActive(true);
-        yield return StartCoroutine(menu.UpdateSelectUI(this));
-        var selectType = menu.CurrentSelectType;
-        switch (selectType)
-        {
-            case SkillMenuSelectUI.SelectType.Skill1:
-                currentAttackType = BattleAttackType.Skill1;
-                NextAction = ActionType.TargetSelect;
-                break;
-            case SkillMenuSelectUI.SelectType.Skill2:
-                currentAttackType = BattleAttackType.Skill2;
-                NextAction = ActionType.TargetSelect;
-                break;
-            case SkillMenuSelectUI.SelectType.Skill3:
-                currentAttackType = BattleAttackType.Skill3;
-                NextAction = ActionType.TargetSelect;
-                break;
-            case SkillMenuSelectUI.SelectType.MainMenu:
-                NextAction = ActionType.MainMenu;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-        
-        menu.gameObject.SetActive(false);
-    }
-    
-    private IEnumerator MainMenuCoroutine()
-    {
-        var menu = MainMenulSelectUI.Instance;
-        
-        menu.gameObject.SetActive(true);
-        yield return StartCoroutine(menu.UpdateSelectUI(this));
-        
-        var selectType = menu.CurrentSelectType;
-        switch (selectType)
-        {
-            case MainMenulSelectUI.SelectType.Attack:
-                currentAttackType = BattleAttackType.Normal;
-                NextAction = ActionType.TargetSelect;
-                break;
-            case MainMenulSelectUI.SelectType.Skill:
-                NextAction = ActionType.SkillSelect;
-                break;
-            case MainMenulSelectUI.SelectType.Item:
-                NextAction = ActionType.MainMenu;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-        
-        menu.gameObject.SetActive(false);
-    }
-
-    private IEnumerator TargetSelectCoroutine()
-    {
-        var enemyList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Enemy];
-        List<BattleCharacter> alivedEnemyList = new List<BattleCharacter>();        
-        foreach (var character in enemyList)
-        {
-            if (character.IsDead == false)
-            {
-                alivedEnemyList.Add(character);
-            }
-        }
-
-        bool isTargetSelected = false;
-        int currentIndex = 0;
-        alivedEnemyList[currentIndex].OnFocusIn();
-        while (isTargetSelected == false)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                alivedEnemyList[currentIndex].OnFocusOut();
-                
-                currentIndex--;
-                currentIndex = Math.Clamp(currentIndex,0 , alivedEnemyList.Count-1);
-                
-                alivedEnemyList[currentIndex].OnFocusIn();
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                alivedEnemyList[currentIndex].OnFocusOut();
-                
-                currentIndex++;
-                currentIndex = Math.Clamp(currentIndex,0 , alivedEnemyList.Count-1);
-                
-                alivedEnemyList[currentIndex].OnFocusIn();
-            }
-            else if (Input.GetKeyDown(KeyCode.Space))
-            {
-                alivedEnemyList[currentIndex].OnFocusOut();
-                isTargetSelected = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                alivedEnemyList[currentIndex].OnFocusOut();
-                break;
-            }
-            yield return null;
-        }
-        
-        //targetCharacter = alivedEnemyList[Random.Range(0, alivedEnemyList.Count)];
-        if (isTargetSelected)
-        {
-            targetCharacter = alivedEnemyList[currentIndex];
-            NextAction = ActionType.Attack;
-        }
-        else
-        {
-            NextAction = PreviousActionType;
-        }
-        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator SkillActiveCoroutine()

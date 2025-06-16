@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -22,14 +23,6 @@ public enum BattleAttackType
     Jump,
     Gradient,
 }
-public enum BattleActionType
-{
-    Relax,
-    Attack,
-    Defend
-}
-
-
 
 public abstract class BattleCharacter : MonoBehaviour
 {
@@ -58,14 +51,12 @@ public abstract class BattleCharacter : MonoBehaviour
     abstract public void OnBeginAttackSignal();
     abstract public void OnBeginDefendSignal();
     abstract public void OnEndDefendSignal();
-    
     abstract public void OnCheckParriedSignal();
-    
 
     abstract public  BattleCharacterType CharacterType { get; }
     abstract public BattleCharacter TargetCharacter { get; }
     
-    protected BattleAttackType currentAttackType = BattleAttackType.Normal;
+    public BattleAttackType CurrentAttackType { get; set; }= BattleAttackType.Normal;
 
     [Space(10), Header("Character Status")]
     [SerializeField] private int maxHp = 100;
@@ -98,6 +89,7 @@ public abstract class BattleCharacter : MonoBehaviour
     public float ParryActionTime { get; protected set; }= 0;
     public float JumpActionTime { get; protected set; }= 0;
 
+    
     public abstract TimelineAsset GetCurrentActionTimeline();
     protected abstract int GetCurrentDamage();
 
@@ -245,17 +237,7 @@ public abstract class BattleCharacter : MonoBehaviour
 
     protected abstract IEnumerator UpdateBattleActionCoroutine();
     protected abstract IEnumerator UpdateDefendActionCoroutine();
-
-
-    protected IEnumerator TimerCoroutine(float waitTime, Action callback)
-    {
-        yield return new WaitForSeconds(waitTime);
-        callback?.Invoke();
-    }
-    
-    
-    
-    protected IEnumerator AttackCoroutine()
+    public IEnumerator AttackCoroutine()
     {
         // 1. TimelineAsset 가져오기
         var timeline = GetCurrentActionTimeline();

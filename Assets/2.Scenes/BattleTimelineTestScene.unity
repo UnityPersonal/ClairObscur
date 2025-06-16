@@ -344,6 +344,7 @@ PlayableDirector:
     m_References:
     - 1756d5abc81b45c4987ac0ac25ceb322: {fileID: 1616052421}
     - d81cc69adcfe81a4b97e3d943f5e7176: {fileID: 2095816231}
+    - 949a6ea352e56274dad6735add96d9a2: {fileID: 1616052421}
 --- !u!4 &270260648
 Transform:
   m_ObjectHideFlags: 0

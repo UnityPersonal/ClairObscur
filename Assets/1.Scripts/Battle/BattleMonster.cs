@@ -14,7 +14,7 @@ public class BattleMonster : BattleCharacter
 
     protected override int GetCurrentDamage()
     {
-        return 10;
+        return 10; // todo: 스킬, 상태, 몬스터 특성, 데미지 연동
     }
 
     protected override void OnDeath(DeathEventArgs args)
@@ -45,9 +45,9 @@ public class BattleMonster : BattleCharacter
         (
             damage : GetCurrentDamage(),
             attackTime: Time.time,
-            attackType: currentAttackType, // todo: 공격 종류에 따라 다르게 설정
+            attackType: CurrentAttackType, // todo: 공격 종류에 따라 다르게 설정
             attacker: this,
-            target: targetCharacter
+            target: playerTargetCharacter
         ));
     }
 
@@ -57,10 +57,10 @@ public class BattleMonster : BattleCharacter
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Enemy;
 
-    private BattleCharacter targetCharacter = null;
+    private BattleCharacter playerTargetCharacter = null;
     public override BattleCharacter TargetCharacter
     {
-        get { return targetCharacter; }
+        get { return playerTargetCharacter; }
     }
 
     protected override IEnumerator UpdateBattleActionCoroutine()
@@ -84,7 +84,7 @@ public class BattleMonster : BattleCharacter
         {
             if(character.IsDead == false)
             {
-                targetCharacter = character;
+                playerTargetCharacter = character;
                 break;
             }
         }
