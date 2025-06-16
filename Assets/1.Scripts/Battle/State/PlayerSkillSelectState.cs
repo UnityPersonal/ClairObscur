@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerSkillSelectState : PlayerState
 {
-    public override BattlePlayer.ActionType StateType => BattlePlayer.ActionType.SkillSelect;
-
     public override IEnumerator Execute(BattlePlayer player)
     {
         var menu = SkillMenuSelectUI.Instance;

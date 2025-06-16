@@ -10,7 +10,9 @@ using Random = UnityEngine.Random;
 
 public class BattlePlayer : BattleCharacter
 {
+    [Header("Battle Player Settings")]
     [SerializeField] Transform dodgeTransform;
+    public Transform DodgeTransform { get { return dodgeTransform; } }
     [SerializeField] SkillData[] skills;
     public enum ActionType
     {
@@ -20,6 +22,7 @@ public class BattlePlayer : BattleCharacter
         SkillSelect,
         TargetSelect,
         SkillActive,
+        Defend,
     }
     private bool isDefending = false;
 
@@ -90,6 +93,7 @@ public class BattlePlayer : BattleCharacter
         playerStatesTable[ActionType.MainMenu] = stateContainer.AddComponent<PlayerMainMenuState>();
         playerStatesTable[ActionType.SkillSelect] = stateContainer.AddComponent<PlayerSkillSelectState>();
         playerStatesTable[ActionType.TargetSelect] = stateContainer.AddComponent<PlayerTargetSelectState>();
+        playerStatesTable[ActionType.Defend] = stateContainer.AddComponent<PlayerDefenseState>();
     }
 
     public override void OnBeginAttackSignal()
@@ -144,71 +148,43 @@ public class BattlePlayer : BattleCharacter
                 yield return null;
                 continue;
             }
-            
+            PlayerDefenseState state = playerStatesTable[ActionType.Defend] as PlayerDefenseState;
             // dodge
             if (Input.GetKey(KeyCode.Q))
             {
                 // 방어 중인 상태에서 처리할 로직을 여기에 작성합니다.
                 // 예를 들어, 방어 애니메이션을 재생하거나 방어 상태를 표시하는 UI 업데이트 등을 할 수 있습니다.
                 Debug.Log($"{name} is dodge.");
-                yield return StartCoroutine(DodgeCoroutine());
+                state.defenseType = PlayerDefenseState.DefenseType.Dodge;
+                yield return state.Execute(this);
                 
             }
             // parry
             else if (Input.GetKeyDown(KeyCode.R))
             {
                 Debug.Log($"{name} is parrying.");
-                yield return StartCoroutine(ParryingCoroutine());
+                state.defenseType = PlayerDefenseState.DefenseType.Parry;
+                yield return state.Execute(this);
 
                 if (BeginParryingAttack == true)
                 {
                     BeginParryingAttack = false;
-                    yield return StartCoroutine(ParryingAttackCoroutine());
+                    state.defenseType = PlayerDefenseState.DefenseType.ParryAttack;
+                    yield return state.Execute(this);
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log($"{name} is jumping.");
-                yield return StartCoroutine(JumpingCoroutine());
-                // 방어 애니메이션을 재생하거나 방어 상태를 표시하는 UI 업데이트 등을 할 수 있습니다.
+                state.defenseType = PlayerDefenseState.DefenseType.Jump;
+                yield return state.Execute(this);
             }
             
             yield return null;
         }
     }
     
-    protected IEnumerator DodgeCoroutine()
-    {
-        var actionData =  actionLUT.GetActionData(ActionDataType.Dodge);
-        var timeline = actionData.actionTimeline;
-        DodgeActionTime = Time.time; // 가장 최근 회피 시간을 캐싱한다.
-        Debug.Log($"<color=red>{gameObject.name} Dodge Play </color>");
-        yield return PlayTimeline(timeline,characterDefaultLocation, dodgeTransform);
-    }
-
-    private IEnumerator ParryingCoroutine()
-    {
-        var actionData =  actionLUT.GetActionData(ActionDataType.Parry);
-        var timeline = actionData.actionTimeline;
-        ParryActionTime = Time.time;
-        Debug.Log($"<color=blue>{gameObject.name} Parry Play </color>");
-        yield return PlayTimeline(timeline, characterDefaultLocation, characterDefaultLocation);
-    }
-
-    private IEnumerator ParryingAttackCoroutine()
-    {
-        var actionData =  actionLUT.GetActionData(ActionDataType.ParryingAttack);
-        var timeline = actionData.actionTimeline;
-        Debug.Log($"<color=yellow>{gameObject.name} Parry Attack Play </color>");
-        yield return PlayTimeline(timeline, characterDefaultLocation, characterDefaultLocation);
-    }
     
-    private IEnumerator JumpingCoroutine()
-    {
-        JumpActionTime = Time.time; // 가장 최근 점프 시간을 캐싱한다.
-        yield break;
-    }
-
     private IEnumerator SkillActiveCoroutine()
     {
         while (IsDead == false)

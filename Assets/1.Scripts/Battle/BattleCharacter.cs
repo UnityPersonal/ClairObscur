@@ -29,12 +29,13 @@ public abstract class BattleCharacter : MonoBehaviour
     const float AttackDelay = 0.33f; // Delay before the monster can attack again
     const float ParryDelay = 0.16f; // Delay before the monster can attack again
     
-    [Header("Character Settings")]
+    [Header("Battle Player Settings")]
     [SerializeField] protected string characterName;
     public string CharacterName => characterName;
     
     [Header("Character Location Settings")]
     [SerializeField] protected Transform characterDefaultLocation;
+    public Transform CharacterDefaultLocation { get { return characterDefaultLocation; } }
     [SerializeField] protected Transform characterHitTransform;
     public Transform CharacterHitTransform { get { return characterHitTransform; } }
     
@@ -47,7 +48,7 @@ public abstract class BattleCharacter : MonoBehaviour
     [Space(10), Header("Character Animation Settings")]
     [SerializeField] protected Animator animator;
     [SerializeField] protected ActionDataTable actionLUT;
-
+    public ActionDataTable ActionLUT => actionLUT;
     abstract public void OnBeginAttackSignal();
     abstract public void OnBeginDefendSignal();
     abstract public void OnEndDefendSignal();
@@ -85,9 +86,9 @@ public abstract class BattleCharacter : MonoBehaviour
     protected bool IsAttacking = false;
     protected bool FinishedAction = false;
 
-    public float DodgeActionTime { get; protected set; }= 0;
-    public float ParryActionTime { get; protected set; }= 0;
-    public float JumpActionTime { get; protected set; }= 0;
+    public float DodgeActionTime { get; set; }= 0;
+    public float ParryActionTime { get; set; }= 0;
+    public float JumpActionTime { get; set; }= 0;
 
     
     public abstract TimelineAsset GetCurrentActionTimeline();

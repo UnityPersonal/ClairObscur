@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMainMenuState : PlayerState
 {
-    public override BattlePlayer.ActionType StateType => BattlePlayer.ActionType.MainMenu;
-
     public override IEnumerator Execute(BattlePlayer player)
     {
         Debug.Log("Main Menu Open");

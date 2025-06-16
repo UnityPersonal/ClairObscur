@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerTargetSelectState : PlayerState
 {
-    public override BattlePlayer.ActionType StateType => BattlePlayer.ActionType.TargetSelect;
-
     public override IEnumerator Execute(BattlePlayer player)
     {
         var enemyList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Enemy];
