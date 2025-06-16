@@ -1312,7 +1312,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 6347335964158684448}
           m_TargetAssemblyTypeName: BattleMonster, Assembly-CSharp
-          m_MethodName: OnEmittedBeginAttackSignal
+          m_MethodName: OnBeginAttackSignal
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

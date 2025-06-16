@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class BattlePlayer : BattleCharacter
 {
     [SerializeField] Transform dodgeTransform;
+    [SerializeField] SkillData[] skills;
     enum ActionType
     {
         None,
@@ -19,16 +20,6 @@ public class BattlePlayer : BattleCharacter
         TargetSelect,
         SkillActive,
     }
-    
-    enum AttackType
-    {
-        Normal,
-        Skill1,
-        Skill2,
-        Skill3,
-    }
-    AttackType currentAttackType = AttackType.Normal;
-
     private bool isDefending = false;
     
     protected override void OnEnable()
@@ -43,13 +34,42 @@ public class BattlePlayer : BattleCharacter
     protected override void OnDodged()
     {
     }
-
+    
+    protected bool BeginParryingAttack = false;
     protected override void OnParried()
     {
+        FinishedAction = true;
+        BeginParryingAttack = true;
     }
 
     protected override void OnJumped()
     {
+    }
+
+    public override TimelineAsset GetCurrentActionTimeline()
+    {
+        switch (currentAttackType)
+        {
+            case BattleAttackType.Normal:
+                var actionData = actionLUT.GetActionData(ActionDataType.Attack);
+                return actionData.actionTimeline;
+            case BattleAttackType.Skill1 : return skills[0].timeline;
+            case BattleAttackType.Skill2 : return skills[1].timeline;
+            case BattleAttackType.Skill3 : return skills[2].timeline;
+            case BattleAttackType.Jump:
+                break;
+            case BattleAttackType.Gradient:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return null;
+    }
+
+    protected override int GetCurrentDamage()
+    {
+        return 10;
     }
 
     protected override void OnDeath(DeathEventArgs args)
@@ -71,31 +91,32 @@ public class BattlePlayer : BattleCharacter
 
     private BattleCharacter targetCharacter = null;
 
-    public override void OnEmittedBeginAttackSignal()
+    public override void OnBeginAttackSignal()
     {
-        int damage = 10;
         float attackTime = Time.time;
         BattleEventManager.OnAttack( new AttackEventArgs
         (
-            damage : damage,
+            damage : GetCurrentDamage(),
             attackTime: attackTime,
-            attackType: BattleAttackType.Normal,
+            attackType: currentAttackType,
             attacker: this,
             target: targetCharacter
         ));
     }
 
-    public override void OnEmittedBeginDefendSignal()
+    public override void OnBeginDefendSignal()
     {
         Debug.Log("OnEmittedBeginDefendSignal");
         isDefending = true;
     }
 
-    public override void OnEmittedEndDefendSignal()
+    public override void OnEndDefendSignal()
     {
         Debug.Log("OnEmittedEndDefendSignal");
         isDefending = false;
     }
+
+    public override void OnCheckParriedSignal() {}
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Player;
     public override BattleCharacter TargetCharacter => targetCharacter;
@@ -140,7 +161,7 @@ public class BattlePlayer : BattleCharacter
             }
             
             // dodge
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKey(KeyCode.Q))
             {
                 // 방어 중인 상태에서 처리할 로직을 여기에 작성합니다.
                 // 예를 들어, 방어 애니메이션을 재생하거나 방어 상태를 표시하는 UI 업데이트 등을 할 수 있습니다.
@@ -153,6 +174,12 @@ public class BattlePlayer : BattleCharacter
             {
                 Debug.Log($"{name} is parrying.");
                 yield return StartCoroutine(ParryingCoroutine());
+
+                if (BeginParryingAttack == true)
+                {
+                    BeginParryingAttack = false;
+                    yield return StartCoroutine(ParryingAttackCoroutine());
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -169,65 +196,26 @@ public class BattlePlayer : BattleCharacter
     {
         var actionData =  actionLUT.GetActionData(ActionDataType.Dodge);
         var timeline = actionData.actionTimeline;
-        director.playableAsset = timeline;
-        foreach (var track in timeline.GetOutputTracks())
-        {
-            if (track is AnimationTrack animationTrack)
-            {
-                Debug.Log($"AnimationTrack found: {animationTrack.name}");
-                director.SetGenericBinding(animationTrack, animator);
-            }
-            
-            // MoveToTargetTrack만 처리
-            if (track is MoveToTargetTrack)
-            {
-                director.SetGenericBinding(track, transform);
-
-                // 3. 트랙의 모든 클립 순회
-                foreach (var clip in track.GetClips())
-                {
-                    // MoveToTargetClip만 처리
-                    var moveClip = clip.asset as MoveToTargetClip;
-                    if (moveClip != null)
-                    {
-                        // 4. actor, target 동적 할당
-                        moveClip.actor.exposedName = UnityEditor.GUID.Generate().ToString();
-                        moveClip.target.exposedName = UnityEditor.GUID.Generate().ToString();
-
-                        if (clip.displayName.Equals("GoTo"))
-                        {
-                            director.SetReferenceValue(moveClip.actor.exposedName, characterDefaultLocation);
-                            director.SetReferenceValue(moveClip.target.exposedName, dodgeTransform);
-                        }
-                        else if (clip.displayName.Equals("ReturnTo"))
-                        {
-                            director.SetReferenceValue(moveClip.actor.exposedName, dodgeTransform);
-                            director.SetReferenceValue(moveClip.target.exposedName, characterDefaultLocation);
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"clip displayName '{clip.displayName}' does not match expected names.");
-                        }
-                    }
-                }
-            }
-
-            if (track is MoveToTargetTrack moveToTargetTrack)
-            {
-                director.SetGenericBinding(track, transform);
-            }
-        }
-        
         DodgeActionTime = Time.time; // 가장 최근 회피 시간을 캐싱한다.
-        director.Play();
         Debug.Log($"<color=red>{gameObject.name} Dodge Play </color>");
-        yield return WaitForTimeline(director);
+        yield return PlayTimeline(timeline,characterDefaultLocation, dodgeTransform);
     }
 
     private IEnumerator ParryingCoroutine()
     {
-        ParryActionTime = Time.time; // 가장 최근 패링 시간을 캐싱한다.
-        yield break;
+        var actionData =  actionLUT.GetActionData(ActionDataType.Parry);
+        var timeline = actionData.actionTimeline;
+        ParryActionTime = Time.time;
+        Debug.Log($"<color=blue>{gameObject.name} Parry Play </color>");
+        yield return PlayTimeline(timeline, characterDefaultLocation, characterDefaultLocation);
+    }
+
+    private IEnumerator ParryingAttackCoroutine()
+    {
+        var actionData =  actionLUT.GetActionData(ActionDataType.ParryingAttack);
+        var timeline = actionData.actionTimeline;
+        Debug.Log($"<color=yellow>{gameObject.name} Parry Attack Play </color>");
+        yield return PlayTimeline(timeline, characterDefaultLocation, characterDefaultLocation);
     }
     
     private IEnumerator JumpingCoroutine()
@@ -245,15 +233,15 @@ public class BattlePlayer : BattleCharacter
         switch (selectType)
         {
             case SkillMenuSelectUI.SelectType.Skill1:
-                currentAttackType = AttackType.Skill1;
+                currentAttackType = BattleAttackType.Skill1;
                 NextAction = ActionType.TargetSelect;
                 break;
             case SkillMenuSelectUI.SelectType.Skill2:
-                currentAttackType = AttackType.Skill2;
+                currentAttackType = BattleAttackType.Skill2;
                 NextAction = ActionType.TargetSelect;
                 break;
             case SkillMenuSelectUI.SelectType.Skill3:
-                currentAttackType = AttackType.Skill3;
+                currentAttackType = BattleAttackType.Skill3;
                 NextAction = ActionType.TargetSelect;
                 break;
             case SkillMenuSelectUI.SelectType.MainMenu:
@@ -277,7 +265,7 @@ public class BattlePlayer : BattleCharacter
         switch (selectType)
         {
             case MainMenulSelectUI.SelectType.Attack:
-                currentAttackType = AttackType.Normal;
+                currentAttackType = BattleAttackType.Normal;
                 NextAction = ActionType.TargetSelect;
                 break;
             case MainMenulSelectUI.SelectType.Skill:

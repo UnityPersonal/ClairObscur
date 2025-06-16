@@ -6,6 +6,7 @@ public enum ActionDataType
     Attack,
     Dodge,
     Parry,
+    ParryingAttack,
     JumpAttack,
     JumpDodge,
     Shoot,

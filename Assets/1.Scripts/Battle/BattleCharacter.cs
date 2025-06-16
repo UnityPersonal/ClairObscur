@@ -16,6 +16,9 @@ public enum BattleCharacterType
 public enum BattleAttackType
 {
     Normal,
+    Skill1,
+    Skill2,
+    Skill3,
     Jump,
     Gradient,
 }
@@ -52,13 +55,17 @@ public abstract class BattleCharacter : MonoBehaviour
     [SerializeField] protected Animator animator;
     [SerializeField] protected ActionDataTable actionLUT;
 
-    abstract public void OnEmittedBeginAttackSignal();
-    abstract public void OnEmittedBeginDefendSignal();
-    abstract public void OnEmittedEndDefendSignal();
+    abstract public void OnBeginAttackSignal();
+    abstract public void OnBeginDefendSignal();
+    abstract public void OnEndDefendSignal();
+    
+    abstract public void OnCheckParriedSignal();
+    
 
     abstract public  BattleCharacterType CharacterType { get; }
     abstract public BattleCharacter TargetCharacter { get; }
     
+    protected BattleAttackType currentAttackType = BattleAttackType.Normal;
 
     [Space(10), Header("Character Status")]
     [SerializeField] private int maxHp = 100;
@@ -85,11 +92,14 @@ public abstract class BattleCharacter : MonoBehaviour
 
     public bool IsDead => currentHp <= 0;
     protected bool IsAttacking = false;
+    protected bool FinishedAction = false;
 
     public float DodgeActionTime { get; protected set; }= 0;
     public float ParryActionTime { get; protected set; }= 0;
     public float JumpActionTime { get; protected set; }= 0;
-    
+
+    public abstract TimelineAsset GetCurrentActionTimeline();
+    protected abstract int GetCurrentDamage();
 
     protected abstract void OnDeath(DeathEventArgs args);
 
@@ -128,6 +138,8 @@ public abstract class BattleCharacter : MonoBehaviour
     protected abstract void OnParried();
     protected abstract void OnJumped();
 
+    
+
     private void OnAttack(AttackEventArgs args)
     {
         if (args.Target.Equals(this) == true)
@@ -149,12 +161,14 @@ public abstract class BattleCharacter : MonoBehaviour
                 {
                     DodgeEventArgs dodgeArgs = new DodgeEventArgs(this, attackTime);
                     BattleEventManager.OnDodge(dodgeArgs);
+                    OnDodged();
                     return;
                 }
                 if ((attackTime - ParryActionTime) <= ParryDelay)
                 {
                     ParryEventArgs parryArgs = new ParryEventArgs(this, attackTime);
                     BattleEventManager.OnParry(parryArgs);
+                    OnParried();
                     return;
                 }
                 // 공격 적중
@@ -163,6 +177,7 @@ public abstract class BattleCharacter : MonoBehaviour
                 
                 animator.SetTrigger("Hit");
                 BattleEventManager.OnTakeDamage(takeDamageArgs);
+                OnTakedDamage();
                 
                 CurrentHp -= damage;
                 break;
@@ -172,6 +187,7 @@ public abstract class BattleCharacter : MonoBehaviour
                 {
                     JumpEventArgs jumpArgs = new JumpEventArgs(this, attackTime);
                     BattleEventManager.OnJump(jumpArgs);
+                    OnJumped();
                     return;
                 }
                 break;
@@ -208,10 +224,22 @@ public abstract class BattleCharacter : MonoBehaviour
         }
         
     }
+
+    public virtual void Activate()
+    {
+        Activated = true;
+
+    }
+    
+    public virtual void Deactivate()
+    {
+        Activated = false;
+    }
+    
     public void StartTurn()
     {
         Debug.Log($"BattleCharacter ::: StartTurn {name}");
-        Activated = true;
+        Activate();
         StartCoroutine(UpdateBattleActionCoroutine());
     }
 
@@ -225,12 +253,44 @@ public abstract class BattleCharacter : MonoBehaviour
         callback?.Invoke();
     }
     
+    
+    
     protected IEnumerator AttackCoroutine()
     {
-        
         // 1. TimelineAsset 가져오기
-        var actionData = actionLUT.GetActionData(ActionDataType.Attack);
-        var timeline = actionData.actionTimeline;
+        var timeline = GetCurrentActionTimeline();
+        yield return PlayTimeline(timeline,characterDefaultLocation, TargetCharacter.CharacterHitTransform);
+        Deactivate();
+        Debug.Log("타임라인 종료됨, 다음 단계 진행");
+    }
+    
+    public IEnumerator WaitForTimeline(PlayableDirector director)
+    {
+        FinishedAction = false;
+
+        void OnStopped(PlayableDirector _) => FinishedAction = true;
+
+        director.stopped += OnStopped;
+
+        // 이미 재생 중인 경우만 대기
+        if (director.state == PlayState.Playing)
+            yield return new WaitUntil(() => FinishedAction);
+
+        director.stopped -= OnStopped;
+    }
+
+    public IEnumerator PlayTimeline(
+        TimelineAsset timeline,
+        Transform origin,
+        Transform destination
+        )
+    {
+        if (director.state == PlayState.Playing)
+        {
+            director.Stop();
+            yield return null;
+        }
+        
         director.playableAsset = timeline;
         // 2. 모든 트랙 순회
         foreach (var track in timeline.GetOutputTracks())
@@ -258,13 +318,13 @@ public abstract class BattleCharacter : MonoBehaviour
 
                         if (clip.displayName.Equals("GoTo"))
                         {
-                            director.SetReferenceValue(moveClip.actor.exposedName, characterDefaultLocation);
-                            director.SetReferenceValue(moveClip.target.exposedName, TargetCharacter.CharacterHitTransform);
+                            director.SetReferenceValue(moveClip.actor.exposedName, origin);
+                            director.SetReferenceValue(moveClip.target.exposedName, destination);
                         }
                         else if (clip.displayName.Equals("ReturnTo"))
                         {
-                            director.SetReferenceValue(moveClip.actor.exposedName, TargetCharacter.CharacterHitTransform);
-                            director.SetReferenceValue(moveClip.target.exposedName, characterDefaultLocation);
+                            director.SetReferenceValue(moveClip.actor.exposedName, destination);
+                            director.SetReferenceValue(moveClip.target.exposedName, origin);
                         }
                         else
                         {
@@ -285,24 +345,6 @@ public abstract class BattleCharacter : MonoBehaviour
 
         director.Play();
         yield return WaitForTimeline(director);
-
-        Activated = false;
-        Debug.Log("타임라인 종료됨, 다음 단계 진행");
-    }
-    
-    public static IEnumerator WaitForTimeline(PlayableDirector director)
-    {
-        bool isDone = false;
-
-        void OnStopped(PlayableDirector _) => isDone = true;
-
-        director.stopped += OnStopped;
-
-        // 이미 재생 중인 경우만 대기
-        if (director.state == PlayState.Playing)
-            yield return new WaitUntil(() => isDone);
-
-        director.stopped -= OnStopped;
     }
 
 }

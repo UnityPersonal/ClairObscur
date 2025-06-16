@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: WarriorUpperSlash
   damage: 0
-  LearnCost: 
+  LearnCost: 0
   ApCost: 2
   timeline: {fileID: 11400000, guid: 65be75c02f9b9ba43a0e08f8c30b6a42, type: 2}

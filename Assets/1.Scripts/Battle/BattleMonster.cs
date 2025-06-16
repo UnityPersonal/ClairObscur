@@ -6,7 +6,17 @@ using UnityEngine.Timeline;
 
 public class BattleMonster : BattleCharacter
 {
-    
+    public override TimelineAsset GetCurrentActionTimeline()
+    {
+        var actionData = actionLUT.GetActionData(ActionDataType.Attack);
+        return actionData.actionTimeline;
+    }
+
+    protected override int GetCurrentDamage()
+    {
+        return 10;
+    }
+
     protected override void OnDeath(DeathEventArgs args)
     {
     }
@@ -28,24 +38,22 @@ public class BattleMonster : BattleCharacter
     }
 
     // Update is called once per frame
-    public override void OnEmittedBeginAttackSignal()
+    public override void OnBeginAttackSignal()
     {
-        int damage = 10;
-        float attackTime = Time.time;
-        
+        Debug.Log($"<color=green>BattleMonster</color> ::: OnEmittedBeginAttackSignal {Time.time}");
         BattleEventManager.OnAttack( new AttackEventArgs
         (
-            damage : damage,
-            attackTime: attackTime,
-            attackType: BattleAttackType.Normal, // todo: 공격 종류에 따라 다르게 설정
+            damage : GetCurrentDamage(),
+            attackTime: Time.time,
+            attackType: currentAttackType, // todo: 공격 종류에 따라 다르게 설정
             attacker: this,
             target: targetCharacter
         ));
     }
 
-    public override void OnEmittedBeginDefendSignal() {}
-
-    public override void OnEmittedEndDefendSignal() {}
+    public override void OnBeginDefendSignal() {}
+    public override void OnEndDefendSignal() {}
+    public override void OnCheckParriedSignal() {}
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Enemy;
 

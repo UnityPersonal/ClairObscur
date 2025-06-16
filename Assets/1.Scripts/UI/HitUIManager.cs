@@ -10,24 +10,34 @@ public class HitUIManager : MonoBehaviour
     void Start()
     {
         BattleEventManager.Callbacks.OnTakeDamage += OnTakeDamage;
+        BattleEventManager.Callbacks.OnDodge += OnDodged;
+        BattleEventManager.Callbacks.OnParry += OnParried;
+        BattleEventManager.Callbacks.OnJump += OnJumped;
+        
+    }
+
+    private void OnParried(ParryEventArgs args)
+    {
+        var hitUI = Instantiate(hitUIPrefab, canvas.transform);
+        hitUI.Set( canvas, args.Character.transform, "PARRIED");
+    }
+
+    private void OnDodged(DodgeEventArgs args)
+    {
+        var hitUI = Instantiate(hitUIPrefab, canvas.transform);
+        hitUI.Set( canvas, args.Character.transform, "DODGED");
+    }
+    
+    private void OnJumped(JumpEventArgs args)
+    {
+        var hitUI = Instantiate(hitUIPrefab, canvas.transform);
+        hitUI.Set( canvas, args.Character.transform, "JUMPED");
     }
 
     void OnTakeDamage(TakeDamageEventArgs args)
     {
         var hitUI = Instantiate(hitUIPrefab, canvas.transform);
         string damageText = args.Damage.ToString();
-        if (args.Parried)
-        {
-            damageText = "PARRIED";
-        }
-        else if (args.Dodged)
-        {
-            damageText = "DODGED";
-        }
-        else if (args.Jumped)
-        {
-            damageText = "JUMPED";
-        }
         hitUI.Set( canvas, args.Target.transform, damageText);
     }
 }

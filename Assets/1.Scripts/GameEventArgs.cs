@@ -16,9 +16,12 @@ public class TimingEventArgs : GameEventArgs
 
 public class DodgeEventArgs : TimingEventArgs
 {
+    public BattleCharacter Character { get; private set; }
+    
     public DodgeEventArgs(BattleCharacter character, float evadeTime) 
         : base(evadeTime)
     {
+        Character = character;
     }
 }
 
@@ -34,10 +37,12 @@ public class ParryEventArgs : TimingEventArgs
 
 public class JumpEventArgs : TimingEventArgs
 {
-    
+    public BattleCharacter Character { get; private set; }
+
     public JumpEventArgs(BattleCharacter character, float jumpTime)
         : base(jumpTime)
     {
+        Character = character;
     }
 }
 
@@ -93,10 +98,6 @@ public class TakeDamageEventArgs : GameEventArgs
 {
     public BattleCharacter Target { get; private set; }
     public int Damage { get; private set; }
-    public bool Dodged { get; set; } = false;
-    public bool Parried { get; set; } = false;
-    public bool Jumped { get; set; } = false;
-    
     public TakeDamageEventArgs(
         BattleCharacter target,
         int damage

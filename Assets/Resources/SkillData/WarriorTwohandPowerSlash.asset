@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WarriorTwohandPowerSlash
   m_EditorClassIdentifier: 
   skillName: WarriorTwohandPowerSlash
-  LearnCost: 
+  damage: 0
+  LearnCost: 0
   ApCost: 2
   timeline: {fileID: 11400000, guid: 6138ac384433d8142a0ed1a4ecd0d2ab, type: 2}

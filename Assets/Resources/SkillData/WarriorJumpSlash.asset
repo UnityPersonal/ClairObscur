@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WarriorJumpSlash
   m_EditorClassIdentifier: 
   skillName: WarriorJumpSlash
-  LearnCost: 
+  damage: 0
+  LearnCost: 0
   ApCost: 1
   timeline: {fileID: 11400000, guid: c6e225e2df8399241b5ceead44943f57, type: 2}
