@@ -85,6 +85,7 @@ public class BattlePlayer : BattleCharacter
     {
         base.Start();
         var stateContainer = new GameObject("PlayerStates");
+        stateContainer.transform.SetParent(transform);
         playerStatesTable[ActionType.Attack] = stateContainer.AddComponent<PlayerAttackState>();
         playerStatesTable[ActionType.MainMenu] = stateContainer.AddComponent<PlayerMainMenuState>();
         playerStatesTable[ActionType.SkillSelect] = stateContainer.AddComponent<PlayerSkillSelectState>();
