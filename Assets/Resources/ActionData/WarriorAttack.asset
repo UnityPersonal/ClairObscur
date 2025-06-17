@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
   m_Name: WarriorAttack
   m_EditorClassIdentifier: 
-  actionDataType: 0
+  actionDataType: 2
   actionTimeline: {fileID: 11400000, guid: fa27706f0584f3745b3410b0e3214c46, type: 2}
+  controller: {fileID: 2781014429875095481, guid: c8001ab5c85f1ae419503d65e6547f5d, type: 3}

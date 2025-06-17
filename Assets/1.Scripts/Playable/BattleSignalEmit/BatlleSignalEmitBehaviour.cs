@@ -5,7 +5,7 @@ using UnityEngine.Timeline;
 // A behaviour that is attached to a playable
 public class BatlleSignalEmitBehaviour : PlayableBehaviour
 {
-    public TimelineEventListener eventListener;
+    public TimelineEventRouter EventRouter;
     //public SignalAsset signal;
     
     

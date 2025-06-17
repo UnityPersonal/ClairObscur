@@ -18,11 +18,11 @@ public class CharacterRewardUI : MonoBehaviour
         // 업데이트는 UI 애니메이션 완료되고 나면 처리된다.
         
         characterName.text = character.CharacterName;
-        int level = character.Level;
-        levelText.text = $"{character.Level}";
+        int level = character.Status.Level;
+        levelText.text = $"{character.Status.Level}";
 
-        int currentExpValue = character.CurrentExp;
-        int maxExpValue = character.NextExp;
+        int currentExpValue = character.Status.CurrentExp;
+        int maxExpValue = character.Status.ExpToNextLevel;
         
         currentExp.text = currentExpValue.ToString();
         maxExp.text = maxExpValue.ToString();

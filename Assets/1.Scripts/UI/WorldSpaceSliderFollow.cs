@@ -33,8 +33,9 @@ public class WorldSpaceSliderFollow : MonoBehaviour
         transform.position = uiWorldPosition;
         transform.LookAt(mainCamera.transform);
         
+        var status = character.Status;
         
-        slider.value = character.CurrentHp / (float)character.MaxHp;
+        slider.value = status.CurrentHP / (float)status.MaxHP;
         //transform.localScale = Vector3.one;
         // 1. 타겟 오브젝트 위에 UI 배치
         //rectTransform.anchoredPosition 
@@ -42,8 +43,6 @@ public class WorldSpaceSliderFollow : MonoBehaviour
         //transform.LookAt(mainCamera.transform);
         //transform.forward = -transform.forward; // 반대로 돌려야 텍스트가 안 뒤집힘
 
-        
-        
         // 2. 카메라와의 거리 기반으로 크기 조정
         //float distance = Vector3.Distance(mainCamera.transform.position, uiWorldPosition);
         //float scale = Mathf.Clamp(1f / distance * scaleFactor, minScale, maxScale);

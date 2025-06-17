@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
   m_Name: WarriorParryingAttack
   m_EditorClassIdentifier: 
-  actionDataType: 3
+  actionDataType: 5
   actionTimeline: {fileID: 11400000, guid: 2ac4d91d015eaee4ebe4b1759fb4eb07, type: 2}
+  controller: {fileID: 1217062772274997871, guid: a9f7e829f6fecab4c80e63fc8f8055ad, type: 3}

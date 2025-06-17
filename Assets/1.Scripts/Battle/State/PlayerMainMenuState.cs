@@ -16,13 +16,13 @@ public class PlayerMainMenuState : PlayerState
         {
             case MainMenulSelectUI.SelectType.Attack:
                 player.CurrentAttackType = BattleAttackType.Normal;
-                player.NextAction = BattlePlayer.ActionType.TargetSelect;
+                player.NextState = BattlePlayer.StateType.TargetSelect;
                 break;
             case MainMenulSelectUI.SelectType.Skill:
-                player.NextAction = BattlePlayer.ActionType.SkillSelect;
+                player.NextState = BattlePlayer.StateType.SkillSelect;
                 break;
             case MainMenulSelectUI.SelectType.Item:
-                player.NextAction = BattlePlayer.ActionType.MainMenu;
+                player.NextState = BattlePlayer.StateType.MainMenu;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

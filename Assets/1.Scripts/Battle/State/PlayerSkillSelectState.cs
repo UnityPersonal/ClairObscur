@@ -14,18 +14,18 @@ public class PlayerSkillSelectState : PlayerState
         {
             case SkillMenuSelectUI.SelectType.Skill1:
                 player.CurrentAttackType = BattleAttackType.Skill1;
-                player.NextAction = BattlePlayer.ActionType.TargetSelect;
+                player.NextState = BattlePlayer.StateType.TargetSelect;
                 break;
             case SkillMenuSelectUI.SelectType.Skill2:
                 player.CurrentAttackType = BattleAttackType.Skill2;
-                player.NextAction = BattlePlayer.ActionType.TargetSelect;
+                player.NextState = BattlePlayer.StateType.TargetSelect;
                 break;
             case SkillMenuSelectUI.SelectType.Skill3:
                 player.CurrentAttackType = BattleAttackType.Skill3;
-                player.NextAction = BattlePlayer.ActionType.TargetSelect;
+                player.NextState = BattlePlayer.StateType.TargetSelect;
                 break;
             case SkillMenuSelectUI.SelectType.MainMenu:
-                player.NextAction = BattlePlayer.ActionType.MainMenu;
+                player.NextState = BattlePlayer.StateType.MainMenu;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

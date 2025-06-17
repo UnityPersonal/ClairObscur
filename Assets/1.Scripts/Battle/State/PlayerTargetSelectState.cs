@@ -57,11 +57,11 @@ public class PlayerTargetSelectState : PlayerState
         if (isTargetSelected)
         {
             player.PlayerTargetCharacter = alivedEnemyList[currentIndex];
-            player.NextAction = BattlePlayer.ActionType.Attack;
+            player.NextState = BattlePlayer.StateType.Attack;
         }
         else
         {
-            player.NextAction = player.PreviousActionType;
+            player.NextState = player.PreviousActionType;
         }
         yield return new WaitForSeconds(0.5f);
     }

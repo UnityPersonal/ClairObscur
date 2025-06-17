@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 [Serializable]
-[TrackBindingType(typeof(TimelineEventListener))]
+[TrackBindingType(typeof(TimelineEventRouter))]
 [TrackClipType(typeof(BattleSignalEmitClip))]
 [TrackColor(0.2f, 0.6f,0.15f)]
 public class BattleSignalEmitTrack : TrackAsset

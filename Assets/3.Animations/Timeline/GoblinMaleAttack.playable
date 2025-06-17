@@ -35,10 +35,10 @@ MonoBehaviour:
   m_Name: MoveToTargetClip
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 5ac8f3ca2734ea844a62bf626a2047ff
+    exposedName: f6820e02779d0b648b42a485fa84960c
     defaultValue: {fileID: 0}
   target:
-    exposedName: f265536817ab5954a9e02aa055669ade
+    exposedName: abbfe507ab0b29a41a3045279bea1acb
     defaultValue: {fileID: 0}
 --- !u!114 &-4924759947063163285
 MonoBehaviour:
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 1.8333333333333333
+  m_Time: 1.55
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 63bdfd3071d5a774b878a28592e6f0bc, type: 2}
@@ -486,10 +486,10 @@ MonoBehaviour:
   m_Name: MoveToTargetClip(Clone)(Clone)
   m_EditorClassIdentifier: 
   actor:
-    exposedName: 99120fd8be8755d4e84736cfaaf21d44
+    exposedName: 5c7f3a8aefc8b8344814123db6546491
     defaultValue: {fileID: 0}
   target:
-    exposedName: 3ad701c7e71568e45833b232dcbe6b29
+    exposedName: 85273324eef32da488841e19328d275f
     defaultValue: {fileID: 0}
 --- !u!114 &4422620226762464646
 MonoBehaviour:

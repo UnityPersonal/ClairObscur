@@ -42,8 +42,8 @@ public class PlayerDefenseState : PlayerState
     
     protected IEnumerator DodgeCoroutine(BattlePlayer player)
     {
-        var actionData =  player.ActionLUT.GetActionData(ActionDataType.Dodge);
-        var timeline = actionData.actionTimeline;
+        var actionController = player.ActionMap[ActionDataType.Dodge];
+        var timeline = actionController.timelineAsset;
         player.DodgeActionTime = Time.time; // 가장 최근 회피 시간을 캐싱한다.
         Debug.Log($"<color=red>{gameObject.name} Dodge Play </color>");
         yield return player.PlayTimeline(timeline,player.CharacterDefaultLocation, player.DodgeTransform);
@@ -51,8 +51,8 @@ public class PlayerDefenseState : PlayerState
 
     private IEnumerator ParryingCoroutine(BattlePlayer player)
     {
-        var actionData =  player.ActionLUT.GetActionData(ActionDataType.Parry);
-        var timeline = actionData.actionTimeline;
+        var actionData =  player.ActionMap[ActionDataType.Parry];
+        var timeline = actionData.timelineAsset;
         player.ParryActionTime = Time.time;
         Debug.Log($"<color=blue>{gameObject.name} Parry Play </color>");
         yield return player.PlayTimeline(timeline, player.CharacterDefaultLocation, player.CharacterDefaultLocation);
@@ -60,8 +60,8 @@ public class PlayerDefenseState : PlayerState
 
     private IEnumerator ParryingAttackCoroutine(BattlePlayer player)
     {
-        var actionData =  player.ActionLUT.GetActionData(ActionDataType.ParryingAttack);
-        var timeline = actionData.actionTimeline;
+        var actionData =  player.ActionMap[ActionDataType.ParryingAttack];
+        var timeline = actionData.timelineAsset;
         Debug.Log($"<color=yellow>{gameObject.name} Parry Attack Play </color>");
         yield return player.PlayTimeline(timeline, player.CharacterDefaultLocation, player.CharacterDefaultLocation);
     }
