@@ -12,5 +12,6 @@ public class SkillData : ScriptableObject
     public string LearnCost;
     // 스킬 사용 비용
     public int ApCost;
-    public TimelineAsset timeline;
+
+    public BattleActionController action;
 }

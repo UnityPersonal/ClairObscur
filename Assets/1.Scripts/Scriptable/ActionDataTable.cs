@@ -5,7 +5,7 @@ public class ActionDataTable : ScriptableObject
 {
     public ActionData[] actionDataList;
     
-    public ActionData GetActionData(ActionDataType actionDataType)
+    public ActionData GetActionData(string actionDataType)
     {
         foreach (var actionData in actionDataList)
         {

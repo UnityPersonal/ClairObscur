@@ -21,6 +21,7 @@ public class MainMenulSelectUI : MonoSingleton<MainMenulSelectUI>
     
     private BattlePlayer player;
     bool menuSelected = false;
+    public bool MenuSelected => menuSelected;
 
     private void Awake()
     {
@@ -40,12 +41,15 @@ public class MainMenulSelectUI : MonoSingleton<MainMenulSelectUI>
             menuSelected = true;
         });
     }
-    
-    public IEnumerator UpdateSelectUI(BattlePlayer player)
+
+    private void OnEnable()
+    {
+        menuSelected = false;
+    }
+
+    public void UpdateSelectUI(BattlePlayer player)
     {
         this.player = player;
-        menuSelected = false;
-        yield return new WaitUntil(() => menuSelected);
     }
     
 

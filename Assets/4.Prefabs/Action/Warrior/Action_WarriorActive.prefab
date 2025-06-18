@@ -122,6 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   director: {fileID: 2424282844880231893}
+  startLocation: {fileID: 0}
+  endLocation: {fileID: 0}
+  actor: {fileID: 6971513762151726134}
+  targetGroup: {fileID: 0}
 --- !u!320 &2424282844880231893
 PlayableDirector:
   m_ObjectHideFlags: 0

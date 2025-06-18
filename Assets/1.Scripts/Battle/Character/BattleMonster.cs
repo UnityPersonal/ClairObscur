@@ -1,27 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 public class BattleMonster : BattleCharacter
 {
-    protected override void OnEnable()
+    [Space(20)]
+    [Header("Battle Monster Settings")]
+    [SerializeField]
+    private CinemachineCamera focusCamera;
+    
+    public override void Initialize()
     {
-        base.OnEnable();
+        base.Initialize();
         BattleEventManager.Callbacks.OnCounter += OnCounter;
+        
+        BindState("wait", new MonsterWaitState());
+        BindState("attack", new MonsterAttackState());
     }
     
-    protected override void OnDisable()
+    public override void OnFocusIn()
     {
-        base.OnDisable();
-        BattleEventManager.Callbacks.OnCounter -= OnCounter;
+        base.OnFocusIn();
+        focusCamera.Priority = 30;
     }
     
-    public override TimelineAsset GetCurrentActionTimeline()
+    public override void OnFocusOut()
     {
-        var actionData = actionLUT.GetActionData(ActionDataType.Attack);
-        return actionData.actionTimeline;
+        base.OnFocusOut();
+        focusCamera.Priority = 0;
     }
 
     protected override int GetCurrentDamage()
@@ -64,33 +73,10 @@ public class BattleMonster : BattleCharacter
     public override BattleCharacterType CharacterType => BattleCharacterType.Enemy;
 
     private BattleCharacter playerTargetCharacter = null;
-    public override BattleCharacter TargetCharacter
+    public override BattleCharacter Target
     {
         get { return playerTargetCharacter; }
     }
-
-    protected override IEnumerator UpdateBattleActionCoroutine()
-    {
-        while (gameObject.activeInHierarchy && (IsDead == false))
-        {
-            if(Activated == false)
-            {
-                yield return WaitCoroutine();
-            }
-            else
-            {
-                yield return StartCoroutine(SelectTargetCoroutine());
-                yield return StartCoroutine(AttackCoroutine());
-            }
-        }
-    }
-
-    protected override IEnumerator UpdateDefendActionCoroutine()
-    {
-        // 몬스터는 별도의 방어 액션이 없으므로 스킵한다.
-        yield break;
-    }
-
 
     private IEnumerator SelectTargetCoroutine()
     {

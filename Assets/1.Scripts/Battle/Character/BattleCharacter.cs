@@ -30,22 +30,22 @@ public abstract class BattleCharacter : MonoBehaviour
     const float AttackDelay = 0.33f; // Delay before the monster can attack again
     const float ParryDelay = 0.16f; // Delay before the monster can attack again
     
-    [Header("Battle Player Settings")]
+    [Header("Battle Character Settings")]
     [SerializeField] protected string characterName;
     [SerializeField] protected CharacterStat status = new CharacterStat();
     public CharacterStat Status => status;
     public string CharacterName => characterName;
     
     [Header("Character Location Settings")]
-    [SerializeField] protected Transform characterDefaultLocation;
-    public Transform CharacterDefaultLocation { get { return characterDefaultLocation; } }
-    [SerializeField] protected Transform characterHitTransform;
-    public Transform CharacterHitTransform { get { return characterHitTransform; } }
+    [SerializeField] protected float focusRadius = 1f;
+    public float FocusRadius { get { return focusRadius; } }
     
     [Space(10), Header("Character Action Settings")]
     [SerializeField] protected BattleActionController currentAction;
     [SerializeField] protected ActionDataTable actionLUT;
-
+    [SerializeField] protected SkillDatabase skillDatabase;
+    [SerializeField] protected string[] equippedSkills = new string[3]{"", "", ""};
+    
     public virtual void OnBeginAttackSignal()
     {
         Debug.Log($"<color=green>BattleCharacter</color> ::: OnEmittedBeginAttackSignal {Time.time}");
@@ -56,9 +56,21 @@ public abstract class BattleCharacter : MonoBehaviour
             attackTime: Time.time,
             attackType: CurrentAttackType, // todo: 공격 종류에 따라 다르게 설정
             attacker: this,
-            target: TargetCharacter
+            target: Target
         ));
     }
+    
+    protected void BindState(string stateName, CharacterState state)
+    {
+        if (StateMap.ContainsKey(stateName.ToLower()))
+        {
+            Debug.LogWarning($"StateMap already contains key: {stateName}");
+            return;
+        }
+        StateMap[stateName.ToLower()] = state;
+        state.Initialize(this);
+    }
+    
     public abstract void OnBeginDefendSignal();
     public abstract void OnEndDefendSignal();
     public abstract void OnCheckParriedSignal();
@@ -66,13 +78,18 @@ public abstract class BattleCharacter : MonoBehaviour
     public virtual void OnCounterAttackSignal() {}
 
     public abstract  BattleCharacterType CharacterType { get; }
-    public abstract BattleCharacter TargetCharacter { get; }
+    public abstract BattleCharacter Target { get; }
     
     public BattleAttackType CurrentAttackType { get; set; }= BattleAttackType.Normal;
 
+    private string nextAction = "wait";
+    protected string NextAction {
+        get => nextAction;
+        set{ nextAction = value.ToLower(); }
+    }
+
     protected bool IsAttacking = false;
     public int AttackCount { get; protected set; }= 0;
-    protected bool FinishedAction = false;
     
     bool _activated = false;
     public bool Activated
@@ -101,74 +118,108 @@ public abstract class BattleCharacter : MonoBehaviour
     public float ParryActionTime { get; set; }= 0;
     public float JumpActionTime { get; set; }= 0;
 
-    
-    public abstract TimelineAsset GetCurrentActionTimeline();
     protected abstract int GetCurrentDamage();
 
-    public void SwapAction(ActionDataType actionType)
+    
+    protected CharacterState currentState;
+    public CharacterState CurrentState
     {
+        get => currentState;
+        set
+        {
+            currentState = value;
+            Debug.Log($"CurrentState changed to {currentState}");
+        }
+    }
+    
+    public void SwapState(string nextState)
+    {
+        nextState = nextState.ToLower();
+        if(currentState != null)
+        {
+            currentState.Exit();
+        }
+
+        Debug.Log($"Swapping state to {nextState}");
+        currentState = StateMap[nextState];
+        currentState.Enter();
+    }
+
+    public void SwapAction(string actionType, Action<PlayableDirector> callback = null)
+    {
+        actionType = actionType.ToLower();
         Debug.Log($"Swapping action to {actionType}");
         if (currentAction != null)
         {
-            currentAction.director.Stop();
             currentAction.gameObject.SetActive(false);
+            currentAction.StopAction();
         }
         currentAction = ActionMap[actionType];
         currentAction.gameObject.SetActive(true);
+        PlayActionArgs args = new PlayActionArgs(actor: this, target: Target, callback: callback);
+        ActionMap[actionType].PlayAction(args);
     }
     
-    
-    protected virtual void OnEnable()
-    {
-        var callbacks = BattleEventManager.Callbacks;
-        callbacks.OnAttack += OnAttack;
-        callbacks.OnDeath += OnDeath;
-    }
+    public Dictionary<string, BattleActionController> ActionMap 
+        = new Dictionary<string, BattleActionController>();
 
-    protected virtual void OnDisable()
-    {
-        var callbacks = BattleEventManager.Callbacks;
-        callbacks.OnAttack -= OnAttack;
-        callbacks.OnDeath -= OnDeath;
-    }
+    public Dictionary<string, CharacterState> StateMap 
+        = new Dictionary<string, CharacterState>();
     
-    public Dictionary<ActionDataType, BattleActionController> ActionMap 
-        = new Dictionary<ActionDataType, BattleActionController>();
-
     public virtual void Initialize()
     {
         status.CurrentHP = status.MaxHP;
         foreach (var data in actionLUT.actionDataList)
         {
             var actionController = Instantiate(data.controller,transform);
-            ActionMap[data.actionDataType] = actionController;     
+            ActionMap[data.actionDataType.ToLower()] = actionController;     
         }
+
+        for(int i = 0; i < equippedSkills.Length; i++)
+        {
+            string actionType = $"skill{i+1}".ToLower();
+            
+            var skillData = skillDatabase.GetSkillData(equippedSkills[i]);
+            var actionController = Instantiate(skillData.action, transform);
+            ActionMap[actionType] = actionController;
+
+            if (ActionMap.ContainsKey(actionType) == false)
+            {
+                Debug.LogWarning($"ActionMap does not contain key: {actionType}");
+                continue;
+            }
+        }
+        var callbacks = BattleEventManager.Callbacks;
+        callbacks.OnAttack += OnAttack;
     }
 
     
     protected virtual void Start()
     {
         Initialize();
-        StartCoroutine(UpdateBattleActionCoroutine());
-        StartCoroutine(UpdateDefendActionCoroutine());
+        SwapState("wait");
     }
-    
+
+    protected void Update()
+    {
+        currentState.Execute();
+    }
+
     protected virtual void OnTakedDamage(int damage)
     {
-        if (IsDead == true)
+        if (IsDead)
         {
             return; // already dead, no damage can be taken
         }
         status.CurrentHP -= damage;
-        if (IsDead == true)
+        if (IsDead)
         {
             // todo: 죽음 애니메이션 발동
             DeathEventArgs deathArgs = new DeathEventArgs(this);
             BattleEventManager.OnDeath(deathArgs);
+            SwapAction("death");
         }
     }
-    
-    protected virtual void OnDeath(DeathEventArgs args) {}
     
     protected virtual void OnDodged() {}
     protected virtual void OnParried() {}
@@ -231,15 +282,9 @@ public abstract class BattleCharacter : MonoBehaviour
         }
     }
   
-    public void OnFocusIn()
-    {
-        
-    }
+    public virtual void OnFocusIn() {}
 
-    public void OnFocusOut()
-    {
-        
-    }
+    public virtual void OnFocusOut() {}
 
     public virtual void Activate()
     {
@@ -255,109 +300,6 @@ public abstract class BattleCharacter : MonoBehaviour
     {
         Debug.Log($"BattleCharacter ::: StartTurn {name}");
         Activate();
-    }
-
-    protected abstract IEnumerator UpdateBattleActionCoroutine();
-    protected abstract IEnumerator UpdateDefendActionCoroutine();
-    
-    public IEnumerator WaitCoroutine()
-    {
-        Debug.Log($"<color=blue>BattleCharacter</color> ::: WaitCoroutine {Time.time}");
-        var timeline = ActionMap[ActionDataType.Wait].timelineAsset;
-        yield return PlayTimeline(timeline,characterDefaultLocation, characterDefaultLocation);
-    }
-    public IEnumerator AttackCoroutine()
-    {
-        // 1. TimelineAsset 가져오기
-        // todo: 현재 액션 타입에 따라 타임라인을 가져온다.
-        var timeline = ActionMap[ActionDataType.Attack].timelineAsset;
-        yield return PlayTimeline(timeline,characterDefaultLocation, TargetCharacter.CharacterHitTransform);
-        Deactivate();
-        Debug.Log("타임라인 종료됨, 다음 단계 진행");
-    }
-    
-    public IEnumerator WaitForTimeline(PlayableDirector director)
-    {
-        FinishedAction = false;
-
-        void OnStopped(PlayableDirector _) => FinishedAction = true;
-
-        director.stopped += OnStopped;
-
-        // 이미 재생 중인 경우만 대기
-        if (director.state == PlayState.Playing)
-            yield return new WaitUntil(() => FinishedAction);
-
-        director.stopped -= OnStopped;
-    }
-
-    public IEnumerator PlayTimeline(
-        TimelineAsset timeline,
-        Transform origin,
-        Transform destination,
-        bool waitForCompletion = true
-        )
-    {
-        var director = currentAction.director;
-        director.playableAsset = timeline;
-        // 2. 모든 트랙 순회
-        foreach (var track in timeline.GetOutputTracks())
-        {
-            if (track is CinemachineTrack)
-            {
-                var brain = Camera.main.GetComponent<CinemachineBrain>();
-                director.SetGenericBinding(track,brain);
-            }
-            
-            // MoveToTargetTrack만 처리
-            if (track is MoveToTargetTrack)
-            {
-                director.SetGenericBinding(track, transform);
-
-                // 3. 트랙의 모든 클립 순회
-                foreach (var clip in track.GetClips())
-                {
-                    // MoveToTargetClip만 처리
-                    var moveClip = clip.asset as MoveToTargetClip;
-                    if (moveClip != null)
-                    {
-                        // 4. actor, target 동적 할당
-                        moveClip.actor.exposedName = UnityEditor.GUID.Generate().ToString();
-                        moveClip.target.exposedName = UnityEditor.GUID.Generate().ToString();
-
-                        if (clip.displayName.Equals("GoTo"))
-                        {
-                            director.SetReferenceValue(moveClip.actor.exposedName, origin);
-                            director.SetReferenceValue(moveClip.target.exposedName, destination);
-                        }
-                        else if (clip.displayName.Equals("ReturnTo"))
-                        {
-                            director.SetReferenceValue(moveClip.actor.exposedName, destination);
-                            director.SetReferenceValue(moveClip.target.exposedName, origin);
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"clip displayName '{clip.displayName}' does not match expected names.");
-                        }
-                        
-                    }
-                    
-                }
-            }
-
-            if (track is BattleSignalEmitTrack)
-            {
-                Debug.Log("BattleSignalEmitTrack found, binding to TimelineEventListener.");
-                director.SetGenericBinding(track, TimelineEventRouter.Instance);
-            }
-        }
-
-        director.Play();
-
-        if (waitForCompletion)
-        {
-            yield return WaitForTimeline(director);
-        }
     }
 
 }

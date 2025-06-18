@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
-  m_Name: GhostSoulAttack
+  m_Name: GoblineMaleAttack
   m_EditorClassIdentifier: 
-  actionDataType: 0
-  actionTimeline: {fileID: 11400000, guid: 17348a842ae780d49a861f28cb4d8284, type: 2}
+  actionDataType: attack1
+  controller: {fileID: 6185258232327670727, guid: 00b62210fd9970b4496c84795ae99e07, type: 3}

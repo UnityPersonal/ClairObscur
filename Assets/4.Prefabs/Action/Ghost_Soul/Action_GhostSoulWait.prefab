@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &227318561415617849
 Transform:
   m_ObjectHideFlags: 0
@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   director: {fileID: 7039405036783798927}
+  startLocation: {fileID: 0}
+  endLocation: {fileID: 0}
+  actor: {fileID: 3451954974894592243}
+  targetGroup: {fileID: 0}
 --- !u!320 &7039405036783798927
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -117,6 +121,15 @@ PrefabInstance:
     - target: {fileID: 4895613410266186789, guid: 3731e2c4001baa941a1a13e0bb6e65eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861860429827691393, guid: 3731e2c4001baa941a1a13e0bb6e65eb, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'IndexFinger_02'\n\tTransform 'Finger_02
+        1'\n\tTransform 'Elbow_R'\n\tTransform 'Finger_02'\n\tTransform 'Finger_03'\n\tTransform
+        'Ball_L'\n\tTransform 'Finger_03 1'\n\tTransform 'Thumb_02'\n\tTransform
+        'Ball_R'\n\tTransform 'Clavicle_L'\n\tand more ..."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

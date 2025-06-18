@@ -19,6 +19,7 @@ public class SkillMenuSelectUI : MonoSingleton<SkillMenuSelectUI>
     [SerializeField] private Button skillButton2;
     [SerializeField] private Button skillButton3;
     bool menuSelected = false;
+    public bool MenuSelected => menuSelected;
     private BattlePlayer player;
     
     private void Awake()
@@ -40,19 +41,10 @@ public class SkillMenuSelectUI : MonoSingleton<SkillMenuSelectUI>
         });
     }
 
-    public IEnumerator UpdateSelectUI(BattlePlayer player)
+    public void UpdateSelectUI(BattlePlayer player)
     {
         this.player = player;
         menuSelected = false;
-        while (!menuSelected)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                currentSelectType = SelectType.MainMenu;
-                menuSelected = true;
-            }
-            yield return null;
-        }
     }
     
 

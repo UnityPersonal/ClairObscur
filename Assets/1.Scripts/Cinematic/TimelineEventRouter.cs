@@ -6,12 +6,12 @@ public class TimelineEventRouter : MonoSingleton<TimelineEventRouter>
 {
     public void OnDefendEndReceived()
     {
-        BattleManager.Instance.CurrentTurnCharacter.TargetCharacter.OnEndDefendSignal();
+        BattleManager.Instance.CurrentTurnCharacter.Target.OnEndDefendSignal();
     }
     
     public void OnDefendReceived()
     {
-        BattleManager.Instance.CurrentTurnCharacter.TargetCharacter.OnBeginDefendSignal();
+        BattleManager.Instance.CurrentTurnCharacter.Target.OnBeginDefendSignal();
     }
 
     public void OnAttackReceived()
@@ -22,7 +22,7 @@ public class TimelineEventRouter : MonoSingleton<TimelineEventRouter>
     public void OnParrayingAttackReceived()
     {
         // Parraying Attack signal 수신 시 처리
-        BattleManager.Instance.CurrentTurnCharacter.TargetCharacter.OnCounterAttackSignal();
+        BattleManager.Instance.CurrentTurnCharacter.Target.OnCounterAttackSignal();
     }
     
     public void OnCoutnerBeginReceived()
