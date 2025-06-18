@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
   m_Name: WarriorDodge
   m_EditorClassIdentifier: 
-  actionDataType: 3
-  actionTimeline: {fileID: 11400000, guid: 7203c95597350f84289500f7f6c822ef, type: 2}
+  actionDataType: dodge
   controller: {fileID: 2053631116124747398, guid: ddad1916cf520e54c8c404128f384c99, type: 3}

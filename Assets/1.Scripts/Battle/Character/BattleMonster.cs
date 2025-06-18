@@ -18,7 +18,8 @@ public class BattleMonster : BattleCharacter
         BattleEventManager.Callbacks.OnCounter += OnCounter;
         
         BindState("wait", new MonsterWaitState());
-        BindState("attack", new MonsterAttackState());
+        BindState("active", new MonsterAttackState());
+        BindState("death", new MonsterDeathState());
     }
     
     public override void OnFocusIn()
@@ -72,7 +73,7 @@ public class BattleMonster : BattleCharacter
 
     public override BattleCharacterType CharacterType => BattleCharacterType.Enemy;
 
-    private BattleCharacter playerTargetCharacter = null;
+    public BattleCharacter playerTargetCharacter = null;
     public override BattleCharacter Target
     {
         get { return playerTargetCharacter; }

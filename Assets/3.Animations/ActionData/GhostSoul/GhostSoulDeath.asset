@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
-  m_Name: WarriorActive
+  m_Name: GhostSoulDeath
   m_EditorClassIdentifier: 
-  actionDataType: active
-  controller: {fileID: 5133415672338930120, guid: 3aa4355c6eecd6c4a9d491ceb0687eb6, type: 3}
+  actionDataType: death
+  controller: {fileID: 6266967383015337548, guid: b230bcb60b718ff4395493705e7fcd3c, type: 3}

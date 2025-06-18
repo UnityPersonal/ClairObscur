@@ -1,19 +1,31 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class MonsterAttackState : CharacterState
 {
     public override void Execute()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        var monster = character as BattleMonster;
+        var playerList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Player];
+        foreach (var character in playerList)
+        {
+            if(character.IsDead == false)
+            {
+                monster.playerTargetCharacter = character;
+                break;
+            }
+        }
+        monster.SwapAction("attack",(PlayableDirector _) => 
+        {
+            monster.SwapState("wait");
+        });
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
     }
 }

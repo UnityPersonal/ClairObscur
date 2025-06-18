@@ -79,12 +79,19 @@ public class BattleActionController : MonoBehaviour
         PlayActionArgs args
         )
     {
-        startLocation.position = args.Actor.transform.position;
-        endLocation.position = args.Target.transform.position;
+        if(startLocation != null && args.Actor != null)
+            startLocation.position = args.Actor.transform.position;
         
-        targetGroup.Targets.Clear();
-        targetGroup.AddMember(actor, 0.5f, 1f);
-        targetGroup.AddMember(args.Target.transform, 0.5f, 1f);
+        if(endLocation != null && args.Target != null)
+            endLocation.position = args.Target.transform.position;
+
+        if (targetGroup != null)
+        {
+            targetGroup.Targets.Clear();
+            targetGroup.AddMember(actor, 0.5f, 1f);
+            targetGroup.AddMember(args.Target.transform, 0.5f, 1f);
+        }
+       
         
         var timeline = director.playableAsset as TimelineAsset;
         // 2. 모든 트랙 순회

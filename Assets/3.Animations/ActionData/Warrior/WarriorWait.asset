@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
   m_Name: WarriorWait
   m_EditorClassIdentifier: 
-  actionDataType: 0
-  actionTimeline: {fileID: 0}
+  actionDataType: wait
   controller: {fileID: 6498434053231889400, guid: 8bfdf98607aa57240801b592f2812f59, type: 3}

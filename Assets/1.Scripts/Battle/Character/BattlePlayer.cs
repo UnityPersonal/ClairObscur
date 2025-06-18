@@ -13,11 +13,12 @@ public class BattlePlayer : BattleCharacter
     [Header("Battle Player Settings")]
     [SerializeField] Transform dodgeTransform;
     public Transform DodgeTransform { get { return dodgeTransform; } }
-    [SerializeField] SkillData[] skills;
-   
+    [SerializeField] protected SkillDatabase skillDatabase;
+    [SerializeField] protected string[] equippedSkills = new string[3]{"", "", ""};
     private int parriedCount = 0;
     protected bool BeginParryingAttack = false;
 
+    
     protected override void OnDodged() {}
     
     protected override void OnParried() { parriedCount++; }
@@ -69,8 +70,25 @@ public class BattlePlayer : BattleCharacter
         BindState("active", new PlayerActiveState());
         BindState("counter", new PlayerCounterState());
         BindState("skillactive", new PlayerSkillActiveState());
+        BindState("death", new PlayerDeathState());
+
         
-        SwapState("wait");
+        return;
+        for(int i = 0; i < equippedSkills.Length; i++)
+        {
+            string actionType = $"skill{i+1}".ToLower();
+            
+            var skillData = skillDatabase.GetSkillData(equippedSkills[i]);
+            var actionController = Instantiate(skillData.action, transform);
+            ActionMap[actionType] = actionController;
+
+            if (ActionMap.ContainsKey(actionType) == false)
+            {
+                Debug.LogWarning($"ActionMap does not contain key: {actionType}");
+                continue;
+            }
+        }
+        
     }
 
     int GetCoutnerDamage()

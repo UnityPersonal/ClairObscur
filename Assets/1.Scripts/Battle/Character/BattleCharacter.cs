@@ -43,8 +43,7 @@ public abstract class BattleCharacter : MonoBehaviour
     [Space(10), Header("Character Action Settings")]
     [SerializeField] protected BattleActionController currentAction;
     [SerializeField] protected ActionDataTable actionLUT;
-    [SerializeField] protected SkillDatabase skillDatabase;
-    [SerializeField] protected string[] equippedSkills = new string[3]{"", "", ""};
+    
     
     public virtual void OnBeginAttackSignal()
     {
@@ -140,7 +139,7 @@ public abstract class BattleCharacter : MonoBehaviour
             currentState.Exit();
         }
 
-        Debug.Log($"Swapping state to {nextState}");
+        Debug.Log($"<color=green>{gameObject}</color> Swapping state to {nextState}");
         currentState = StateMap[nextState];
         currentState.Enter();
     }
@@ -175,20 +174,7 @@ public abstract class BattleCharacter : MonoBehaviour
             ActionMap[data.actionDataType.ToLower()] = actionController;     
         }
 
-        for(int i = 0; i < equippedSkills.Length; i++)
-        {
-            string actionType = $"skill{i+1}".ToLower();
-            
-            var skillData = skillDatabase.GetSkillData(equippedSkills[i]);
-            var actionController = Instantiate(skillData.action, transform);
-            ActionMap[actionType] = actionController;
-
-            if (ActionMap.ContainsKey(actionType) == false)
-            {
-                Debug.LogWarning($"ActionMap does not contain key: {actionType}");
-                continue;
-            }
-        }
+        
         var callbacks = BattleEventManager.Callbacks;
         callbacks.OnAttack += OnAttack;
     }
@@ -217,7 +203,7 @@ public abstract class BattleCharacter : MonoBehaviour
             // todo: 죽음 애니메이션 발동
             DeathEventArgs deathArgs = new DeathEventArgs(this);
             BattleEventManager.OnDeath(deathArgs);
-            SwapAction("death");
+            SwapState("death");
         }
     }
     
@@ -289,6 +275,7 @@ public abstract class BattleCharacter : MonoBehaviour
     public virtual void Activate()
     {
         Activated = true;
+        SwapState("active");
     }
     
     public virtual void Deactivate()

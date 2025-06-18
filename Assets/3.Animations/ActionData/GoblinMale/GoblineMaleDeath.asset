@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
-  m_Name: GoblineMaleAttack2
+  m_Name: GoblineMaleDeath
   m_EditorClassIdentifier: 
-  actionDataType: attack2
-  actionTimeline: {fileID: 11400000, guid: 93b274476dacf084c91d1392d8617f63, type: 2}
-  controller: {fileID: 0}
+  actionDataType: death
+  controller: {fileID: 4157634143345704602, guid: e3dded63cf5c5e54c9128539cf56260e, type: 3}

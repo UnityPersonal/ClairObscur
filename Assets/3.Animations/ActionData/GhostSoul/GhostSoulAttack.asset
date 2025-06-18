@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23330292c7f760545a05b6428591da75, type: 3}
   m_Name: GhostSoulAttack
   m_EditorClassIdentifier: 
-  actionDataType: attack1
+  actionDataType: attack
   controller: {fileID: 3968033301440772143, guid: 9ad100a48c74db94ea7256bb8a299817, type: 3}
