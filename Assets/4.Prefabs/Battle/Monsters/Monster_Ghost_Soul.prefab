@@ -961,7 +961,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2126335579484945455}
   - component: {fileID: 7689065029532558254}
-  - component: {fileID: 1039086934881207533}
   m_Layer: 0
   m_Name: Monster_Ghost_Soul
   m_TagString: Untagged
@@ -1009,21 +1008,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1039086934881207533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2858293302564529315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013cf27843686bd4aab897457f205f54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterDefaultLocation: {fileID: 0}
-  characterCamera: {fileID: 674309763707647811}
-  maxHp: 100
 --- !u!1 &3157947566533536131
 GameObject:
   m_ObjectHideFlags: 0

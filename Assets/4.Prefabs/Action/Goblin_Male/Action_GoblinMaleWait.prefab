@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6282570706056779924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3313957726635677285}
+  - component: {fileID: 6793563198744373336}
+  - component: {fileID: 376314821915339370}
+  m_Layer: 0
+  m_Name: Action_GoblinMaleWait
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3313957726635677285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282570706056779924}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 346922735787357898}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6793563198744373336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282570706056779924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 376314821915339370}
+--- !u!320 &376314821915339370
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282570706056779924}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 9f5a2f068a042e742be5fd6785c1d68f, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -1492097897826882841, guid: 9f5a2f068a042e742be5fd6785c1d68f, type: 2}
+    value: {fileID: 7994345381140244486}
+  m_ExposedReferences:
+    m_References: []
+--- !u!1001 &437621780364849953
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3313957726635677285}
+    m_Modifications:
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674917452324723317, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_Name
+      value: Actor_Goblin_Male
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+--- !u!4 &346922735787357898 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+  m_PrefabInstance: {fileID: 437621780364849953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7994345381140244486 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7557920283894012711, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+  m_PrefabInstance: {fileID: 437621780364849953}
+  m_PrefabAsset: {fileID: 0}
