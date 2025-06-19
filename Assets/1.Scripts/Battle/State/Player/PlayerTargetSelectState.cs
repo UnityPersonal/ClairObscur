@@ -39,9 +39,7 @@ public class PlayerTargetSelectState : PlayerState
                 case BattleAttackType.Normal:
                     character.SwapState("attack");
                     break;
-                case BattleAttackType.Skill1:
-                case BattleAttackType.Skill2:
-                case BattleAttackType.Skill3:
+                case BattleAttackType.Skill:
                     character.SwapState("skillactive");
                     break;
                 case BattleAttackType.Jump:
@@ -52,6 +50,7 @@ public class PlayerTargetSelectState : PlayerState
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
+            alivedEnemyList[currentIndex].OnFocusOut();
             character.SwapState("mainmenu");
         }
     }

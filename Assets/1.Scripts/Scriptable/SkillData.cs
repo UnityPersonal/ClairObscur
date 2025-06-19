@@ -6,7 +6,13 @@ public class SkillData : ScriptableObject
 {
     public string skillName;
 
-    public int damage; // 콤보 공격시 각 피격당 데미지 계산 필요
+    public int additiveDamage; // 추가 데미지 (예: 버프 등으로 인한)
+    public int multiplierDamage; // 배수 데미지 (예: 특정 스킬의 효과로 인한)
+    
+    public int CalcaultedDamage (int damage)    
+    {
+        return (damage + additiveDamage) * multiplierDamage;
+    }
     
     // 스킬 배우는 비용
     public string LearnCost;

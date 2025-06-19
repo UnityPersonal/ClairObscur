@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.TextCore.Text;
 
 public class PlayerActiveState : PlayerState
@@ -7,7 +8,6 @@ public class PlayerActiveState : PlayerState
     public override void Execute()
     {
         character.SwapState("mainmenu");
-        
     }
 
     public override void Enter()

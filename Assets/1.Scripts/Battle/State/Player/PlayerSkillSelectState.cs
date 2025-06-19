@@ -7,29 +7,17 @@ public class PlayerSkillSelectState : PlayerState
     public override void Execute()
     {
         var menu = SkillMenuSelectUI.Instance;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            character.SwapState("mainmenu");
+            return;
+        }
         if (menu.MenuSelected == false) return;
         
-        var selectType = menu.CurrentSelectType;
-        switch (selectType)
-        {
-            case SkillMenuSelectUI.SelectType.Skill1:
-                character.CurrentAttackType = BattleAttackType.Skill1;
-                character.SwapState("targetslect");
-                break;
-            case SkillMenuSelectUI.SelectType.Skill2:
-                character.CurrentAttackType = BattleAttackType.Skill2;
-                character.SwapState("targetslect");
-                break;
-            case SkillMenuSelectUI.SelectType.Skill3:
-                character.CurrentAttackType = BattleAttackType.Skill3;
-                character.SwapState("targetslect");
-                break;
-            case SkillMenuSelectUI.SelectType.MainMenu:
-                character.SwapState("mainmenu");
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        var player = character as BattlePlayer;
+        player.CurrentSelectSkillIndex = menu.CurrentSelectIndex;
+        player.CurrentAttackType = BattleAttackType.Skill;
+        character.SwapState("targetselect");
     }
 
     public override void Enter()

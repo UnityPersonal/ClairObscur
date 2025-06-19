@@ -15,6 +15,7 @@ public class PlayerMainMenuState : PlayerState
         {
             case MainMenulSelectUI.SelectType.Attack:
                 character.CurrentAttackType = BattleAttackType.Normal;
+                character.CurrentAttackAction = "attack";
                 character.SwapState("targetselect");
                 break;
             case MainMenulSelectUI.SelectType.Skill:

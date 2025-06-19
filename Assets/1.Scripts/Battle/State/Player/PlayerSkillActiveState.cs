@@ -10,34 +10,25 @@ public class PlayerSkillActiveState : PlayerState
 
     public override void Enter()
     {
-        // todo: 스킬 활성화시 코스트 소모 및 스킬 추가효과 발동
-        var player = character as BattlePlayer;
-        switch (player.CurrentAttackType)
+        BattlePlayer player = character as BattlePlayer;
+        var skillData = player.GetSkillDataByIndex(player.CurrentSelectSkillIndex);
+        
+        if (skillData == null)
         {
-            case BattleAttackType.Skill1:
-                character.SwapAction("skill1", (PlayableDirector _) =>
-                {
-                    character.SwapState("wait");
-                });
-                break;
-            case BattleAttackType.Skill2:
-                character.SwapAction("skill2", (PlayableDirector _) =>
-                {
-                    character.SwapState("wait");
-                });
-                break;
-            case BattleAttackType.Skill3:
-                character.SwapAction("skill3", (PlayableDirector _) =>
-                {
-                    character.SwapState("wait");
-                });
-                break;
-            case BattleAttackType.Normal:
-            case BattleAttackType.Jump:
-            case BattleAttackType.Gradient:
-            default:
-                throw new ArgumentOutOfRangeException();
+            Debug.LogError("Skill data not found for index: " + player.CurrentSelectSkillIndex);
+            return;
         }
+
+        var action = skillData.action;
+        // 코스트 소모
+        player.PlayerStat.currentAP -= skillData.ApCost;
+        
+        // todo: 스킬 효과 적용
+        character.SwapAction(action.ActionName, (PlayableDirector _) =>
+        {
+            character.SwapState("wait");
+        });
+        
     }
 
     public override void Exit()

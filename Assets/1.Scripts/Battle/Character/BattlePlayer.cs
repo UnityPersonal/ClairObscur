@@ -21,7 +21,19 @@ public class BattlePlayer : BattleCharacter
     private int parriedCount = 0;
     protected bool BeginParryingAttack = false;
 
+    public int CurrentSelectSkillIndex { get; set; } = 0;
     public SkillController skillController;
+    
+    public SkillData GetSkillDataByIndex(int index)
+    {
+        if (index < 0 || index >= equippedSkills.Length)
+        {
+            Debug.LogError($"Invalid skill index: {index}");
+            return null;
+        }
+        
+        return skillDatabase.GetSkillData(equippedSkills[index]);
+    }
 
     public override void Activate()
     {

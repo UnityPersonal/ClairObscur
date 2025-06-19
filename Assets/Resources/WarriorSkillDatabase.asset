@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 709a8748d3f5b6e43b2c2952d1d6c43e, type: 3}
-  m_Name: WarriorJumpSlash
+  m_Script: {fileID: 11500000, guid: 50c87a5a9159fc94aad1b92ec37b428e, type: 3}
+  m_Name: WarriorSkillDatabase
   m_EditorClassIdentifier: 
-  skillName: WarriorJumpSlash
-  additiveDamage: 0
-  multiplierDamage: 0
-  LearnCost: 0
-  ApCost: 1
-  action: {fileID: 5905110545059585370, guid: deba74284f7cb054d94b11d8048ca879, type: 3}
+  skills:
+  - {fileID: 11400000, guid: 2012526a5e5dc7a49b9d924b61870116, type: 2}

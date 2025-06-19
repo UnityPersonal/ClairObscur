@@ -18,9 +18,7 @@ public enum BattleCharacterType
 public enum BattleAttackType
 {
     Normal,
-    Skill1,
-    Skill2,
-    Skill3,
+    Skill,
     Jump,
     Gradient,
 }
@@ -80,7 +78,8 @@ public abstract class BattleCharacter : MonoBehaviour
     public abstract  BattleCharacterType CharacterType { get; }
     public abstract BattleCharacter Target { get; }
     
-    public BattleAttackType CurrentAttackType { get; set; }= BattleAttackType.Normal;
+    public BattleAttackType CurrentAttackType { get; set; } =  BattleAttackType.Normal;  
+    public string CurrentAttackAction { get; set; } =  "attack";  
 
     private string nextAction = "wait";
     protected string NextAction {
@@ -239,6 +238,7 @@ public abstract class BattleCharacter : MonoBehaviour
         switch (attackType)
         {
             case BattleAttackType.Normal:
+            case BattleAttackType.Skill:
             {
                 if ((attackTime - DodgeActionTime) <= AttackDelay)
                 {
