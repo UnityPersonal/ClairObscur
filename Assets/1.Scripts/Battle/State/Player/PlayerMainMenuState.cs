@@ -33,11 +33,16 @@ public class PlayerMainMenuState : PlayerState
         var menu = MainMenulSelectUI.Instance;
         menu.gameObject.SetActive(true);
         menu.UpdateSelectUI(character as BattlePlayer );
+        
+        PlayerStatUI.Instance.gameObject.SetActive(true);
+        PlayerStatUI.Instance.Setup(character as BattlePlayer);
     }
 
     public override void Exit()
     {
         var menu = MainMenulSelectUI.Instance;
         menu.gameObject.SetActive(false);
+        
+        PlayerStatUI.Instance.gameObject.SetActive(false);
     }
 }

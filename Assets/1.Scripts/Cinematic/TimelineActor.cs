@@ -6,5 +6,7 @@ public class TimelineActor : MonoBehaviour
     public Transform TrackTransform => trackTransform;
     
     public float TrackRadius = 1f;
+    
+    public float TrackWeight = 1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 }

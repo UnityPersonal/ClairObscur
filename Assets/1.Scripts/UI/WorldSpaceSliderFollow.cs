@@ -29,7 +29,7 @@ public class WorldSpaceSliderFollow : MonoBehaviour
     {
         if (target == null || mainCamera == null) return;
 
-        var uiWorldPosition = target.position + offset;
+        var uiWorldPosition = character.Actor.transform.position + offset;
         transform.position = uiWorldPosition;
         transform.LookAt(mainCamera.transform);
         

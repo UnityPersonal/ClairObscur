@@ -11,6 +11,9 @@ using Random = UnityEngine.Random;
 public class BattlePlayer : BattleCharacter
 {
     [Header("Battle Player Settings")]
+    [SerializeField] private PlayerStat playerStat = new PlayerStat();
+    public PlayerStat PlayerStat { get { return playerStat; } }
+    
     [SerializeField] Transform dodgeTransform;
     public Transform DodgeTransform { get { return dodgeTransform; } }
     [SerializeField] protected SkillDatabase skillDatabase;
@@ -18,12 +21,40 @@ public class BattlePlayer : BattleCharacter
     private int parriedCount = 0;
     protected bool BeginParryingAttack = false;
 
-    
-    protected override void OnDodged() {}
-    
-    protected override void OnParried() { parriedCount++; }
+    public SkillController skillController;
 
-    protected override void OnJumped() {}
+    public override void Activate()
+    {
+        base.Activate();
+    }
+    
+    public override void Deactivate()
+    {
+        base.Deactivate();
+        PlayerStatUI.Instance.gameObject.SetActive(false);
+    }
+
+    private void OnRecivedTakedDamage(TakeDamageEventArgs args)
+    {
+        if (Activated == false) return;
+        if (args.Target != Target) return;
+
+        playerStat.currentAP += 1;
+    }
+
+    protected override void OnDodged()
+    {
+        playerStat.currentAP += 1;
+    }
+
+    protected override void OnParried()
+    {
+        parriedCount++;
+        playerStat.currentAP += 1;
+
+    }
+
+    protected override void OnJumped() { playerStat.currentAP += 1; }
 
     protected override int GetCurrentDamage()
     {

@@ -7,6 +7,7 @@ public class PlayerActiveState : PlayerState
     public override void Execute()
     {
         character.SwapState("mainmenu");
+        
     }
 
     public override void Enter()

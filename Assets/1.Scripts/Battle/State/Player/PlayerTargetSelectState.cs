@@ -68,6 +68,7 @@ public class PlayerTargetSelectState : PlayerState
             }
         }
         currentIndex = 0;
+        
     }
 
     public override void Exit()

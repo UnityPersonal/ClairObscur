@@ -108,9 +108,12 @@ public class BattleActionController : MonoBehaviour
 
         if (targetGroup != null)
         {
+            var targetActor = args.Target.Actor;
+            
             targetGroup.Targets.Clear();
-            targetGroup.AddMember(actor.TrackTransform, 0.5f, actor.TrackRadius);
-            targetGroup.AddMember(args.Target.Actor.TrackTransform, 0.5f, args.Target.Actor.TrackRadius);
+            targetGroup.AddMember(actor.TrackTransform, actor.TrackWeight, actor.TrackRadius);
+            
+            targetGroup.AddMember(targetActor.TrackTransform, targetActor.TrackWeight, targetActor.TrackRadius);
         }
        
         

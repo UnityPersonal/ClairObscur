@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackTransform: {fileID: 1966678554477749168}
+  TrackRadius: 2
+  TrackWeight: 2
 --- !u!1001 &3009125524139786142
 PrefabInstance:
   m_ObjectHideFlags: 0

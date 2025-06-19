@@ -280,8 +280,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 414577278094903959}
-  - component: {fileID: 131780801452728609}
   - component: {fileID: 5905110545059585370}
+  - component: {fileID: 131780801452728609}
   m_Layer: 0
   m_Name: Action_WarriorJumpSlashAttack
   m_TagString: Untagged
@@ -308,6 +308,25 @@ Transform:
   - {fileID: 1811028804845228496}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5905110545059585370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2671920285080548718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: jumpslash
+  director: {fileID: 131780801452728609}
+  startLocation: {fileID: 546058285769427529}
+  endLocation: {fileID: 8596581179557727723}
+  actor: {fileID: 3521660263708333888}
+  targetGroup: {fileID: 7968826697008006228}
+  tweenBind: 1
 --- !u!320 &131780801452728609
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -348,25 +367,6 @@ PlayableDirector:
     - 4f951d6f0b297504097f92d7705b5e08: {fileID: 546058285769427529}
     - 73dcbcf2106fe1b48b7f7e13670efe8f: {fileID: 546058285769427529}
     - bba578dcceb936943a59b93808541b00: {fileID: 892829752620795044}
---- !u!114 &5905110545059585370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2671920285080548718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: jumpslash
-  director: {fileID: 131780801452728609}
-  startLocation: {fileID: 546058285769427529}
-  endLocation: {fileID: 8596581179557727723}
-  actor: {fileID: 3521660263708333888}
-  targetGroup: {fileID: 7968826697008006228}
-  tweenBind: 1
 --- !u!1 &2764345688555143349
 GameObject:
   m_ObjectHideFlags: 0
