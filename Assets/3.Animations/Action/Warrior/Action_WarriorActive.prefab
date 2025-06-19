@@ -124,7 +124,7 @@ MonoBehaviour:
   director: {fileID: 2424282844880231893}
   startLocation: {fileID: 0}
   endLocation: {fileID: 0}
-  actor: {fileID: 6971513762151726134}
+  actor: {fileID: 773548208534496754}
   targetGroup: {fileID: 0}
 --- !u!320 &2424282844880231893
 PlayableDirector:
@@ -1306,6 +1306,17 @@ PrefabInstance:
       addedObject: {fileID: 2550001116870834514}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
+--- !u!114 &773548208534496754 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7011723523100111021, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
+  m_PrefabInstance: {fileID: 7778442896842642783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &3373570478085854801 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4982037696558531342, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}

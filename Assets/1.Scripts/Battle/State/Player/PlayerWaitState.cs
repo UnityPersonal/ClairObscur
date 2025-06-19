@@ -9,6 +9,7 @@ public class PlayerWaitState : PlayerState
 
     public override void Enter()
     {
+        character.SwapAction("wait");
         character.Deactivate();
     }
 

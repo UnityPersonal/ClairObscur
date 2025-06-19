@@ -49,7 +49,7 @@ MonoBehaviour:
   director: {fileID: 376314821915339370}
   startLocation: {fileID: 0}
   endLocation: {fileID: 0}
-  actor: {fileID: 346922735787357898}
+  actor: {fileID: 6480303039048290350}
   targetGroup: {fileID: 0}
 --- !u!320 &376314821915339370
 PlayableDirector:
@@ -132,6 +132,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
   m_PrefabInstance: {fileID: 437621780364849953}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6480303039048290350 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6916429479166698255, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+  m_PrefabInstance: {fileID: 437621780364849953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &7994345381140244486 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7557920283894012711, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}

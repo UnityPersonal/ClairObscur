@@ -113,7 +113,7 @@ MonoBehaviour:
   director: {fileID: 1904951004725741725}
   startLocation: {fileID: 0}
   endLocation: {fileID: 0}
-  actor: {fileID: 4956272392120104175}
+  actor: {fileID: 3372013390523182379}
   targetGroup: {fileID: 0}
 --- !u!320 &1904951004725741725
 PlayableDirector:
@@ -130,10 +130,6 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: 234590368576227607, guid: 7203c95597350f84289500f7f6c822ef, type: 2}
-    value: {fileID: 767487525360328328}
-  - key: {fileID: -4812968152216394465, guid: 7203c95597350f84289500f7f6c822ef, type: 2}
-    value: {fileID: 4956272392120104175}
   - key: {fileID: 5637682571584933485, guid: def32181bafa737479d6d6a1dcb8c28a, type: 2}
     value: {fileID: 767487525360328328}
   - key: {fileID: -227817619509260888, guid: def32181bafa737479d6d6a1dcb8c28a, type: 2}
@@ -210,6 +206,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4982037696558531342, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
   m_PrefabInstance: {fileID: 5730101777762573702}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3372013390523182379 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7011723523100111021, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
+  m_PrefabInstance: {fileID: 5730101777762573702}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4956272392120104175 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 814410797533604201, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}

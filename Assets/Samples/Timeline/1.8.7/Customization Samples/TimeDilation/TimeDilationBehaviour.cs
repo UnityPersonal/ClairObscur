@@ -12,5 +12,7 @@ namespace Timeline.Samples
     {
         [Tooltip("Time.timeScale replacement value.")]
         public float timeScale = 1f;
+        
+        public bool OnlyTimelineDilation = false;
     }
 }

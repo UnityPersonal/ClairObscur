@@ -29,19 +29,23 @@ namespace Timeline.Samples
             }
 
             // blend to/from the default timeline
-            Time.timeScale = Mathf.Max(0.0001f, Mathf.Lerp(m_DefaultTimeScale, timeScale, Mathf.Clamp01(totalWeight)));
+            //Time.timeScale = Mathf.Max(0.0001f, Mathf.Lerp(m_DefaultTimeScale, timeScale, Mathf.Clamp01(totalWeight)));
+            float blendedSpeed = Mathf.Max(0.0001f, Mathf.Lerp(m_DefaultTimeScale, timeScale, Mathf.Clamp01(totalWeight)));
+            playable.GetGraph().GetRootPlayable(0).SetSpeed(blendedSpeed);
         }
 
         // Called when the playable graph is created, typically when the timeline is played.
         public override void OnPlayableCreate(Playable playable)
         {
-            m_DefaultTimeScale = Time.timeScale;
+            //m_DefaultTimeScale = Time.timeScale;
+            m_DefaultTimeScale = (float)playable.GetGraph().GetRootPlayable(0).GetSpeed();
         }
 
         // Called when the playable is destroyed, typically when the timeline stops.
         public override void OnPlayableDestroy(Playable playable)
         {
-            Time.timeScale = m_DefaultTimeScale;
+            //Time.timeScale = m_DefaultTimeScale;
+            //playable.GetGraph().GetRootPlayable(0).SetSpeed(m_DefaultTimeScale);
         }
     }
 }

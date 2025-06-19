@@ -29,19 +29,28 @@ public class PlayerDefenseState : PlayerState
         {
             player.DodgeActionTime = Time.time;
             isActing = true;
-            character.SwapAction("dodge", (PlayableDirector _) => { isActing = false;});
+            character.SwapAction("dodge", (PlayableDirector _) => { OnEndDefenseAction(); });
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
             player.ParryActionTime = Time.time;
             isActing = true;
-            character.SwapAction("parry", (PlayableDirector _) => { isActing = false;});
+            character.SwapAction("parry", (PlayableDirector _) => { OnEndDefenseAction();});
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             player.JumpActionTime = Time.time;
             isActing = true;
-            character.SwapAction("jump", (PlayableDirector _) => { isActing = false;});
+            character.SwapAction("jump", (PlayableDirector _) => { OnEndDefenseAction();});
+        }
+    }
+
+    private void OnEndDefenseAction()
+    {
+        isActing = false;
+        if (character.IsDead == false)
+        {
+            character.SwapAction("wait");
         }
     }
 

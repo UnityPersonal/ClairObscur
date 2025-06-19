@@ -41,7 +41,6 @@ public class BattleMonster : BattleCharacter
 
     private void OnCounter(CounterEventArgs args)
     {
-        Debug.Log($"<color=purple>BattlePlayer</color> ::: OnCounter{Time.time}");
         if (args.Target.Equals(this) == true)
         {
             Debug.Log($"<color=red>BattleMonster</color> ::: OnCounter {Time.time} {args.Damage}");
@@ -61,13 +60,13 @@ public class BattleMonster : BattleCharacter
     
     public void OnCounterBeginSignal()
     {
-        currentAction.director.Pause();
+        currentAction.PauseAction();
         Debug.Log($"<color=purple>BattleMonster</color> ::: OnCounterBeginSignal {Time.time}");
     }
     
     public void OnCounterEndSignal()
     {
-        currentAction.director.Resume();
+        currentAction.ResumeAction();
         Debug.Log($"<color=purple>BattleMonster</color> ::: OnCounterEndSignal {Time.time}");
     }
 

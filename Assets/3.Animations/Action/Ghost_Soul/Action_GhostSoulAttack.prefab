@@ -331,7 +331,7 @@ MonoBehaviour:
   director: {fileID: 4017037680741607603}
   startLocation: {fileID: 1283556363835901125}
   endLocation: {fileID: 2487799127770305911}
-  actor: {fileID: 8201904666916763277}
+  actor: {fileID: 6656965560656768880}
   targetGroup: {fileID: 3467590603645968111}
 --- !u!320 &4017037680741607603
 PlayableDirector:
@@ -1721,6 +1721,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3731e2c4001baa941a1a13e0bb6e65eb, type: 3}
+--- !u!114 &6656965560656768880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7944904222578548184, guid: 3731e2c4001baa941a1a13e0bb6e65eb, type: 3}
+  m_PrefabInstance: {fileID: 3612927742145671848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &7861467556116128041 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6861860429827691393, guid: 3731e2c4001baa941a1a13e0bb6e65eb, type: 3}

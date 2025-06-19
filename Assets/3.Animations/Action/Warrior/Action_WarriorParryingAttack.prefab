@@ -178,8 +178,8 @@ MonoBehaviour:
   director: {fileID: 3847675447191691252}
   startLocation: {fileID: 798782935435514497}
   endLocation: {fileID: 7141788329687154525}
-  actor: {fileID: 8409060790408485605}
-  targetGroup: {fileID: 0}
+  actor: {fileID: 2211556689183556385}
+  targetGroup: {fileID: 2111879518986161701}
 --- !u!320 &3847675447191691252
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -190,8 +190,8 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 2ac4d91d015eaee4ebe4b1759fb4eb07, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 1
+  m_InitialState: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -2115,6 +2115,17 @@ PrefabInstance:
       addedObject: {fileID: 7561272373947108967}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
+--- !u!114 &2211556689183556385 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7011723523100111021, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
+  m_PrefabInstance: {fileID: 9223269174179869580}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4241373328049647746 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4982037696558531342, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}

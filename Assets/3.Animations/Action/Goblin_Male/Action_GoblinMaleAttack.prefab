@@ -82,7 +82,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2257467044552749555}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.026319977, y: 0.94342613, z: -0.07726364, w: -0.32137957}
+  m_LocalRotation: {x: -0.02631998, y: 0.94342613, z: -0.077263646, w: -0.3213796}
   m_LocalPosition: {x: 4.241534, y: 2.4257336, z: 5.5031776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2257467044552749555}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb4843bae7d24943842ea23130dcd55, type: 3}
   m_Name: 
@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872363495626400555}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.027952185, y: 0.9211293, z: -0.067337155, w: -0.382368}
+  m_LocalRotation: {x: -0.027952183, y: 0.9211293, z: -0.06733716, w: -0.38236797}
   m_LocalPosition: {x: 5.52, y: 2.4257336, z: 5.5031776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872363495626400555}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb4843bae7d24943842ea23130dcd55, type: 3}
   m_Name: 
@@ -427,7 +427,7 @@ MonoBehaviour:
   director: {fileID: 8707827043338357944}
   startLocation: {fileID: 8608094471456888522}
   endLocation: {fileID: 2104149267135859843}
-  actor: {fileID: 7714480881037749540}
+  actor: {fileID: 3905036872506346432}
   targetGroup: {fileID: 2424106066179743001}
 --- !u!320 &8707827043338357944
 PlayableDirector:
@@ -626,6 +626,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 7557920283894012711, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
   m_PrefabInstance: {fileID: 7623870346609715407}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3905036872506346432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6916429479166698255, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+  m_PrefabInstance: {fileID: 7623870346609715407}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7714480881037749540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}

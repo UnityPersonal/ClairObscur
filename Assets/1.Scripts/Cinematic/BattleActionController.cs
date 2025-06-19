@@ -34,9 +34,11 @@ public class BattleActionController : MonoBehaviour
     [SerializeField] private Transform startLocation;
     [SerializeField] private Transform endLocation;
     
-    [SerializeField] private Transform actor;
+    [SerializeField] private TimelineActor actor;
+    public TimelineActor Actor => actor;
     [SerializeField] private CinemachineTargetGroup targetGroup;
     
+    private CinemachineCamera[] cameras;
     private void Awake()
     {
         director = GetComponent<PlayableDirector>();
@@ -45,6 +47,8 @@ public class BattleActionController : MonoBehaviour
             Debug.LogError("PlayableDirector component is missing on BattleActionController.");
         }
         director.stopped += OnStopped;
+
+        cameras = GetComponentsInChildren<CinemachineCamera>(true);
     }
     private void OnDestroy()
     {
@@ -63,11 +67,19 @@ public class BattleActionController : MonoBehaviour
     public void PauseAction()
     {
         director.Pause();
+        foreach (var camera in cameras)
+        {
+            camera.enabled = false;
+        }
     }
     
     public void ResumeAction()
     {
         director.Resume();
+        foreach (var camera in cameras)
+        {
+            camera.enabled = true;
+        }
     }
 
     public void StopAction()
@@ -83,13 +95,13 @@ public class BattleActionController : MonoBehaviour
             startLocation.position = args.Actor.transform.position;
         
         if(endLocation != null && args.Target != null)
-            endLocation.position = args.Target.transform.position;
+            endLocation.position = args.Target.Actor.transform.position;
 
         if (targetGroup != null)
         {
             targetGroup.Targets.Clear();
-            targetGroup.AddMember(actor, 0.5f, 1f);
-            targetGroup.AddMember(args.Target.transform, 0.5f, 1f);
+            targetGroup.AddMember(actor.TrackTransform, 0.5f, actor.TrackRadius);
+            targetGroup.AddMember(args.Target.Actor.TrackTransform, 0.5f, args.Target.Actor.TrackRadius);
         }
        
         

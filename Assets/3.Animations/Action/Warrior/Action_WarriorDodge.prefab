@@ -80,9 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   director: {fileID: 3860579844116368294}
-  startLocation: {fileID: 0}
-  endLocation: {fileID: 0}
-  actor: {fileID: 0}
+  startLocation: {fileID: 2836271468856104610}
+  endLocation: {fileID: 8305013201092941325}
+  actor: {fileID: 3715340636832434150}
   targetGroup: {fileID: 0}
 --- !u!320 &3860579844116368294
 PlayableDirector:
@@ -1310,6 +1310,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4982037696558531342, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
   m_PrefabInstance: {fileID: 5963100136100427595}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3715340636832434150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7011723523100111021, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
+  m_PrefabInstance: {fileID: 5963100136100427595}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6452657387989032482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 814410797533604201, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}

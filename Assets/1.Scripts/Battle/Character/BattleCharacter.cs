@@ -42,6 +42,7 @@ public abstract class BattleCharacter : MonoBehaviour
     
     [Space(10), Header("Character Action Settings")]
     [SerializeField] protected BattleActionController currentAction;
+    public TimelineActor Actor =>  currentAction.Actor;  
     [SerializeField] protected ActionDataTable actionLUT;
     
     

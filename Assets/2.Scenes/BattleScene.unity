@@ -1164,7 +1164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1378094460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,31 +1731,31 @@ PrefabInstance:
       objectReference: {fileID: 107115990}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.7061527
+      value: -0.77577496
       objectReference: {fileID: 0}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8913946
+      value: 1.7304649
       objectReference: {fileID: 0}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5196342
+      value: 3.9945107
       objectReference: {fileID: 0}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9513119
+      value: 0.9505126
       objectReference: {fileID: 0}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.20309097
+      value: 0.13519959
       objectReference: {fileID: 0}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.22676851
+      value: -0.27692917
       objectReference: {fileID: 0}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.048331402
+      value: 0.03946203
       objectReference: {fileID: 0}
     - target: {fileID: 8253860622701139679, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2014,7 +2014,7 @@ PrefabInstance:
       objectReference: {fileID: 1829442250}
     - target: {fileID: 6347335964158684448, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
       propertyPath: status.maxHP
-      value: 10
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6347335964158684448, guid: 50596556ba0d59042a2bae1ac131fa42, type: 3}
       propertyPath: characterHitTransform
