@@ -4,6 +4,26 @@ public class GameEventArgs
 {
 }
 
+public class StartTurnEventArgs : GameEventArgs
+{
+    public BattleCharacter Character { get; private set; }
+    
+    public StartTurnEventArgs(BattleCharacter character)
+    {
+        Character = character;
+    }
+}
+
+public class EndTurnEventArgs : GameEventArgs
+{
+    public BattleCharacter Character { get; private set; }
+    
+    public EndTurnEventArgs(BattleCharacter character)
+    {
+        Character = character;
+    }
+}
+
 public class TimingEventArgs : GameEventArgs
 {
     public float Time { get; private set; }

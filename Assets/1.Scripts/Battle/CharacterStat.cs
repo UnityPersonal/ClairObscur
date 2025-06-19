@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -22,6 +23,13 @@ public class CharacterStat
     public int ExpToNextLevel => CharacterLevelTable.GetCharacterGrowthData(Level).Exp;
     
     public bool IsDead => currentHP <= 0;
+    public List<bool> StatusEffects { get; private set; } = new List<bool>();
 
+    public CharacterStat()
+    {
+        StatusEffects = new List<bool>(GameUtilHelper.GetEnumCount<SkillStatusEffectType>() );
+        
+        
+    }
 
 }

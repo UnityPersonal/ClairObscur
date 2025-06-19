@@ -5,6 +5,8 @@ public class BattleEventManager : MonoSingleton<BattleEventManager>
 {
     public class EventCallbacks
     {
+        public Action<StartTurnEventArgs> OnStartTurn;
+        public Action<EndTurnEventArgs> OnEndTurn;
         public Action<FocusEventArgs> OnFocus;
         public Action<AttackEventArgs> OnAttack;
         public Action<DodgeEventArgs> OnDodge;
@@ -67,5 +69,15 @@ public class BattleEventManager : MonoSingleton<BattleEventManager>
     static public void OnCounter(CounterEventArgs args)
     {
         Instance.callbacks.OnCounter?.Invoke(args);
+    }
+
+    static public void OnStartTurn(StartTurnEventArgs args)
+    {
+        Instance.callbacks.OnStartTurn?.Invoke(args);
+    }
+    
+    static public void OnEndTurn(EndTurnEventArgs args)
+    {
+        Instance.callbacks.OnEndTurn?.Invoke(args);
     }
 }

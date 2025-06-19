@@ -20,4 +20,10 @@ public class SkillData : ScriptableObject
     public int ApCost;
 
     public BattleActionController action;
+    
+    public SkillStatusEffectType SkillEffectType { get; set; }
+    public SkillTargetRangeType TargetRange { get; set; }
+    public CharacterClass CharacterClass { get; set; }
+    public float EffectValue { get; set; } // 효과의 수치 (예: 데미지(%), 힐량(%), 버프/디버프 지속시간(turn(integer)) 등)
+    
 }
