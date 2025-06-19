@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: WarriorActionTable
   m_EditorClassIdentifier: 
   actionDataList:
-  - {fileID: 11400000, guid: df559a133a68afa4bb949129c97fdfe9, type: 2}
-  - {fileID: 11400000, guid: 44366b8d97b59b24192aa23fcab057f0, type: 2}
-  - {fileID: 11400000, guid: 7fa5fbda9e7812148a6026b4979674d0, type: 2}
-  - {fileID: 11400000, guid: 06b8281cd3637b74d9c59a3bdf44a2d5, type: 2}
-  - {fileID: 11400000, guid: 83c7ecdcd0d7af24e83c5e26223efba4, type: 2}
-  - {fileID: 11400000, guid: eed17ed77a170cd4c8a4d21200c266cd, type: 2}
+  - {fileID: 5133415672338930120, guid: 3aa4355c6eecd6c4a9d491ceb0687eb6, type: 3}
+  - {fileID: 2781014429875095481, guid: c8001ab5c85f1ae419503d65e6547f5d, type: 3}
+  - {fileID: 4475575210345201132, guid: 07a71f082a6f65b4e8ec88abf97aaad7, type: 3}
+  - {fileID: 2053631116124747398, guid: ddad1916cf520e54c8c404128f384c99, type: 3}
+  - {fileID: 5905110545059585370, guid: deba74284f7cb054d94b11d8048ca879, type: 3}
+  - {fileID: 6998697378345929355, guid: 74457a78427843042b23341c4f7c4337, type: 3}
+  - {fileID: 1217062772274997871, guid: a9f7e829f6fecab4c80e63fc8f8055ad, type: 3}
+  - {fileID: 6498434053231889400, guid: 8bfdf98607aa57240801b592f2812f59, type: 3}

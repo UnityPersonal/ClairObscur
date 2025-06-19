@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c45b9394573ed49a3ec250c04f65fe, type: 3}
   m_Name: ArcherActionTable
   m_EditorClassIdentifier: 
-  actionDataList:
-  - {fileID: 11400000, guid: a8cb30fa14be07149b920ccd1fc217b0, type: 2}
-  - {fileID: 11400000, guid: f09679cb66873cf4d97fc8f310590b5d, type: 2}
-  - {fileID: 11400000, guid: f9486e844a69d1745a45166aac7f86ce, type: 2}
+  actionDataList: []

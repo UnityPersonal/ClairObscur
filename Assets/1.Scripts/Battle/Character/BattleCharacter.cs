@@ -132,8 +132,19 @@ public abstract class BattleCharacter : MonoBehaviour
         }
     }
     
-    public void SwapState(string nextState)
+    public void ReserveSwapState(string nextState)
     {
+        nextState = nextState.ToLower();
+        currentState.ReserveSwap(nextState);
+    }
+    
+    public void SwapState(string nextState, bool immediate = true)
+    {
+        if (immediate == false)
+        {
+            
+        }
+        
         nextState = nextState.ToLower();
         if(currentState != null)
         {
@@ -171,8 +182,8 @@ public abstract class BattleCharacter : MonoBehaviour
         status.CurrentHP = status.MaxHP;
         foreach (var data in actionLUT.actionDataList)
         {
-            var actionController = Instantiate(data.controller,transform);
-            ActionMap[data.actionDataType.ToLower()] = actionController;     
+            var actionController = Instantiate(data,transform);
+            ActionMap[data.ActionName.ToLower()] = actionController;     
         }
 
         

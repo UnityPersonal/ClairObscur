@@ -79,11 +79,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: death
   director: {fileID: 5837172626063670878}
   startLocation: {fileID: 6324777293524537752}
   endLocation: {fileID: 4607478079723547345}
   actor: {fileID: 909744720785641914}
   targetGroup: {fileID: 0}
+  tweenBind: 1
 --- !u!320 &5837172626063670878
 PlayableDirector:
   m_ObjectHideFlags: 0

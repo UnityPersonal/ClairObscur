@@ -14,4 +14,8 @@ public abstract class CharacterState
     public abstract void Execute();
     public abstract void Enter();
     public abstract void Exit();
+
+    public virtual void ReserveSwap(string nextState)
+    {
+    }
 }

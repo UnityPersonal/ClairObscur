@@ -33,6 +33,6 @@ public class GameResultUI : MonoBehaviour
             StartCoroutine(characterRewardUI.AnimateCharacterReward(player));
         }
         
-        // 킬로그에 몬스터를 넣어준다.
+        // todo: 킬로그에 몬스터를 넣어준다.
     }
 }

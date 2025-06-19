@@ -360,11 +360,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: jumpslash
   director: {fileID: 131780801452728609}
   startLocation: {fileID: 546058285769427529}
   endLocation: {fileID: 8596581179557727723}
   actor: {fileID: 3521660263708333888}
   targetGroup: {fileID: 7968826697008006228}
+  tweenBind: 1
 --- !u!1 &2764345688555143349
 GameObject:
   m_ObjectHideFlags: 0

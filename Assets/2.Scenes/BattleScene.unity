@@ -1713,6 +1713,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -250
       objectReference: {fileID: 0}
+    - target: {fileID: 7215099614209232343, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
     - target: {fileID: 8044405559385658712, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: target
       value: 

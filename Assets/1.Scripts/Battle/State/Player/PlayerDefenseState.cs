@@ -20,10 +20,27 @@ public class PlayerDefenseState : PlayerState
 
     private bool isActing = false;
     
+    bool reserveSwap = false;
+    
+    public override void ReserveSwap(string nextState)
+    {
+        base.ReserveSwap(nextState);
+        // Do not allow swapping to another state while acting
+        if (isActing) reserveSwap = true;
+        else character.SwapState(nextState,true);
+    }
+    
     public override void Execute()
     {
         var player = character as BattlePlayer;
         if (isActing == true) return;
+        
+        if(reserveSwap == true) 
+        {
+            reserveSwap = false;
+            character.SwapState("wait", true);
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -48,6 +65,7 @@ public class PlayerDefenseState : PlayerState
     private void OnEndDefenseAction()
     {
         isActing = false;
+        reserveSwap = false;
         if (character.IsDead == false)
         {
             character.SwapAction("wait");

@@ -50,7 +50,7 @@ public class BattlePlayer : BattleCharacter
         else
         {
             // todo: 바로 돌아가는게 아니라 이전 애니메이션 재생 끝나면 넘어가도록 수정하자.
-            SwapState("wait");
+            ReserveSwapState("wait");
         }
     }
 

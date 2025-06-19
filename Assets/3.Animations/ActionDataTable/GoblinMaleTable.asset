@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GoblinMaleTable
   m_EditorClassIdentifier: 
   actionDataList:
-  - {fileID: 11400000, guid: 43a3931512668b842831f3188ec4e8fc, type: 2}
-  - {fileID: 11400000, guid: 628908d272f1e3b45a52f4315b1218bb, type: 2}
-  - {fileID: 11400000, guid: 10b39c94aa9f13b4fb2fc71658862836, type: 2}
+  - {fileID: 4157634143345704602, guid: e3dded63cf5c5e54c9128539cf56260e, type: 3}
+  - {fileID: 6185258232327670727, guid: 00b62210fd9970b4496c84795ae99e07, type: 3}
+  - {fileID: 6793563198744373336, guid: b32a3bcb7562a454a843d348d6fe054a, type: 3}

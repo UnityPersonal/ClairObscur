@@ -424,11 +424,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: attack
   director: {fileID: 8707827043338357944}
   startLocation: {fileID: 8608094471456888522}
   endLocation: {fileID: 2104149267135859843}
   actor: {fileID: 3905036872506346432}
   targetGroup: {fileID: 2424106066179743001}
+  tweenBind: 1
 --- !u!320 &8707827043338357944
 PlayableDirector:
   m_ObjectHideFlags: 0

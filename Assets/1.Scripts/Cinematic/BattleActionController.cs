@@ -7,6 +7,7 @@ using UnityEngine.Timeline;
 
 public class PlayActionArgs
 {
+    
     public BattleCharacter Actor { get; set; }
     public BattleCharacter Target { get; set; }
     
@@ -26,6 +27,9 @@ public class PlayActionArgs
 
 public class BattleActionController : MonoBehaviour
 {
+    [SerializeField] string actionName;
+    public string ActionName { get => actionName.ToLower(); }
+    
     public PlayableDirector director;
     public TimelineAsset timelineAsset => director.playableAsset as TimelineAsset;
     
@@ -39,6 +43,8 @@ public class BattleActionController : MonoBehaviour
     [SerializeField] private CinemachineTargetGroup targetGroup;
     
     private CinemachineCamera[] cameras;
+    
+    [SerializeField] private bool tweenBind = true;
     private void Awake()
     {
         director = GetComponent<PlayableDirector>();
@@ -91,11 +97,14 @@ public class BattleActionController : MonoBehaviour
         PlayActionArgs args
         )
     {
-        if(startLocation != null && args.Actor != null)
-            startLocation.position = args.Actor.transform.position;
+        if (tweenBind)
+        {
+            if(startLocation != null && args.Actor != null)
+                startLocation.position = args.Actor.transform.position;
         
-        if(endLocation != null && args.Target != null)
-            endLocation.position = args.Target.Actor.transform.position;
+            if(endLocation != null && args.Target != null)
+                endLocation.position = args.Target.Actor.transform.position;    
+        }
 
         if (targetGroup != null)
         {

@@ -79,11 +79,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: dodge
   director: {fileID: 3860579844116368294}
   startLocation: {fileID: 2836271468856104610}
   endLocation: {fileID: 8305013201092941325}
   actor: {fileID: 3715340636832434150}
   targetGroup: {fileID: 0}
+  tweenBind: 0
 --- !u!320 &3860579844116368294
 PlayableDirector:
   m_ObjectHideFlags: 0

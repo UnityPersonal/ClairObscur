@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GhostSoulTable
   m_EditorClassIdentifier: 
   actionDataList:
-  - {fileID: 11400000, guid: 1fdb2f524ab8589489c8a3f36efd9815, type: 2}
-  - {fileID: 11400000, guid: b865dbadb25c8644184955723fc751d8, type: 2}
-  - {fileID: 11400000, guid: df3eb911102fd44409b6ce7db4e56ab7, type: 2}
+  - {fileID: 3968033301440772143, guid: 9ad100a48c74db94ea7256bb8a299817, type: 3}
+  - {fileID: 6266967383015337548, guid: b230bcb60b718ff4395493705e7fcd3c, type: 3}
+  - {fileID: 7237222759533687030, guid: 5a15b25e0bec99646ac7eeded691c90e, type: 3}

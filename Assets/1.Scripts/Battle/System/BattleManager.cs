@@ -63,6 +63,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         {
             IsEndBattle = true;
             Debug.Log("All players are dead. Battle ended.");
+            GameManager.Instance.GoToWorldScene();
             return;
         }
 

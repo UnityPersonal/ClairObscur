@@ -110,11 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d8c3e63f2f50041ac953568e952b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: parry
   director: {fileID: 1904951004725741725}
   startLocation: {fileID: 0}
   endLocation: {fileID: 0}
   actor: {fileID: 3372013390523182379}
   targetGroup: {fileID: 0}
+  tweenBind: 1
 --- !u!320 &1904951004725741725
 PlayableDirector:
   m_ObjectHideFlags: 0
