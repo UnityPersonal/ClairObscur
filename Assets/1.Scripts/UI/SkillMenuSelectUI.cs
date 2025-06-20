@@ -56,7 +56,8 @@ public class SkillMenuSelectUI : MonoSingleton<SkillMenuSelectUI>
         {
             var skillData = player.GetSkillDataByIndex(i);
             if(skillData == null) continue;
-            skillButtons[i].SetUP(player.PlayerStat,skillData);
+            
+            skillButtons[i].SetUP(player,skillData);
         }
     }
     

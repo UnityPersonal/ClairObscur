@@ -18,23 +18,21 @@ public class CharacterRewardUI : MonoBehaviour
         // 업데이트는 UI 애니메이션 완료되고 나면 처리된다.
         
         characterName.text = character.CharacterName;
-        int level = character.Status.Level;
-        levelText.text = $"{character.Status.Level}";
+        var level = character.Stat(GameStat.LEVEL);
+        
+        levelText.text = $"{level.StatValue}";
 
-        int currentExpValue = character.Status.CurrentExp;
-        int maxExpValue = character.Status.ExpToNextLevel;
+        var exp = character.Stat(GameStat.EXPERIENCE);
+        var nextExp = character.Stat(GameStat.NEXT_EXPERIENCE);
+
+        int currentExpValue = exp.StatValue;
+        int maxExpValue = nextExp.StatValue;
         
         currentExp.text = currentExpValue.ToString();
         maxExp.text = maxExpValue.ToString();
         
-        expSlider.value = (float)currentExpValue / maxExpValue;
-        
-        // Animate the exp slider
         float targetValue = (float)(currentExpValue) / maxExpValue;
-        expSlider.value = Mathf.Lerp(expSlider.value, targetValue, 0.5f);
-        
-        // Update the current exp text
-        currentExp.text = (currentExpValue).ToString();
+        expSlider.value = targetValue;
         yield break;
     }
 }

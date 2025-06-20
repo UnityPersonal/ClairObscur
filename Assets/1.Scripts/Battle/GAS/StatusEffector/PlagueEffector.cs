@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// 캐릭터의 최대 생명력을 감소시킵니다.
@@ -16,9 +17,10 @@ public class PlagueEffector : StatusEffector
     {
         if (args.Target == owner)
         {
-            int reduce = Mathf.CeilToInt(owner.Status.MaxHP * 0.1f);
+            var hp  = owner.Stat("HP");
+            int reduce = Mathf.CeilToInt(hp.MaxValue * 0.1f);
             Debug.Log($"[PlagueEffector] {owner.name} 최대 HP 감소 {reduce}");
-            owner.Status.CurrentHP = Mathf.Min(owner.Status.CurrentHP, owner.Status.MaxHP - reduce);
+            owner.Status.CurrentHP = Mathf.Min(owner.Status.CurrentHP, hp.MaxValue - reduce);
         }
     }
 }

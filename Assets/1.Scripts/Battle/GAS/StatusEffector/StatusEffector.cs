@@ -5,6 +5,7 @@ using UnityEngine;
 /// 상태효과의 기본 클래스입니다. 각 Effector는 이 클래스를 상속받고,
 /// 필요한 타이밍 이벤트에 콜백을 등록합니다.
 /// </summary>
+[Serializable]
 public abstract class StatusEffector
 {
     protected BattleCharacter owner;

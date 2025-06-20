@@ -23,11 +23,13 @@ public class DefenseStance : MaelStanceState
     public override void OnTakeDamage(ref int damage)
     {
         damage = Mathf.FloorToInt(damage * 0.75f); // 피해 감소
-        player.PlayerStat.currentAP += 1;
+        var ap = player.Stat(GameStat.AP);
+        ap.SetStatValue(ap.StatValue + 1);
     }
     public override void OnHeal(int healAmount)
     {
-        player.PlayerStat.currentAP += 1;
+        var ap = player.Stat(GameStat.AP);
+        ap.SetStatValue(ap.StatValue + 1);
     }
 }
 
@@ -112,7 +114,8 @@ public class MaelPlayer : BattlePlayer
         base.OnJumped();
         if (CurrentStanceType == MaelStanceType.None)
         {
-            PlayerStat.currentAP += 1;
+            var ap = Stat(GameStat.AP);
+            ap.SetStatValue(ap.StatValue + 1);
         }
     }
 }

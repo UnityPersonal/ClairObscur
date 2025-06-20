@@ -10,10 +10,6 @@ using Random = UnityEngine.Random;
 
 public class BattlePlayer : BattleCharacter
 {
-    [Header("Battle Player Settings")]
-    [SerializeField] private PlayerStat playerStat = new PlayerStat();
-    public PlayerStat PlayerStat { get { return playerStat; } }
-    
     [SerializeField] Transform dodgeTransform;
     public Transform DodgeTransform { get { return dodgeTransform; } }
     [SerializeField] protected SkillDatabase skillDatabase;
@@ -45,28 +41,33 @@ public class BattlePlayer : BattleCharacter
         base.Deactivate();
         PlayerStatUI.Instance.gameObject.SetActive(false);
     }
+    
+    public void IncrementAP(int amount)
+    {
+        var ap = Stat(GameStat.AP);
+        ap.SetStatValue(ap.StatValue + amount);
+    }
 
     private void OnRecivedTakedDamage(TakeDamageEventArgs args)
     {
         if (Activated == false) return;
         if (args.Target != Target) return;
 
-        playerStat.currentAP += 1;
+        IncrementAP(1);
     }
 
     protected override void OnDodged()
     {
-        playerStat.currentAP += 1;
+        IncrementAP(1);
     }
 
     protected override void OnParried()
     {
         parriedCount++;
-        playerStat.currentAP += 1;
-
+        IncrementAP(1);
     }
 
-    protected override void OnJumped() { playerStat.currentAP += 1; }
+    protected override void OnJumped() { IncrementAP(1);}
 
     protected override int GetCurrentDamage()
     {
@@ -118,20 +119,7 @@ public class BattlePlayer : BattleCharacter
 
         
         return;
-        for(int i = 0; i < equippedSkills.Length; i++)
-        {
-            string actionType = $"skill{i+1}".ToLower();
-            
-            var skillData = skillDatabase.GetSkillData(equippedSkills[i]);
-            var actionController = Instantiate(skillData.action, transform);
-            ActionMap[actionType] = actionController;
-
-            if (ActionMap.ContainsKey(actionType) == false)
-            {
-                Debug.LogWarning($"ActionMap does not contain key: {actionType}");
-                continue;
-            }
-        }
+        
         
     }
 

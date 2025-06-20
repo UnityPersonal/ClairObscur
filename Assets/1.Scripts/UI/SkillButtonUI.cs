@@ -9,10 +9,11 @@ public class SkillButtonUI : MonoBehaviour
     [SerializeField] private TMP_Text skillNameText;
     public TMP_Text SkillNameText => skillNameText;
 
-    public void SetUP(PlayerStat status, SkillData skillData)
+    public void SetUP(BattleCharacter character, SkillData skillData)
     {
         this.skillNameText.text = skillData.skillName;
-        if(status.currentAP < skillData.ApCost )
+        var ap = character.Stat(GameStat.AP);
+        if(ap.StatValue < skillData.ApCost )
         {
             skillButton.enabled = false;
             skillNameText.color = Color.red; // Disable color

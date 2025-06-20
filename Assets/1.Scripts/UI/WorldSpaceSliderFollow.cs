@@ -34,8 +34,9 @@ public class WorldSpaceSliderFollow : MonoBehaviour
         transform.LookAt(mainCamera.transform);
         
         var status = character.Status;
+        var hp = character.Stat(GameStat.HEALTH);
         
-        slider.value = status.CurrentHP / (float)status.MaxHP;
+        slider.value = hp.StatValue / (float)hp.MaxValue;
         //transform.localScale = Vector3.one;
         // 1. 타겟 오브젝트 위에 UI 배치
         //rectTransform.anchoredPosition 

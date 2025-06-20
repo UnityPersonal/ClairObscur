@@ -30,8 +30,16 @@ public abstract class BattleCharacter : MonoBehaviour
     
     [Header("Battle Character Settings")]
     [SerializeField] protected string characterName;
-    [SerializeField] protected CharacterStat status = new CharacterStat();
-    public CharacterStat Status => status;
+    [SerializeField] protected CharacterStatus status = new CharacterStatus();
+    [SerializeField] protected List<BattleAttribute> Attributes = new List<BattleAttribute>();
+    public BattleAttribute GetAttribute(string name)
+    {
+        return Attributes.Find(attr => attr.AttributeName.Equals(name, StringComparison.OrdinalIgnoreCase));
+    }
+    
+    public CharacterStatus Status => status;
+    public GameStat Stat(string statName) { return status.GetStat(statName); }
+    
     public string CharacterName => characterName;
     
     [Header("Character Location Settings")]
@@ -178,7 +186,8 @@ public abstract class BattleCharacter : MonoBehaviour
     
     public virtual void Initialize()
     {
-        status.CurrentHP = status.MaxHP;
+        var hp = status.GetStat(GameStat.HEALTH);
+        hp.StatValue = hp.MaxValue;
         foreach (var data in actionLUT.actionDataList)
         {
             var actionController = Instantiate(data,transform);

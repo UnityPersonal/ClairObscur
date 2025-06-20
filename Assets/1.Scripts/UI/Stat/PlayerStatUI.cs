@@ -9,6 +9,7 @@ public class PlayerStatUI : MonoSingleton<PlayerStatUI>
     public void Setup(BattlePlayer player)
     {
         characterNameText.text = player.CharacterName;
-        apBarUI.SetAp(player.PlayerStat.currentAP);
+        var ap = player.Stat(GameStat.AP);
+        apBarUI.SetAp(ap.StatValue);
     }
 }

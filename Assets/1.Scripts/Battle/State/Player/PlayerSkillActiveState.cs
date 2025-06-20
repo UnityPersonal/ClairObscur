@@ -21,7 +21,8 @@ public class PlayerSkillActiveState : PlayerState
 
         var action = skillData.action;
         // 코스트 소모
-        player.PlayerStat.currentAP -= skillData.ApCost;
+        var ap = player.Stat(GameStat.AP);
+        ap.SetStatValue(ap.StatValue - skillData.ApCost);
         
         // todo: 스킬 효과 적용
         character.SwapAction(action.ActionName, (PlayableDirector _) =>
