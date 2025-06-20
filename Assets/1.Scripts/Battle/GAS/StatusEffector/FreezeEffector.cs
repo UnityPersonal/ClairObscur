@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class FreezeEffector : StatusEffector
 {
+    public override string EffectorName => "freeze";
     protected override void BindToEvents()
     {
         BattleEventManager.Callbacks.OnStartTurn += OnStartTurn;

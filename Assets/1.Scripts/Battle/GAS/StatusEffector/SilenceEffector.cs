@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class SilenceEffector : StatusEffector
 {
+    public override string EffectorName => "Silence";
     // Skill 시스템과의 연동이 필요합니다.
     protected override void BindToEvents()
     {

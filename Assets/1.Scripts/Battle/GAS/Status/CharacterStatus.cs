@@ -9,10 +9,10 @@ public class CharacterStatus
     public List<GameStat> stats = new List<GameStat>();
     public int CurrentHP
     {
-        get => stats.Find( (stat) => stat.StatName.Equals("HP", StringComparison.OrdinalIgnoreCase)).StatValue;
+        get => GetStat(GameStat.HEALTH).StatValue;
         set
         {
-            var stat= stats.Find( (stat) => stat.StatName.Equals("HP", StringComparison.OrdinalIgnoreCase));
+            var stat = GetStat(GameStat.HEALTH);
                 stat.SetStatValue(value);
         }
     }

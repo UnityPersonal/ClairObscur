@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class StunEffector : StatusEffector
 {
+    public override string EffectorName => "Stun";
     protected override void BindToEvents()
     {
         BattleEventManager.Callbacks.OnStartTurn += OnStartTurn;

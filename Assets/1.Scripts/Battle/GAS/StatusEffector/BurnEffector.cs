@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class BurnEffector : StatusEffector
 {
+    public override string EffectorName => "Burn";
     protected override void BindToEvents()
     {
         BattleEventManager.Callbacks.OnStartTurn += OnStartTurn;

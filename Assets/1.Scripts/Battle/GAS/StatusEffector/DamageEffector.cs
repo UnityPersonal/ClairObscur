@@ -10,7 +10,7 @@ public enum DamageType
     Lightning,
 }
 
-public class DamageEffector : StatusEffector
+public abstract class DamageEffector : StatusEffector
 {
     public DamageType damageType;
 }

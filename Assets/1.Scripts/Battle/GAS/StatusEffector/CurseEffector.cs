@@ -7,6 +7,7 @@ using UnityEngine;
 public class CurseEffector : StatusEffector
 {
     private float remainingTurns = 3;
+    public override string EffectorName => "Curse";
 
     protected override void BindToEvents()
     {

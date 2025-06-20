@@ -8,6 +8,8 @@ using UnityEngine;
 public class BerserkEffector : StatusEffector
 {
     private int stacks = 1;
+    
+    public override string EffectorName => "Berserk";
 
     protected override void BindToEvents()
     {

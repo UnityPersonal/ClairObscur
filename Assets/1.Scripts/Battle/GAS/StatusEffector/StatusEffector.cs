@@ -8,6 +8,7 @@ using UnityEngine;
 [Serializable]
 public abstract class StatusEffector
 {
+    public abstract string EffectorName { get; }
     protected BattleCharacter owner;
 
     public virtual void Initialize(BattleCharacter owner)

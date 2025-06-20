@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class ExhaustionEffector : StatusEffector
 {
+    public override string EffectorName => "Exhaustion";
     // AP 획득 차단은 AP 시스템과의 연동이 필요합니다.
     protected override void BindToEvents()
     {

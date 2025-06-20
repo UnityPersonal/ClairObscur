@@ -31,13 +31,16 @@ public abstract class BattleCharacter : MonoBehaviour
     [Header("Battle Character Settings")]
     [SerializeField] protected string characterName;
     [SerializeField] protected CharacterStatus status = new CharacterStatus();
+    public CharacterStatus Status => status;
+
     [SerializeField] protected List<BattleAttribute> Attributes = new List<BattleAttribute>();
     public BattleAttribute GetAttribute(string name)
     {
         return Attributes.Find(attr => attr.AttributeName.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
     
-    public CharacterStatus Status => status;
+    [SerializeField] protected List<StatusEffector> statusEffects = new List<StatusEffector>();
+    public List<StatusEffector> StatusEffects => statusEffects;
     public GameStat Stat(string statName) { return status.GetStat(statName); }
     
     public string CharacterName => characterName;

@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class MarkEffector : StatusEffector
 {
+    public override string EffectorName => "Mark";
     private bool isMarked = true;
 
     protected override void BindToEvents()

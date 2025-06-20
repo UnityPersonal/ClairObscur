@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 /// </summary>
 public class PlagueEffector : StatusEffector
 {
+    public override string EffectorName => "Plague";
     protected override void BindToEvents()
     {
         BattleEventManager.Callbacks.OnTakeDamage += OnTakeDamage;

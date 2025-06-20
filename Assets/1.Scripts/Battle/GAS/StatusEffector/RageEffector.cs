@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class RageEffector : StatusEffector
 {
+    public override string EffectorName => "Rage";
     protected override void BindToEvents()
     {
         BattleEventManager.Callbacks.OnStartTurn += OnStartTurn;

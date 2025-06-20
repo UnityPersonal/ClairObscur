@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class ReversalEffector : StatusEffector
 {
+    public override string EffectorName => "Reversal";
     protected override void BindToEvents()
     {
         BattleEventManager.Callbacks.OnTakeDamage += OnTakeDamage;

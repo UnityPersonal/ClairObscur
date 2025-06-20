@@ -5,8 +5,9 @@ using UnityEngine;
 /// 캐릭터가 플레이할 수 없게 합니다.
 /// 대신 캐릭터가 자기 아군 중 하나를 공격합니다.
 /// </summary>
-public class ConfuseEffector : StatusEffector
+public class CharmEffector : StatusEffector
 {
+    public override string EffectorName => "Confuse";
     protected override void BindToEvents()
     {
         BattleEventManager.Callbacks.OnStartTurn += OnStartTurn;

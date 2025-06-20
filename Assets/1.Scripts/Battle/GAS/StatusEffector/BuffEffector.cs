@@ -1,6 +1,4 @@
 
-public class BuffEffector : StatusEffector
+public abstract class BuffEffector : StatusEffector
 {
-    
-        
 }
