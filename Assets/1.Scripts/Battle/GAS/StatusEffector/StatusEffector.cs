@@ -6,10 +6,26 @@ public class StatusEffector
     public string EffectorName;
     public StatusEffectorType EffectorType;
     public Sprite EffectorIcon;
-    public int EffectorValue { get; set; } = 0;
+    
+    private int effectorValue = 0;
 
-    public virtual void Initialize(BattleCharacter owner)
+    public int EffectorValue
     {
-        // 초기화 로직을 여기에 작성합니다.
+        get { return effectorValue; }
+        set
+        {
+            effectorValue = value;
+            if (character != null)
+            {
+                // Trigger any callbacks or updates needed in the character
+                character.Callbacks.OnEffectorChanged?.Invoke();
+            }
+        }
+    }
+
+    private BattleCharacter character;
+    public void BindCharacter(BattleCharacter owner)
+    {
+        character = owner;
     }
 }

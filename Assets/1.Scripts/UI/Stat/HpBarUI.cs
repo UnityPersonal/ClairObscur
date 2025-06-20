@@ -1,15 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HpBarUI : MonoBehaviour
+public class HpBarUI : WorldSpaceUIFollow
 {
-    public BattleCharacter character;
     public Slider slider;
 
-    // Update is called once per frame
-    void Update()
+
+    public void SetUp(BattleCharacter character)
+    {
+        this.character = character;
+        OnChangedStat();
+        character.Callbacks.OnStatusChanged += OnChangedStat;
+    }
+
+    public void OnChangedStat()
     {
         var hp = character.Stat(GameStat.HEALTH);
+
         slider.value = hp.StatValue / (float)hp.MaxValue;
 
     }

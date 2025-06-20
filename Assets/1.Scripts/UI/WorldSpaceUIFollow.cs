@@ -27,7 +27,7 @@ public class WorldSpaceUIFollow : MonoBehaviour
     {
         var uiWorldPosition = character.Actor.transform.position + offset;
         transform.position = uiWorldPosition;
-        transform.LookAt(mainCamera.transform);
+        transform.forward = -mainCamera.transform.forward;
         
         //transform.localScale = Vector3.one;
         // 1. 타겟 오브젝트 위에 UI 배치

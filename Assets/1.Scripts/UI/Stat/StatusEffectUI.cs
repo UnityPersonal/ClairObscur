@@ -4,32 +4,46 @@ using UnityEngine;
 
 
 
-public class StatusEffectUI : MonoBehaviour
+public class StatusEffectUI : WorldSpaceUIFollow
 {
-    [Serializable]
-    public class EffectIcon
-    {
-        public StatusEffectorType key;
-        public Sprite icon;
-    }
-    
-    public List<EffectIcon> effectIcons = new List<EffectIcon>();
-    
     [SerializeField] StatusEffectTileUI tileUIPrefab;
     [SerializeField] RectTransform statusEffectContainer;
+
+    private Dictionary<string, StatusEffectTileUI> tileUIDictionary = new Dictionary<string, StatusEffectTileUI>();
     
     public void SetUp(BattleCharacter character)
     {
-        var childCount = statusEffectContainer.childCount;
-        for (int i = transform.childCount - 1; i >= 0; i--)
+        this.character = character;
+        var assetList = AssetManager.Instance.StatusEffectorAssetList;
+        foreach (var asset in assetList)
         {
-            Destroy(statusEffectContainer.GetChild(i).gameObject);
+            var key = asset.EffectorName.ToLower();
+            tileUIDictionary[key] = Instantiate(tileUIPrefab, statusEffectContainer);
+            tileUIDictionary[key].SetUp(asset.EffectorIcon, 0); 
         }
 
-        foreach (var statusEffector in character.StatusEffects)
+        OnChanagedCharacterStatusEffects();
+        character.Callbacks.OnEffectorChanged += OnChanagedCharacterStatusEffects;
+    }
+    
+    private void OnChanagedCharacterStatusEffects()
+    {
+        foreach (var pair in character.StatusEffects)
         {
-            var tileUI = Instantiate(tileUIPrefab, statusEffectContainer);
-            tileUI.SetUp(statusEffector.Value.EffectorIcon, statusEffector.Value.EffectorValue);
+            var effector = pair.Value;
+            var key = effector.EffectorName.ToLower();
+            if (tileUIDictionary.TryGetValue(key, out var tileUI))
+            {
+                if (effector.EffectorValue > 0)
+                {
+                    tileUI.gameObject.SetActive(true);
+                    tileUI.SetUp(effector.EffectorIcon, effector.EffectorValue);
+                }
+                else
+                {
+                    tileUI.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }

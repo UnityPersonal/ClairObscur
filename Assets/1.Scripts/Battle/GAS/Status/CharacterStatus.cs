@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable]
 public class CharacterStatus
 {
-    [SerializeField] private string characterName;
     public List<GameStat> stats = new List<GameStat>();
     public int CurrentHP
     {

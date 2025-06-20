@@ -8,11 +8,23 @@ public class BattleWarrior : BattlePlayer
     /// 공격 또는 방어에 성공하면 카운트를 획득한다.
     /// 피해을 받으면 카운트를 잃는다.
     /// </summary>
-    public int GuardCount { get; private set; }= 0;// D C B A S
     public const int MAX_GUARD_COUNT = 1; // D C B A S
     public const int MAX_RANK_INDEX = 4; // D C B A S
-    public int CurrentRankIndex { get; private set; } = 0; // D C B A S
-    public float CurrentGauge => GuardCount / (float)MAX_GUARD_COUNT; // 0 ~ 100
+    public float CurrentGauge => PerfectionCount / (float)MAX_GUARD_COUNT; // 0 ~ 100
+    
+    const string RANK = "Rank";
+    private const string PERFECTION_COUNT = "PerfectionCount";
+    public int PerfectionCount
+    {
+        get => Stat(PERFECTION_COUNT).StatValue;
+        private set => Stat(PERFECTION_COUNT).StatValue = value;
+    }
+
+    public int CurrentRankIndex
+    {
+        get => Stat(RANK).StatValue;
+        set => Stat(RANK).StatValue = value;
+    }        
     
     protected override void Start()
     {
@@ -36,35 +48,36 @@ public class BattleWarrior : BattlePlayer
     protected override int GetCurrentDamage()
     {
         int damage = base.GetCurrentDamage();
+
         damage += CurrentRankIndex * 5;
         return damage;
     }
 
     public void ChangeGaurdCount(int value)
     {
-        GuardCount = GuardCount + value;
-        if(GuardCount < 0)
+        PerfectionCount = PerfectionCount + value;
+        if(PerfectionCount < 0)
         {
             if (CurrentRankIndex != 0)
             {
-                CurrentRankIndex--;
-                GuardCount = MAX_GUARD_COUNT;
+                CurrentRankIndex = CurrentRankIndex - 1;
+                PerfectionCount = MAX_GUARD_COUNT;
             }
             else
             {
-                GuardCount = 0; // 최소값은 0
+                PerfectionCount = 0; // 최소값은 0
             }
         }
-        else if(GuardCount > MAX_GUARD_COUNT)
+        else if(PerfectionCount > MAX_GUARD_COUNT)
         {
             if (CurrentRankIndex < (MAX_RANK_INDEX) )
             {
-                CurrentRankIndex++;
-                GuardCount = 0;
+                CurrentRankIndex = CurrentRankIndex + 1;
+                PerfectionCount = 0;
             }
             else
             {
-                GuardCount = MAX_GUARD_COUNT; // 최대값은 MAX_GUARD_COUNT
+                PerfectionCount = MAX_GUARD_COUNT; // 최대값은 MAX_GUARD_COUNT
             }
         }
         WarriorUI.Instance.SetGauge(CurrentGauge);

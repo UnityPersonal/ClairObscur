@@ -1,12 +1,63 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public partial class GameStat
 {
+    BattleCharacter owner;
+    public void BindCharacter(BattleCharacter character)
+    {
+        owner = character;
+    }
+    
     public string StatName = "Unnamed Stat";
     public string StatDescription = "No description provided.";
-    public int StatValue = 0;
-    public int MaxValue = 0;
+    [SerializeField] private int statValue = 0;
+    [SerializeField] private int maxValue = -1; // -1 means no limit
+
+
+    public int StatValue
+    {
+        get
+        {
+            return statValue;
+        }
+        set
+        {
+            if(maxValue < 0) statValue = value;
+            else statValue = Math.Clamp(value, 0, maxValue);
+            if (owner != null)
+            {
+                owner.Callbacks.OnStatusChanged?.Invoke();
+            }
+            else
+            {
+                Debug.LogWarning("Owner character is not bound to the GameStat.");
+            }
+        }
+    }
+    
+    public int MaxValue
+    {
+        get
+        {
+            return maxValue;
+        }
+        set
+        {
+            maxValue = value;
+            if (owner != null)
+            {
+                owner.Callbacks.OnStatusChanged?.Invoke();
+            }
+            else
+            {
+                Debug.LogWarning("Owner character is not bound to the GameStat.");
+            }
+        }
+    }
+
+    
 
     public override string ToString()
     {

@@ -71,7 +71,10 @@ public class BattlePlayer : BattleCharacter
 
     protected override int GetCurrentDamage()
     {
-        return 10; // todo: 스킬, 장비, 상태, 직업, 데미지 연동
+        var attackDamage = Stat(GameStat.ATTACK_POWER);
+        // todo: 어빌리티 값을 데미지에 반영
+        // todo: 스킬, 장비, 상태, 직업, 데미지 연동
+        return attackDamage.StatValue ;
     }
 
     public BattleCharacter PlayerTargetCharacter { get; set; }= null;

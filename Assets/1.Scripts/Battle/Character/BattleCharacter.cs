@@ -27,8 +27,7 @@ public enum BattleAttackType
 
 public abstract partial class BattleCharacter : MonoBehaviour
 {
-    const float AttackDelay = 0.33f; // Delay before the monster can attack again
-    const float ParryDelay = 0.16f; // Delay before the monster can attack again
+    public CallbackEvents Callbacks { get; private set; } = new CallbackEvents();
     
     [Header("Battle Character Settings")]
     [SerializeField] protected string characterName;
@@ -216,6 +215,9 @@ public abstract partial class BattleCharacter : MonoBehaviour
             var key = effector.ToLower();
             statusEffects[key].EffectorValue = Random.Range(5,10);;
         }
+        
+        WorldSpaceUISpawner.Instance.SpawnHpBar(this);
+        WorldSpaceUISpawner.Instance.SpawnStatusEffectUI(this);
     }
 
     protected void Update()
@@ -266,14 +268,14 @@ public abstract partial class BattleCharacter : MonoBehaviour
                     DodgeEventArgs dodgeArgs = new DodgeEventArgs(this, attackTime);
                     BattleEventManager.OnDodge(dodgeArgs);
                     OnDodged();
-                    return;
+                    break;
                 }
                 if ((attackTime - ParryActionTime) <= ParryDelay)
                 {
                     ParryEventArgs parryArgs = new ParryEventArgs(this, attackTime);
                     BattleEventManager.OnParry(parryArgs);
                     OnParried();
-                    return;
+                    break;
                 }
                 // 공격 적중
                 TakeDamageEventArgs takeDamageArgs = 
@@ -299,6 +301,11 @@ public abstract partial class BattleCharacter : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(attackType), attackType, null);
         }
+        
+        Callbacks.OnStatusChanged?.Invoke();
+        Callbacks.OnEffectorChanged?.Invoke();
+        Callbacks.OnAttributeChanged?.Invoke();
+
     }
   
     public virtual void OnFocusIn() {}
