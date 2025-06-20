@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.Timeline;
 
-[CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
+[CreateAssetMenu(fileName = "SkillData", menuName = "Skill/SkillData", order = 1)]
 public class SkillData : ScriptableObject
 {
     public string skillName;
 
     public int additiveDamage; // 추가 데미지 (예: 버프 등으로 인한)
     public int multiplierDamage; // 배수 데미지 (예: 특정 스킬의 효과로 인한)
+    
+    public Sprite skillIcon; // 스킬 아이콘
     
     public int CalcaultedDamage (int damage)    
     {

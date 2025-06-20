@@ -44,8 +44,8 @@ public abstract partial class BattleCharacter : MonoBehaviour
     protected Dictionary<string, StatusEffector> statusEffects = new Dictionary<string, StatusEffector>();
     public Dictionary<string, StatusEffector> StatusEffects => statusEffects;
     
-    public GameStat Stat(string statName) { return status.GetStat(statName); }
-    
+    public GameStat Stat(string statName) { return status.GetStat(statName.ToLower()); }
+    public StatusEffector StatusEffect(string statName) { return statusEffects[statName.ToLower()]; }
     public string CharacterName => characterName;
     
     [Header("Character Location Settings")]
@@ -197,7 +197,6 @@ public abstract partial class BattleCharacter : MonoBehaviour
         var callbacks = BattleEventManager.Callbacks;
         callbacks.OnAttack += OnAttack;
     }
-
     
     protected virtual void Start()
     {
@@ -231,7 +230,21 @@ public abstract partial class BattleCharacter : MonoBehaviour
         {
             return; // already dead, no damage can be taken
         }
+
+        { // apply shield effect
+            var shieldEffect = StatusEffect("shield");
+            if (shieldEffect.EffectorValue > 0)
+            {
+                shieldEffect.EffectorValue = shieldEffect.EffectorValue - 1;
+                return; // ignore damage if shield is active
+            }
+        }
+        
         status.CurrentHP -= damage;
+        // 공격 적중
+        TakeDamageEventArgs takeDamageArgs = new TakeDamageEventArgs(this, damage);
+        // todo : 피격 애니메이션 실행
+        BattleEventManager.OnTakeDamage(takeDamageArgs);
         if (IsDead)
         {
             // todo: 죽음 애니메이션 발동
@@ -277,12 +290,9 @@ public abstract partial class BattleCharacter : MonoBehaviour
                     OnParried();
                     break;
                 }
-                // 공격 적중
-                TakeDamageEventArgs takeDamageArgs = 
-                    new TakeDamageEventArgs(this, damage);
+               
                 
-                // todo : 피격 애니메이션 실행
-                BattleEventManager.OnTakeDamage(takeDamageArgs);
+                
                 OnTakedDamage(damage);
                 
                 break;
@@ -327,6 +337,56 @@ public abstract partial class BattleCharacter : MonoBehaviour
     {
         Debug.Log($"BattleCharacter ::: StartTurn {name}");
         Activate();
+
+        {// start turn event
+            StartTurnEventArgs args = new StartTurnEventArgs(character: this);
+            BattleEventManager.OnStartTurn(args);
+        }
+
+        {// apply cursed effect
+            var curseEffect = StatusEffect("cursed");
+            if (curseEffect.EffectorValue == 1)
+            {
+                var hp = status.GetStat(GameStat.HEALTH);
+                OnTakedDamage(hp.MaxValue);
+                Debug.Log($"<color=red>{name}</color> ::: Curse effect applied," +
+                          $" Character Die Immediatly");
+                curseEffect.EffectorValue = 0; // reset curse effect
+                return;
+            }
+        }
+        
+        {// apply burn effect
+            var burnEffect = StatusEffect("burn");
+            if (burnEffect.EffectorValue > 0)
+            {
+                OnTakedDamage(10 * burnEffect.EffectorValue);
+                Debug.Log($"<color=red>{name}</color> ::: Burn effect applied, remaining value: {burnEffect.EffectorValue}");
+            }
+        }
+        
+        {// stun effect
+            var stunEffect = StatusEffect("stun");
+            if (stunEffect.EffectorValue == 1)
+            {
+                Debug.Log($"<color=red>{name}</color> ::: Stun effect Value," +
+                          $" Skip Turn");
+                stunEffect.EffectorValue = 0;
+                Deactivate();
+            }
+        }
+
+        {// apply freeze effect
+            var freezeEffect = StatusEffect("freeze");
+            if (freezeEffect.EffectorValue > 0)
+            {
+                Debug.Log($"<color=red>{name}</color> ::: Freeze effect Value," +
+                          $" Skip Turn");
+                freezeEffect.EffectorValue = freezeEffect.EffectorValue - 1;
+                Deactivate();
+            }
+        }
+        
     }
 
 }

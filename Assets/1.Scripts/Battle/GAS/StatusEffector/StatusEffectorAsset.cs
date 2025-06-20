@@ -15,7 +15,7 @@ public class StatusEffectorAsset : ScriptableObject
     public StatusEffector CreateEffector()
     {
         StatusEffector effector = new StatusEffector();
-        effector.EffectorName = EffectorName;
+        effector.EffectorName = EffectorName.ToLower();
         effector.EffectorType = EffectorType;
         effector.EffectorIcon = EffectorIcon;
         return effector;

@@ -22,10 +22,13 @@ public class StatusEffector
             }
         }
     }
-
+    
     private BattleCharacter character;
     public void BindCharacter(BattleCharacter owner)
     {
         character = owner;
     }
+    
+    
+    
 }
