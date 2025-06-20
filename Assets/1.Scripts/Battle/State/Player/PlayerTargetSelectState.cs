@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerTargetSelectState : PlayerState
 {
     List<BattleCharacter> alivedEnemyList = new List<BattleCharacter>();
-    bool isTargetSelected = false;
+    
     int currentIndex = 0;
     public override void Execute()
     {

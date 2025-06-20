@@ -16,6 +16,9 @@ public class BattleEventManager : MonoSingleton<BattleEventManager>
         public Action<TakeDamageEventArgs> OnTakeDamage;
         public Action<DeathEventArgs> OnDeath;
         public Action<CounterEventArgs> OnCounter;
+        
+        public Action<StartDefenseEventArgs> OnStartDefend;
+        public Action<EndDefenseEventArgs> OnEndDefend;
     }
 
     private EventCallbacks callbacks = new EventCallbacks();
@@ -80,4 +83,16 @@ public class BattleEventManager : MonoSingleton<BattleEventManager>
     {
         Instance.callbacks.OnEndTurn?.Invoke(args);
     }
+    
+    static public void OnStartDefend(StartDefenseEventArgs args)
+    {
+        Instance.callbacks.OnStartDefend?.Invoke(args);
+    }
+
+    static public void OnEndDefend(EndDefenseEventArgs args)
+    {
+        Instance.callbacks.OnEndDefend?.Invoke(args);
+    }
 }
+
+

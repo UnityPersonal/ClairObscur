@@ -9,7 +9,7 @@ public enum StatusEffectorType
     Dizzy,
     Freeze,
     Exhaust,
-    Confusion,
+    Precision,
     Shield,
     Mark,
     Plague,
@@ -19,7 +19,6 @@ public enum StatusEffectorType
     Stun,
     
     Perfection,
-    Invert,
     
     // damage effector
     PhysicalDamage,

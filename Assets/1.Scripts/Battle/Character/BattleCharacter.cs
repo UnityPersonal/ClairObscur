@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
 using UnityEngine.Timeline;
+using Random = UnityEngine.Random;
+
 
 [System.Serializable]
 public enum BattleCharacterType
@@ -23,7 +25,7 @@ public enum BattleAttackType
     Gradient,
 }
 
-public abstract class BattleCharacter : MonoBehaviour
+public abstract partial class BattleCharacter : MonoBehaviour
 {
     const float AttackDelay = 0.33f; // Delay before the monster can attack again
     const float ParryDelay = 0.16f; // Delay before the monster can attack again
@@ -39,8 +41,10 @@ public abstract class BattleCharacter : MonoBehaviour
         return Attributes.Find(attr => attr.AttributeName.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
     
-    [SerializeField] protected List<StatusEffector> statusEffects = new List<StatusEffector>();
-    public List<StatusEffector> StatusEffects => statusEffects;
+    [SerializeField] protected List<string> registedEffectorTypes = new List<string>();
+    protected Dictionary<string, StatusEffector> statusEffects = new Dictionary<string, StatusEffector>();
+    public Dictionary<string, StatusEffector> StatusEffects => statusEffects;
+    
     public GameStat Stat(string statName) { return status.GetStat(statName); }
     
     public string CharacterName => characterName;
@@ -53,7 +57,6 @@ public abstract class BattleCharacter : MonoBehaviour
     [SerializeField] protected BattleActionController currentAction;
     public TimelineActor Actor =>  currentAction.Actor;  
     [SerializeField] protected ActionDataTable actionLUT;
-    
     
     public virtual void OnBeginAttackSignal()
     {
@@ -98,7 +101,6 @@ public abstract class BattleCharacter : MonoBehaviour
         set{ nextAction = value.ToLower(); }
     }
 
-    protected bool IsAttacking = false;
     public int AttackCount { get; protected set; }= 0;
     
     bool _activated = false;
@@ -150,11 +152,6 @@ public abstract class BattleCharacter : MonoBehaviour
     
     public void SwapState(string nextState, bool immediate = true)
     {
-        if (immediate == false)
-        {
-            
-        }
-        
         nextState = nextState.ToLower();
         if(currentState != null)
         {
@@ -207,6 +204,18 @@ public abstract class BattleCharacter : MonoBehaviour
     {
         Initialize();
         SwapState("wait");
+
+        foreach (var effectorAsset in AssetManager.Instance.StatusEffectorAssetList)
+        {
+            var key = effectorAsset.EffectorName.ToLower();
+            statusEffects[key] = effectorAsset.CreateEffector();
+        }
+        
+        foreach (var effector in registedEffectorTypes)
+        {
+            var key = effector.ToLower();
+            statusEffects[key].EffectorValue = Random.Range(5,10);;
+        }
     }
 
     protected void Update()

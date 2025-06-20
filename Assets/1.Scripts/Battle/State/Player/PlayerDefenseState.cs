@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Rendering;
 
 public class PlayerDefenseState : PlayerState
 {
