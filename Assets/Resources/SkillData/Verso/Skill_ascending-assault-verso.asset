@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709a8748d3f5b6e43b2c2952d1d6c43e, type: 3}
   m_Name: Skill_ascending-assault-verso
   m_EditorClassIdentifier: 
-  skillName: 
+  skillName: ascending-assault
   additiveDamage: 0
   multiplierDamage: 0
   skillIcon: {fileID: 0}

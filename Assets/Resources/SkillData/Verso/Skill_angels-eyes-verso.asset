@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709a8748d3f5b6e43b2c2952d1d6c43e, type: 3}
   m_Name: Skill_angels-eyes-verso
   m_EditorClassIdentifier: 
-  skillName: 
+  skillName: angels-eyes
   additiveDamage: 0
   multiplierDamage: 0
-  skillIcon: {fileID: 0}
+  skillIcon: {fileID: 21300000, guid: b57f4e4433e46a34082e3bf8fb7ca172, type: 3}
   LearnCost: 
   ApCost: 0
   action: {fileID: 0}
