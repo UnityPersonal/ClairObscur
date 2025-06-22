@@ -4,6 +4,30 @@ public class GameEventArgs
 {
 }
 
+public class ActiveSkillEventArgs : GameEventArgs
+{
+    public BattleCharacter Character { get; private set; }
+    public SkillData Skill { get; private set; }
+    
+    public ActiveSkillEventArgs(BattleCharacter character, SkillData skill)
+    {
+        Character = character;
+        Skill = skill;
+    }
+}
+
+public class DeactiveSkillEventArgs : GameEventArgs
+{
+    public BattleCharacter Character { get; private set; }
+    public SkillData Skill { get; private set; }
+    
+    public DeactiveSkillEventArgs(BattleCharacter character, SkillData skill)
+    {
+        Character = character;
+        Skill = skill;
+    }
+}
+
 public class StartDefenseEventArgs : GameEventArgs
 {
     public BattleCharacter Character { get; private set; }

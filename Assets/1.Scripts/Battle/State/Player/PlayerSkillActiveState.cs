@@ -7,6 +7,12 @@ public class PlayerSkillActiveState : PlayerState
     public override void Execute()
     {
     }
+    
+    void CastBuffEffect()
+    {
+        BattlePlayer player = character as BattlePlayer;
+        var skillData = player.GetSkillDataByIndex(player.CurrentSelectSkillIndex);
+    }
 
     public override void Enter()
     {
@@ -24,9 +30,14 @@ public class PlayerSkillActiveState : PlayerState
         var ap = player.Stat(GameStat.AP);
         ap.SetStatValue(ap.StatValue - skillData.ApCost);
         
+        skillData.dealEffectHandler.ApplySkillEffect();
+        skillData.buffEffectHandler.ApplySkillEffect();
+        
         // todo: 스킬 효과 적용
         character.SwapAction(action.ActionName, (PlayableDirector _) =>
         {
+            skillData.dealEffectHandler.RemoveSkillEffect();
+            skillData.buffEffectHandler.RemoveSkillEffect();
             character.SwapState("wait");
         });
         

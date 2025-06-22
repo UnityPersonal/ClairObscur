@@ -11,7 +11,7 @@ public class SkillButtonUI : MonoBehaviour
 
     public void SetUP(BattleCharacter character, SkillData skillData)
     {
-        this.skillNameText.text = skillData.skillName;
+        this.skillNameText.text = skillData.SkillName;
         var ap = character.Stat(GameStat.AP);
         if(ap.StatValue < skillData.ApCost )
         {

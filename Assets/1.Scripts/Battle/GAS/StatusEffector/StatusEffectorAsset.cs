@@ -9,14 +9,12 @@ using UnityEngine;
 public class StatusEffectorAsset : ScriptableObject
 {
     public string EffectorName;
-    public StatusEffectorType EffectorType;
     public Sprite EffectorIcon;
 
     public StatusEffector CreateEffector()
     {
         StatusEffector effector = new StatusEffector();
         effector.EffectorName = EffectorName.ToLower();
-        effector.EffectorType = EffectorType;
         effector.EffectorIcon = EffectorIcon;
         return effector;
     }

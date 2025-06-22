@@ -42,8 +42,6 @@ public class PlayerTargetSelectState : PlayerState
                 case BattleAttackType.Skill:
                     character.SwapState("skillactive");
                     break;
-                case BattleAttackType.Jump:
-                case BattleAttackType.Gradient:
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -57,7 +55,7 @@ public class PlayerTargetSelectState : PlayerState
 
     public override void Enter()
     {
-        var enemyList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Enemy];
+        var enemyList = BattleManager.Instance.CharacterGroup[BattleCharacterLayer.Monster];
         alivedEnemyList.Clear();        
         foreach (var character in enemyList)
         {

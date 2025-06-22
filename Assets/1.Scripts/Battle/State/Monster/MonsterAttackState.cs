@@ -10,7 +10,7 @@ public class MonsterAttackState : CharacterState
     public override void Enter()
     {
         var monster = character as BattleMonster;
-        var playerList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Player];
+        var playerList = BattleManager.Instance.CharacterGroup[BattleCharacterLayer.Player];
         foreach (var character in playerList)
         {
             if(character.IsDead == false)

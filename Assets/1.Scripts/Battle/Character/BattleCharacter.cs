@@ -11,18 +11,16 @@ using Random = UnityEngine.Random;
 
 
 [System.Serializable]
-public enum BattleCharacterType
+public enum BattleCharacterLayer
 {
     Player,
-    Enemy
+    Monster,
 }
 
 public enum BattleAttackType
 {
     Normal,
     Skill,
-    Jump,
-    Gradient,
 }
 
 public abstract partial class BattleCharacter : MonoBehaviour
@@ -88,7 +86,8 @@ public abstract partial class BattleCharacter : MonoBehaviour
     
     public virtual void OnCounterAttackSignal() {}
 
-    public abstract  BattleCharacterType CharacterType { get; }
+    public abstract  BattleCharacterLayer CharacterLayer { get; }
+     
     public abstract BattleCharacter Target { get; }
     
     public BattleAttackType CurrentAttackType { get; set; } =  BattleAttackType.Normal;  
@@ -297,17 +296,6 @@ public abstract partial class BattleCharacter : MonoBehaviour
                 
                 break;
             }
-            case BattleAttackType.Jump:
-                if ((attackTime - JumpActionTime) <= AttackDelay)
-                {
-                    JumpEventArgs jumpArgs = new JumpEventArgs(this, attackTime);
-                    BattleEventManager.OnJump(jumpArgs);
-                    OnJumped();
-                    return;
-                }
-                break;
-            case BattleAttackType.Gradient:
-                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(attackType), attackType, null);
         }

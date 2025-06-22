@@ -4,7 +4,6 @@ using UnityEngine;
 public class StatusEffector
 {
     public string EffectorName;
-    public StatusEffectorType EffectorType;
     public Sprite EffectorIcon;
     
     private int effectorValue = 0;

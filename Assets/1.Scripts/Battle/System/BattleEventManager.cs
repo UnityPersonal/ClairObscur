@@ -19,6 +19,7 @@ public class BattleEventManager : MonoSingleton<BattleEventManager>
         
         public Action<StartDefenseEventArgs> OnStartDefend;
         public Action<EndDefenseEventArgs> OnEndDefend;
+        
     }
 
     private EventCallbacks callbacks = new EventCallbacks();

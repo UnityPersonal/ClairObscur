@@ -23,8 +23,8 @@ public class GameResultUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        var playerGroup = BattleManager.Instance.CharacterGroup[BattleCharacterType.Player];
-        var enemyGroup = BattleManager.Instance.CharacterGroup[BattleCharacterType.Enemy];
+        var playerGroup = BattleManager.Instance.CharacterGroup[BattleCharacterLayer.Player];
+        var enemyGroup = BattleManager.Instance.CharacterGroup[BattleCharacterLayer.Monster];
 
         foreach (var player in playerGroup)
         {

@@ -70,7 +70,7 @@ public class BattleMonster : BattleCharacter
         Debug.Log($"<color=purple>BattleMonster</color> ::: OnCounterEndSignal {Time.time}");
     }
 
-    public override BattleCharacterType CharacterType => BattleCharacterType.Enemy;
+    public override BattleCharacterLayer CharacterLayer => BattleCharacterLayer.Monster;
 
     public BattleCharacter playerTargetCharacter = null;
     public override BattleCharacter Target
@@ -80,7 +80,7 @@ public class BattleMonster : BattleCharacter
 
     private IEnumerator SelectTargetCoroutine()
     {
-        var playerList = BattleManager.Instance.CharacterGroup[BattleCharacterType.Player];
+        var playerList = BattleManager.Instance.CharacterGroup[BattleCharacterLayer.Player];
         foreach (var character in playerList)
         {
             if(character.IsDead == false)

@@ -143,7 +143,7 @@ public class BattlePlayer : BattleCharacter
         BattleEventManager.OnCounter(counterArgs);
     }
 
-    public override BattleCharacterType CharacterType => BattleCharacterType.Player;
+    public override BattleCharacterLayer CharacterLayer => BattleCharacterLayer.Player;
     public override BattleCharacter Target => PlayerTargetCharacter;
 
     

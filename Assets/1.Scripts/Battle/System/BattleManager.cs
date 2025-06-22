@@ -13,12 +13,22 @@ public class BattleManager : MonoSingleton<BattleManager>
     [SerializeField] private BattleCharacter[] battleCharacters;
     private readonly Queue<BattleCharacter> battlePriorityQueue = new Queue<BattleCharacter>();
 
-    private readonly Dictionary<BattleCharacterType, List<BattleCharacter>> characterGroup 
-        = new Dictionary<BattleCharacterType, List<BattleCharacter>>();
+    private readonly Dictionary<BattleCharacterLayer, List<BattleCharacter>> characterGroup 
+        = new Dictionary<BattleCharacterLayer, List<BattleCharacter>>();
     
-    public Dictionary<BattleCharacterType, List<BattleCharacter>> CharacterGroup
+    public Dictionary<BattleCharacterLayer, List<BattleCharacter>> CharacterGroup
     {
         get { return characterGroup; }
+    }
+    
+    public List<BattleCharacter> AlivedCharacterGroup(BattleCharacterLayer layer)
+    {
+        if (characterGroup.TryGetValue(layer, out var characterList))
+        {
+            var alivedCharacterList = characterList.Where(c => c.IsDead == false).ToList();
+            return characterList;
+        }
+        return null;
     }
 
     public BattleCharacter CurrentTurnCharacter
@@ -38,13 +48,13 @@ public class BattleManager : MonoSingleton<BattleManager>
             }
             battlePriorityQueue.Enqueue(character);
 
-            if (characterGroup.TryGetValue(character.CharacterType, out var characterList))
+            if (characterGroup.TryGetValue(character.CharacterLayer, out var characterList))
             {
                 characterList.Add(character);
             }
             else
             {
-                characterGroup[character.CharacterType] = new List<BattleCharacter> { character };
+                characterGroup[character.CharacterLayer] = new List<BattleCharacter> { character };
             }
         }
         
@@ -53,7 +63,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     
     void CheckEndTurn()
     {
-        var players = characterGroup[BattleCharacterType.Player];
+        var players = characterGroup[BattleCharacterLayer.Player];
         int playerDeadCount = 0;
         
         foreach (var player in players)
@@ -67,7 +77,7 @@ public class BattleManager : MonoSingleton<BattleManager>
             return;
         }
 
-        var enemies = characterGroup[BattleCharacterType.Enemy];
+        var enemies = characterGroup[BattleCharacterLayer.Monster];
         int enemyDeadCount = 0;
         
         foreach (var enemy in enemies)
