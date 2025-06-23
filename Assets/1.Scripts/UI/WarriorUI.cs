@@ -5,7 +5,7 @@ public class WarriorUI : MonoSingleton<WarriorUI>
 {
     [SerializeField] TMP_Text rankText;
     
-    
+    [SerializeField] Sprite[] rankSprites; // Assuming you have sprites for each rank
     string[] rankList = {"D", "C" , "B", "A", "S"};
     
     Color zeroGaugeColor = new Color(0f, 0f, 0f, 1f); // Gray color for zero gauge

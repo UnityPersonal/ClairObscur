@@ -1,42 +1,47 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
 
-public class SkillDatabase : MonoSingleton<SkillDatabase>
+public class SkillDatabase : MonoBehaviour
 {
-    [SerializeField] SkillData[] skills;
     [SerializeField] string databasePath = "Database/Skills";
     
-    Dictionary<string,VersoSkillData> versoSkillDataDictionary 
-        = new Dictionary<string, VersoSkillData>();
-        
+    [SerializeField] Sprite[] iconList; // 기본 스킬 아이콘, 필요시 변경 가능
+    public ActionDataTable actionTable; // 액션 데이터, 필요시 변경 가능
+    public Dictionary<string,VersoSkillData> skillTable = new(); 
 
-    
+    public Dictionary<string, Sprite> iconTable = new();
+        
     private void Start()
     {
-        TSVLoader.LoadTableAsync<VersoSkillCSVData>("DialogTable", true).ContinueWith(
+        foreach (var icon in iconList)
+        {
+            iconTable[icon.name] = icon; 
+        }
+        
+        
+        TSVLoader.LoadTableAsync<VersoSkillCSVData>(databasePath, true).ContinueWith(
             (taskResult) =>
             {
                 var list = taskResult.Result;
+                Debug.Log($"loaded {list.Count} Verso skills from {databasePath}");
                 foreach (var csvData in list)
                 {
-                    var skill = new VersoSkillData(csvData);
-                    versoSkillDataDictionary[skill.SkillName] = skill;
+                    Debug.Log(csvData);
+                    var skill = new VersoSkillData(csvData,this);
+                    skillTable[skill.Key] = skill;
                 }
             }
         );
+        
+        return;
     }
 
     
     public SkillData GetSkillData(string skillName)
     {
-        foreach (var skill in skills)
-        {
-            if (skill.SkillName == skillName)
-            {
-                return skill;
-            }
-        }
-        return null; // or throw an exception if not found
+        return skillTable[skillName];
     }
 }

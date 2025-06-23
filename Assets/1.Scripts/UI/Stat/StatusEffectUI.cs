@@ -14,7 +14,7 @@ public class StatusEffectUI : WorldSpaceUIFollow
     public void SetUp(BattleCharacter character)
     {
         this.character = character;
-        var assetList = AssetManager.Instance.StatusEffectorAssetList;
+        var assetList = AssetManager.Instance.CommonEffectorList;
         foreach (var asset in assetList)
         {
             var key = asset.EffectorName.ToLower();

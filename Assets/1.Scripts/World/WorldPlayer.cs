@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class WorldPlayer : WorldCharacter
 {
+    public static WorldPlayer player;
     [SerializeField] private CinemachineCamera virtualCamera;
     
     CharacterController characterController;
@@ -12,11 +14,27 @@ public class WorldPlayer : WorldCharacter
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotateSpeed = 45f;
 
+    [SerializeField] private CharacterSelectMenu characterSelectMenu;
+    [SerializeField] private SkillDatabase warriorSkillTable;
+    //[SerializeField] private SkillDatabase archerSkillTable;
+    public SkillDatabase GetSkillDatabase(string characterName)
+    {
+        switch (characterName)
+        {
+            case "Warrior":
+                return warriorSkillTable;
+            // case "Archer":
+            //     return archerSkillTable;
+            default:
+                throw new ArgumentException($"Unknown character name: {characterName}");
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();
         characterController = GetComponent<CharacterController>();
-        
+        WorldPlayer.player = this;
     }
 
     protected override void UpdateMovement()
@@ -44,15 +62,13 @@ public class WorldPlayer : WorldCharacter
         
     }
     
-    private void UpdateLookMovement()
-    {
-        Vector2 lookInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-    }
-
     protected override void Update()
     {
         base.Update();
-        UpdateLookMovement();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            characterSelectMenu.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -1,33 +1,85 @@
+using System;
 using UnityEngine;
 using UnityEngine.Timeline;
 
 public class SkillData
 {
+    public string Key;
+    
     public string SkillName;
     public string SkillDescription; // 스킬 설명
     public Sprite SkillIcon; // 스킬 아이콘
+    
     
     public BattleActionController action;
     
     public int ApCost; // 스킬 배우는 비용
     public int LearnCost; // 스킬 사용 비용
+    public string preLearnSkill; // 선행 스킬 키, 이 스킬을 배우기 전에 반드시 배워야 하는 스킬의 키
 
     public SkillEffectorHandler dealEffectHandler;
     public SkillEffectorHandler buffEffectHandler;
-    
-    public SkillData defendEffectHandler;
-
-    public SkillData(SkillCSVData skillCSVData)
+    SkillEffectGroup ToGroup(string group)
     {
+        group = group.ToLower();
+        return group switch
+        {
+            "_" => SkillEffectGroup.Team,
+            "enemy" => SkillEffectGroup.Enemy,
+            "team" => SkillEffectGroup.Team,
+            "all" => SkillEffectGroup.All,
+            _ => SkillEffectGroup.Team,
+            
+        };
+    }
+        
+    SkillEffectRange ToRange(string range)
+    {
+        range = range.ToLower();
+        return range switch
+        {
+            "_" => SkillEffectRange.Self,
+            "self" => SkillEffectRange.Self,
+            "single" => SkillEffectRange.SingleTarget,
+            "all" => SkillEffectRange.AllTargets,
+            _ => SkillEffectRange.Self,
+        };
+    }
+    
+    public SkillData(SkillCSVData skillCSVData, SkillDatabase skillDatabase)
+    {
+        this.Key = skillCSVData.Key;
         this.SkillName = skillCSVData.SkillName;
         this.SkillDescription = skillCSVData.Description;
         this.ApCost = skillCSVData.APCost;
         this.LearnCost = skillCSVData.LearningCost;
-        this.SkillIcon = Resources.Load<Sprite>(skillCSVData.SkillIconPath);
-        this.action = Resources.Load<BattleActionController>(skillCSVData.ActionPath);
+        this.SkillIcon = skillDatabase.iconTable[skillCSVData.IconPath];
+        this.action = skillDatabase.actionTable.GetActionData(skillCSVData.ActionPath);
 
+        preLearnSkill = skillCSVData.PreLearnSkill;
+        
         this.dealEffectHandler = new SkillEffectorHandler();
+        dealEffectHandler.EffectorName = skillCSVData.DealEffector;
+        dealEffectHandler.EffectorGroup = SkillEffectGroup.Enemy;
+        dealEffectHandler.EffectorRange = ToRange(skillCSVData.DealRange);
+        dealEffectHandler.EffectorValue = skillCSVData.DealValue;
+        
+        
+        
         this.buffEffectHandler = new SkillEffectorHandler();
+        buffEffectHandler.EffectorName = skillCSVData.BuffEffector;
+        buffEffectHandler.EffectorGroup = ToGroup(skillCSVData.BuffEffector);
+        buffEffectHandler.EffectorRange = ToRange(skillCSVData.BuffRange);
+        buffEffectHandler.EffectorValue = skillCSVData.BuffValue;
+        
+        /*Debug.Log($"{SkillName}" +
+                  $" AP Cost: {ApCost}," +
+                  $" Learn Cost: {LearnCost}" +
+                  $" Description: {SkillDescription}" +
+                  $" Action Path: {skillCSVData.ActionPath}" +
+                  $" Skill Icon Path: {skillCSVData.IconPath}" +
+                  $"PreLearnSkill: {preLearnSkill}" );*/
+
     }
     
 }
@@ -35,13 +87,14 @@ public class SkillData
 [System.Serializable]
 public class SkillCSVData
 {
+    public string Key { get; set; } // Unique key for the skill, e.g., "skill_001"
     public string SkillName { get; set; }
     public int APCost { get; set; }
     public int LearningCost { get; set; }
     public string PreLearnSkill { get; set; }
 
     public string ActionPath { get; set; } // Path to the action associated with the skill
-    public string SkillIconPath { get; set; } // Path to the skill icon
+    public string IconPath { get; set; } // Path to the skill icon
     public string Description { get; set; } // Description of the skill
 
     public string DealEffector { get; set; } // Effect that deals damage

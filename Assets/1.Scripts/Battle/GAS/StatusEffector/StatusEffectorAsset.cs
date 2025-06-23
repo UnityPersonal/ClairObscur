@@ -10,12 +10,15 @@ public class StatusEffectorAsset : ScriptableObject
 {
     public string EffectorName;
     public Sprite EffectorIcon;
+    
+    public string Description;
 
-    public StatusEffector CreateEffector()
+    public StatusEffector CreateEffector(BattleCharacter character)
     {
         StatusEffector effector = new StatusEffector();
         effector.EffectorName = EffectorName.ToLower();
         effector.EffectorIcon = EffectorIcon;
+        effector.BindCharacter(character);
         return effector;
     }
 }

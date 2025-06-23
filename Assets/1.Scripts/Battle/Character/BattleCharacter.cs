@@ -202,16 +202,21 @@ public abstract partial class BattleCharacter : MonoBehaviour
         Initialize();
         SwapState("wait");
 
-        foreach (var effectorAsset in AssetManager.Instance.StatusEffectorAssetList)
+        foreach (var effectorAsset in AssetManager.Instance.CommonEffectorList)
         {
             var key = effectorAsset.EffectorName.ToLower();
-            statusEffects[key] = effectorAsset.CreateEffector();
+            statusEffects[key] = effectorAsset.CreateEffector(this);
         }
-        
-        foreach (var effector in registedEffectorTypes)
+
+        foreach (var effectorAsset in AssetManager.Instance.dealEffectorTable.AssetList)
         {
-            var key = effector.ToLower();
-            statusEffects[key].EffectorValue = Random.Range(5,10);;
+            var key = effectorAsset.EffectorName.ToLower();
+            statusEffects[key] = effectorAsset.CreateEffector(this);
+        }
+        foreach (var effectorAsset in AssetManager.Instance.buffEffectorTable.AssetList)
+        {
+            var key = effectorAsset.EffectorName.ToLower();
+            statusEffects[key] = effectorAsset.CreateEffector(this);
         }
         
         WorldSpaceUISpawner.Instance.SpawnHpBar(this);
@@ -324,15 +329,14 @@ public abstract partial class BattleCharacter : MonoBehaviour
     public void StartTurn()
     {
         Debug.Log($"BattleCharacter ::: StartTurn {name}");
-        Activate();
 
         {// start turn event
             StartTurnEventArgs args = new StartTurnEventArgs(character: this);
             BattleEventManager.OnStartTurn(args);
         }
 
-        {// apply cursed effect
-            var curseEffect = StatusEffect("cursed");
+        {// apply curse effect
+            var curseEffect = StatusEffect("curse");
             if (curseEffect.EffectorValue == 1)
             {
                 var hp = status.GetStat(GameStat.HEALTH);
@@ -342,6 +346,11 @@ public abstract partial class BattleCharacter : MonoBehaviour
                 curseEffect.EffectorValue = 0; // reset curse effect
                 return;
             }
+            else if (curseEffect.EffectorValue > 1)
+            {
+                Debug.Log($"<color=red>{name}</color> ::: Curse effect applied, remaining value: {curseEffect.EffectorValue}");
+                curseEffect.EffectorValue = (curseEffect.EffectorValue - 1); // reduce curse effect value
+            }
         }
         
         {// apply burn effect
@@ -350,6 +359,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
             {
                 OnTakedDamage(10 * burnEffect.EffectorValue);
                 Debug.Log($"<color=red>{name}</color> ::: Burn effect applied, remaining value: {burnEffect.EffectorValue}");
+                burnEffect.EffectorValue = (burnEffect.EffectorValue - 1); // reduce burn effect value
             }
         }
         
@@ -361,6 +371,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
                           $" Skip Turn");
                 stunEffect.EffectorValue = 0;
                 Deactivate();
+                return;
             }
         }
 
@@ -370,10 +381,14 @@ public abstract partial class BattleCharacter : MonoBehaviour
             {
                 Debug.Log($"<color=red>{name}</color> ::: Freeze effect Value," +
                           $" Skip Turn");
-                freezeEffect.EffectorValue = freezeEffect.EffectorValue - 1;
+                freezeEffect.EffectorValue = (freezeEffect.EffectorValue - 1);
                 Deactivate();
+                return;
             }
         }
+        
+        Activate();
+
         
     }
 

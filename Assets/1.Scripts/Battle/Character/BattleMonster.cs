@@ -31,7 +31,7 @@ public class BattleMonster : BattleCharacter
     public override void OnFocusOut()
     {
         base.OnFocusOut();
-        focusCamera.Priority = 0;
+        focusCamera.Priority = -10;
     }
 
     protected override int GetCurrentDamage()

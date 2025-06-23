@@ -1,35 +1,34 @@
 
+using UnityEngine;
+
 public class VersoSkillData : SkillData
 {
+    public int upgradeRank; // Rank of the skill upgrade
     public SkillEffectorHandler upgradeEffectHandler;
     
-    public VersoSkillData(VersoSkillCSVData data)
-    : base(data)
+    public VersoSkillData(VersoSkillCSVData data, SkillDatabase skillDatabase)
+    : base(data,skillDatabase)
     {
-        SkillName = data.SkillName;
-        SkillDescription = data.Description;
-        ApCost = data.APCost;
-        LearnCost = data.LearningCost;
-        
-        /*// Set the deal effect handler
-        if (!string.IsNullOrEmpty(data.DealEffector))
+        int ToRank(string rank)
         {
-            dealEffectHandler = new SkillEffectorHandler(data.DealEffector, data.DealRange, data.DealValue);
+            rank = rank.ToUpper();
+            return rank switch
+            {
+                "D" => 0,
+                "C" => 1,
+                "B" => 2,
+                "A" => 3,
+                "S" => 4,
+                _ => 0, // 기본값은 0
+            };
         }
+        upgradeRank = ToRank(data.UpgradeRank);
         
-        // Set the buff effect handler
-        if (!string.IsNullOrEmpty(data.BuffEffector))
-        {
-            buffEffectHandler = new SkillEffectorHandler(data.BuffEffector, data.BuffGroup, data.BuffRange, data.BuffValue);
-        }
-        
-        // Set the upgrade effect handler
-        if (!string.IsNullOrEmpty(data.UpgradeEffector))
-        {
-            upgradeEffectHandler = new SkillEffectorHandler(data.UpgradeEffector, data.UpgradeRank, data.UpgradeValue);
-        }*/
-        
-        
+        upgradeEffectHandler = new SkillEffectorHandler();
+        upgradeEffectHandler.EffectorName = data.UpgradeEffector;
+        upgradeEffectHandler.EffectorGroup = SkillEffectGroup.Team;
+        upgradeEffectHandler.EffectorRange = SkillEffectRange.Self;
+        upgradeEffectHandler.EffectorValue = data.UpgradeValue;
     }
 }
 
@@ -38,6 +37,6 @@ public class VersoSkillCSVData : SkillCSVData
 {
     public string UpgradeRank { get; set; } // Rank of the skill upgrade
     public string UpgradeEffector { get; set; } // Effect that upgrades the skill
-    public float UpgradeValue { get; set; } // Value of the upgrade effect
+    public int UpgradeValue { get; set; } // Value of the upgrade effect
     
 }

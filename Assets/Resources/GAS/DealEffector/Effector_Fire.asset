@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2621f3dfc70e47ee86214ab83e88924e, type: 3}
+  m_Name: Effector_Fire
+  m_EditorClassIdentifier: 
+  EffectorName: Fire
+  EffectorIcon: {fileID: 21300000, guid: 5db083d31a1d04741a588ba53307f28a, type: 3}
+  Description: "\uBD88 \uC18D\uC131 \uB370\uBBF8\uC9C0(\uD654\uC0C1 \uD6A8\uACFC\uBD80\uC5EC)"

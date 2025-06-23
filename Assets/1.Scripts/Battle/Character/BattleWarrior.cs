@@ -29,6 +29,12 @@ public class BattleWarrior : BattlePlayer
     protected override void Start()
     {
         base.Start();
+        foreach (var effectorAsset in AssetManager.Instance.versoEffectorTable.AssetList)
+        {
+            var key = effectorAsset.EffectorName.ToLower();
+            statusEffects[key] = effectorAsset.CreateEffector(this);
+        }
+        
         var callbacks = BattleEventManager.Callbacks;
         callbacks.OnTakeDamage += OnTakeDamage;
     }
