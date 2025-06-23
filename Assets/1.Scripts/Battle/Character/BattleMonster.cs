@@ -9,8 +9,13 @@ public class BattleMonster : BattleCharacter
 {
     [Space(20)]
     [Header("Battle Monster Settings")]
+    [SerializeField] public CharacterStatus monsterStatus = new CharacterStatus();
+    
+    
     [SerializeField]
     private CinemachineCamera focusCamera;
+    
+    public override CharacterStatus Status => monsterStatus;
     
     public override void Initialize()
     {

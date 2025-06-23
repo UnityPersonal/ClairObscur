@@ -28,23 +28,15 @@ public abstract partial class BattleCharacter : MonoBehaviour
     public CallbackEvents Callbacks { get; private set; } = new CallbackEvents();
     
     [Header("Battle Character Settings")]
-    [SerializeField] protected string characterName;
-    [SerializeField] protected CharacterStatus status = new CharacterStatus();
-    public CharacterStatus Status => status;
+    public abstract CharacterStatus Status { get; } 
 
-    [SerializeField] protected List<BattleAttribute> Attributes = new List<BattleAttribute>();
-    public BattleAttribute GetAttribute(string name)
-    {
-        return Attributes.Find(attr => attr.AttributeName.Equals(name, StringComparison.OrdinalIgnoreCase));
-    }
-    
-    [SerializeField] protected List<string> registedEffectorTypes = new List<string>();
+
     protected Dictionary<string, StatusEffector> statusEffects = new Dictionary<string, StatusEffector>();
     public Dictionary<string, StatusEffector> StatusEffects => statusEffects;
     
-    public GameStat Stat(string statName) { return status.GetStat(statName.ToLower()); }
+    public GameStat Stat(string statName) { return Status.GetStat(statName.ToLower()); }
     public StatusEffector StatusEffect(string statName) { return statusEffects[statName.ToLower()]; }
-    public string CharacterName => characterName;
+    public string CharacterName => Status.CharacterName;
     
     [Header("Character Location Settings")]
     [SerializeField] protected float focusRadius = 1f;
@@ -122,7 +114,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
         
     }
     
-    public bool IsDead => status.IsDead;
+    public bool IsDead => Status.IsDead;
 
     public float DodgeActionTime { get; set; }= 0;
     public float ParryActionTime { get; set; }= 0;
@@ -184,7 +176,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
     
     public virtual void Initialize()
     {
-        var hp = status.GetStat(GameStat.HEALTH);
+        var hp = Status.GetStat(GameStat.HEALTH);
         hp.StatValue = hp.MaxValue;
         foreach (var data in actionLUT.actionDataList)
         {
@@ -197,7 +189,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
         callbacks.OnAttack += OnAttack;
     }
     
-    protected virtual void Start()
+    public virtual void ReadyBattle()
     {
         Initialize();
         SwapState("wait");
@@ -244,7 +236,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
             }
         }
         
-        status.CurrentHP -= damage;
+        Status.CurrentHP -= damage;
         // 공격 적중
         TakeDamageEventArgs takeDamageArgs = new TakeDamageEventArgs(this, damage);
         // todo : 피격 애니메이션 실행
@@ -339,7 +331,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
             var curseEffect = StatusEffect("curse");
             if (curseEffect.EffectorValue == 1)
             {
-                var hp = status.GetStat(GameStat.HEALTH);
+                var hp = Status.GetStat(GameStat.HEALTH);
                 OnTakedDamage(hp.MaxValue);
                 Debug.Log($"<color=red>{name}</color> ::: Curse effect applied," +
                           $" Character Die Immediatly");

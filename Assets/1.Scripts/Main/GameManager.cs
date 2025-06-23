@@ -13,6 +13,7 @@ public class GameManager : DontDestorySingleton<GameManager>
         // 배틀씬으로 넘어가는 로직 구현
         Debug.Log("Starting Battle with characters: " + battleCharacters.Count.ToString());
         SceneManager.LoadScene(BATTLE_SCENE_INDEX, LoadSceneMode.Single);
+
     }
     
     public void GoToWorldScene()

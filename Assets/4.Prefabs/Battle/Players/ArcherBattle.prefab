@@ -91,7 +91,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4033833235466446129
 Transform:
   m_ObjectHideFlags: 0
@@ -121,15 +121,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73af2f43079407540a710170fb88a2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: 
-  status:
-    maxHP: 0
-  characterDefaultLocation: {fileID: 0}
-  characterHitTransform: {fileID: 0}
+  focusRadius: 1
   currentAction: {fileID: 0}
   actionLUT: {fileID: 11400000, guid: 001e9f8bb62f59845874e47015624c6d, type: 2}
-  dodgeTransform: {fileID: 0}
-  skills: []
+  playerStatus:
+    CharacterName: Archer
+    stats:
+    - StatName: Health
+      StatDescription: "\uCCB4\uB825"
+      statValue: 100
+      maxValue: 10000
+    - StatName: Ap
+      StatDescription: "\uB9C8\uB825"
+      statValue: 8
+      maxValue: 8
+    - StatName: AttackPower
+      StatDescription: "\uACF5\uACA9\uB825"
+      statValue: 10
+      maxValue: 9999
+    - StatName: Defense
+      StatDescription: "\uBC29\uC5B4\uB825"
+      statValue: 10
+      maxValue: 9999
+    - StatName: Speed
+      StatDescription: "\uC18D\uB3C4"
+      statValue: 10
+      maxValue: 100
+    - StatName: CritialRate
+      StatDescription: "\uCE58\uBA85\uD0C0\uC728"
+      statValue: 0
+      maxValue: 100
+    - StatName: Level
+      StatDescription: "\uB808\uBCA8"
+      statValue: 1
+      maxValue: 100
+    - StatName: Exp
+      StatDescription: "\uACBD\uD5D8\uCE58"
+      statValue: 0
+      maxValue: -1
+    - StatName: NextExp
+      StatDescription: "\uB808\uBCA8\uC5C5 \uD544\uC694 \uACBD\uD5D8\uCE58"
+      statValue: 100
+      maxValue: -1
+    - StatName: Rank
+      StatDescription: "\uC644\uBCBD \uB7AD\uD06C"
+      statValue: 0
+      maxValue: 5
+    - StatName: PerfectionCount
+      StatDescription: "\uC644\uBCBD \uC131\uACF5 \uD69F\uC218"
+      statValue: 0
+      maxValue: -1
+    Attributes:
+    - attributeName: Vitality
+      attributeDescription: "\uD65C\uB825"
+      attributeValue: 555
+    - attributeName: Might
+      attributeDescription: "\uD798"
+      attributeValue: 555
+    - attributeName: Agility
+      attributeDescription: "\uBBFC\uCCA9"
+      attributeValue: 555
+    - attributeName: Defense
+      attributeDescription: "\uBC29\uC5B4"
+      attributeValue: 555
+    - attributeName: Luck
+      attributeDescription: "\uD589\uC6B4"
+      attributeValue: 555
 --- !u!1001 &321249661624657191
 PrefabInstance:
   m_ObjectHideFlags: 0

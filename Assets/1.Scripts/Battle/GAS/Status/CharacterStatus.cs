@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class CharacterStatus
 {
+    public string CharacterName;
     public List<GameStat> stats = new List<GameStat>();
     public int CurrentHP
     {

@@ -10,32 +10,30 @@ using Random = UnityEngine.Random;
 
 public class BattlePlayer : BattleCharacter
 {
-    [SerializeField] Transform dodgeTransform;
-    public Transform DodgeTransform { get { return dodgeTransform; } }
-    [SerializeField] protected SkillDatabase skillDatabase;
-    [SerializeField] protected string[] equippedSkills = new string[3]{"", "", ""};
+    public PlayerStatus playerStatus;
+    public override CharacterStatus Status => playerStatus;
+    
+    public BattleAttribute GetAttribute(string attributeName)
+    {
+        return playerStatus.GetAttribute(attributeName);
+    }
+    
     private int parriedCount = 0;
     protected bool BeginParryingAttack = false;
 
     public int CurrentSelectSkillIndex { get; set; } = 0;
-    public SkillController skillController;
     
     public SkillData GetSkillDataByIndex(int index)
     {
-        if (index < 0 || index >= equippedSkills.Length)
+        if (index < 0 || index >= playerStatus.EquippedSkills.Length)
         {
             Debug.LogError($"Invalid skill index: {index}");
             return null;
         }
         
-        return skillDatabase.GetSkillData(equippedSkills[index]);
+        return playerStatus.EquippedSkills[index];
     }
 
-    public override void Activate()
-    {
-        base.Activate();
-    }
-    
     public override void Deactivate()
     {
         base.Deactivate();
@@ -48,7 +46,7 @@ public class BattlePlayer : BattleCharacter
         ap.SetStatValue(ap.StatValue + amount);
     }
 
-    private void OnRecivedTakedDamage(TakeDamageEventArgs args)
+    private void OnReceivedTakedDamage(TakeDamageEventArgs args)
     {
         if (Activated == false) return;
         if (args.Target != Target) return;

@@ -26,9 +26,9 @@ public class BattleWarrior : BattlePlayer
         set => Stat(RANK).StatValue = value;
     }        
     
-    protected override void Start()
+    public override void ReadyBattle()
     {
-        base.Start();
+        base.ReadyBattle();
         foreach (var effectorAsset in AssetManager.Instance.versoEffectorTable.AssetList)
         {
             var key = effectorAsset.EffectorName.ToLower();

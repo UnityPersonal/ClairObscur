@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 
+[System.Serializable]
 public class GameCharacterData
 {
-    public List<GameStat> Stats = new List<GameStat>();
-    public List<BattleAttribute> Attributes = new List<BattleAttribute>();
+    public string CharacterName;
+    public CharacterStatus Status = new CharacterStatus();
 }

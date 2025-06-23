@@ -77,6 +77,8 @@ public class WorldPlayer : WorldCharacter
         {
             // 배틀씬으로 넘어가는 로직 구현
             Debug.Log("Battle Trigger Entered");
+            var monster = other.GetComponent<WorldMonster>();
+            GameUser.Instance.enemySamples = monster.BattleCharacters;
             List<BattleCharacter> battleCharacters = new List<BattleCharacter>();
             GameManager.Instance.StartBattle(battleCharacters);
         }

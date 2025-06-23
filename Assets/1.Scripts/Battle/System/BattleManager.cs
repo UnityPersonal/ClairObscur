@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,8 @@ using UnityEngine.Serialization;
 public class BattleManager : MonoSingleton<BattleManager>
 {
     [SerializeField] GameResultUI gameResultUI;
+    [SerializeField] Transform[] playerSpawnPoints;
+    [SerializeField] Transform[] enemySpawnPoints;
     
     private bool IsEndBattle { get; set; } = false;
 
@@ -39,25 +42,58 @@ public class BattleManager : MonoSingleton<BattleManager>
     
     void Start()
     {
-        foreach (var character in battleCharacters)
-        {
-            if (character == null)
-            {
-                Debug.LogError("BattleManager ::: Start - BattleCharacter is null");
-                continue;
-            }
-            battlePriorityQueue.Enqueue(character);
+        Setup(GameUser.Instance);
+    }
 
-            if (characterGroup.TryGetValue(character.CharacterLayer, out var characterList))
+    public void Setup(GameUser user)
+    {
+        for(int i = 0; i < user.playerSamples.Count; i++)
+        {
+            var sample = user.playerSamples[i];
+            var spawnPoint = playerSpawnPoints[i];
+            var player = Instantiate(sample, spawnPoint.position, spawnPoint.rotation);
+            var status = user.GetPlayerStatus(player.CharacterName);
+            player.playerStatus = status;
+            player.gameObject.SetActive(true);
+            player.ReadyBattle();
+            
+            battlePriorityQueue.Enqueue(player);
+            
+            if (characterGroup.TryGetValue(player.CharacterLayer, out var characterList))
             {
-                characterList.Add(character);
+                characterList.Add(player);
             }
             else
             {
-                characterGroup[character.CharacterLayer] = new List<BattleCharacter> { character };
+                characterGroup[player.CharacterLayer] = new List<BattleCharacter> { player };
             }
         }
-        
+
+        for (int i = 0; i < user.enemySamples.Count; i++)
+        {
+            var sample = user.enemySamples[i];
+            var spawnPoint = enemySpawnPoints[i];
+            var enemy = Instantiate(sample, spawnPoint.position, spawnPoint.rotation);
+            enemy.Initialize();
+            enemy.gameObject.SetActive(true);
+            
+            battlePriorityQueue.Enqueue(enemy);
+            enemy.ReadyBattle();
+
+            if (characterGroup.TryGetValue(enemy.CharacterLayer, out var characterList))
+            {
+                characterList.Add(enemy);
+            }
+            else
+            {
+                characterGroup[enemy.CharacterLayer] = new List<BattleCharacter> { enemy };
+            }
+        }
+        StartGame();
+    }
+
+    public void StartGame()
+    {
         StartCoroutine(UpdateBattleLoopCoroutine());
     }
     
