@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CharacterSkillMenu : MonoBehaviour
 {
     [SerializeField] Button exitButton;
-    
+    [SerializeField] SkillInventorySystem skillInventorySystem;
     
     [Header("Character Skill Detail Menu")]
     [SerializeField] TMP_Text skillNameText;
@@ -24,6 +24,9 @@ public class CharacterSkillMenu : MonoBehaviour
         {
             gameObject.SetActive(false);
         });
+
+        var status = GameUser.Instance.GetPlayerStatus(characterName);
+        skillInventorySystem.SetUp(status, skillDatabase);
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

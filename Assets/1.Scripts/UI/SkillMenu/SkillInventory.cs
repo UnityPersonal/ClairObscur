@@ -13,7 +13,7 @@ public class SkillInventory : MonoBehaviour
         slots = GetComponentsInChildren<SkllInventorySlot>();
     }
 
-    public void Initialize(List<SkillItem> items)
+    public void Initialize(List<SkillSlotItem> items)
     {
         for (int i = 0; i < slots.Length; i++)
         {

@@ -8,18 +8,15 @@ using UnityEngine.UI;
 public class SkllInventorySlot : MonoBehaviour, 
     IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    public SkillItem skillItem {get; set;}
-    [FormerlySerializedAs("slotItem")] [SerializeField] private SkillSlotItem skillSlotItem;
+    public SkillSlotItem skillItem {get; set;}
     [SerializeField] private bool canDrag;
-    public void SetSlot(SkillItem skillItem)
+    public void SetSlot(SkillSlotItem skillItem)
     {
         this.skillItem = skillItem;
-        skillSlotItem.Set(skillItem);
     }
 
     public void ClearSlot()
     {
-        skillSlotItem.Clear();
         skillItem = null;
     }
     

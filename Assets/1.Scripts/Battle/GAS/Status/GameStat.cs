@@ -69,5 +69,4 @@ public partial class GameStat
         if(MaxValue < 0) StatValue = value;
         else StatValue = Math.Clamp(value, 0, MaxValue);
     }
-        
 }

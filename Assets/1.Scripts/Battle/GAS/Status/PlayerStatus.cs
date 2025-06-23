@@ -12,4 +12,5 @@ public class PlayerStatus : CharacterStatus
     }
     
     public SkillData[] EquippedSkills = new SkillData[3];
+    public List<SkillData> LearnedSkills = new List<SkillData>();
 }

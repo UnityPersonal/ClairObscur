@@ -12,14 +12,6 @@ using UnityEngine.UI;
 
 public class SkillInventorySystem : MonoBehaviour
 {
-    #region 이렇게 하시면 안됩니다~ 저는 스크립트 늘리기 싫어서 그냥 하는거에요
-
-    private List<SkillItem> itemTable;
-
-    private List<SkillItem> userDataItems = new List<SkillItem>();
-    
-    #endregion
-    
     public static SkillInventorySystem Instance { get; private set; }
 
     private SkllInventorySlot SourceSlot { get; set; }
@@ -27,10 +19,8 @@ public class SkillInventorySystem : MonoBehaviour
 
     private GraphicRaycaster raycaster;
 
-    [FormerlySerializedAs("traderInventory")] [SerializeField] private SkillInventory traderSkillInventory;
-    [FormerlySerializedAs("userInventory")] [SerializeField] private SkillInventory userSkillInventory;
-    
-    
+    [FormerlySerializedAs("traderInventory")] [SerializeField] private SkillInventory equipmentSkillInventory;
+    [FormerlySerializedAs("userInventory")] [SerializeField] private SkillInventory playerSkillInventory;
     
     private void Awake()
     {
@@ -38,10 +28,10 @@ public class SkillInventorySystem : MonoBehaviour
         raycaster = GetComponent<GraphicRaycaster>();
     }
 
-    public void SetUp(SkillDatabase database)
+    public void SetUp(PlayerStatus status, SkillDatabase database)
     {
-        traderSkillInventory.Initialize(itemTable);
-        userSkillInventory.Initialize(null);
+        //traderSkillInventory.Initialize();
+        //userSkillInventory.Initialize(null);
 
     }
 
@@ -82,7 +72,7 @@ public class SkillInventorySystem : MonoBehaviour
                 }
                 else
                 {
-                    if (from.Equals(traderSkillInventory))
+                    if (from.Equals(equipmentSkillInventory))
                     {
                         //Trader -> User (구매)
                         Debug.Log($"아이템 구매 {SourceSlot.gameObject.name}");
@@ -108,6 +98,6 @@ public class SkillInventorySystem : MonoBehaviour
 
     private SkillInventory FindInventory(SkllInventorySlot slot)
     {
-        return traderSkillInventory.IsIn(slot) ? traderSkillInventory : userSkillInventory;
+        return equipmentSkillInventory.IsIn(slot) ? equipmentSkillInventory : playerSkillInventory;
     }
 }
