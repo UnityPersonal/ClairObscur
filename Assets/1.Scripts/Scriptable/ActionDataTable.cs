@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ActionDataTable", menuName = "Scriptable Objects/ActionDataTable")]
@@ -9,7 +10,7 @@ public class ActionDataTable : ScriptableObject
     {
         foreach (var actionData in actionDataList)
         {
-            if (actionData.ActionName == actionDataType)
+            if (actionData.ActionName.Equals(actionDataType, StringComparison.OrdinalIgnoreCase))
             {
                 return actionData;
             }
