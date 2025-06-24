@@ -32,7 +32,7 @@ public partial class GameStat
             }
             else
             {
-                Debug.LogWarning("Owner character is not bound to the GameStat.");
+                Debug.LogWarning($"{StatName} Owner character is not bound to the GameStat .");
             }
         }
     }
@@ -62,6 +62,11 @@ public partial class GameStat
     public override string ToString()
     {
         return $"{StatName}: {StatValue} / {MaxValue} - {StatDescription}";
+    }
+    
+    public void IncrementStatValue(int increment)
+    {
+        SetStatValue(increment + statValue);
     }
     
     public void SetStatValue(int value)

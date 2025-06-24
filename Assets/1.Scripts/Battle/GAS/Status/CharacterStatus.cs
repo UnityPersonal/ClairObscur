@@ -19,6 +19,14 @@ public class CharacterStatus
     
     public bool IsDead => CurrentHP <= 0;
     
+    public virtual void BindCharacter(BattleCharacter owner)
+    {
+        foreach (var stat in stats)
+        {
+            stat.BindCharacter(owner);
+        }
+    }
+    
     public GameStat GetStat(string statName)
     {
         var stat = stats.Find( (stat) => stat.StatName.Equals(statName, StringComparison.OrdinalIgnoreCase));

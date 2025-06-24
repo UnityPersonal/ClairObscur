@@ -38,7 +38,7 @@ public class MainMenulSelectUI : MonoSingleton<MainMenulSelectUI>
         itemButton.onClick.AddListener(() =>
         {
             currentSelectType = SelectType.Item;
-            menuSelected = true;
+            //menuSelected = true;
         });
     }
 
@@ -50,6 +50,16 @@ public class MainMenulSelectUI : MonoSingleton<MainMenulSelectUI>
     public void UpdateSelectUI(BattlePlayer player)
     {
         this.player = player;
+
+        if (player.StatusEffect("silence").EffectorValue > 0)
+        {
+            // If the player is silenced, disable the skill button
+            skillButton.enabled = false;
+        }
+        else
+        {
+            skillButton.enabled = true;
+        }
     }
     
 

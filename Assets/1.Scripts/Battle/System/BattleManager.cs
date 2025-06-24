@@ -74,7 +74,6 @@ public class BattleManager : MonoSingleton<BattleManager>
             var sample = user.enemySamples[i];
             var spawnPoint = enemySpawnPoints[i];
             var enemy = Instantiate(sample, spawnPoint.position, spawnPoint.rotation);
-            enemy.Initialize();
             enemy.gameObject.SetActive(true);
             
             battlePriorityQueue.Enqueue(enemy);

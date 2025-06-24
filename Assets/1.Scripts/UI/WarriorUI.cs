@@ -1,10 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WarriorUI : MonoSingleton<WarriorUI>
 {
     [SerializeField] TMP_Text rankText;
-    
+    [SerializeField] Image rankImage; // Assuming you have an Image component to display the rank sprite
     [SerializeField] Sprite[] rankSprites; // Assuming you have sprites for each rank
     string[] rankList = {"D", "C" , "B", "A", "S"};
     
@@ -34,6 +35,7 @@ public class WarriorUI : MonoSingleton<WarriorUI>
         }
         
         rankText.text = rankList[rankIndex];
+        rankImage.sprite = rankSprites[rankIndex];
     }
 
     

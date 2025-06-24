@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f076cff0b4816f941827e7281e226a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStatus:
+    weaponDealEffector: fire
   focusRadius: 1
   currentAction: {fileID: 0}
   actionLUT: {fileID: 11400000, guid: 077304515b6bbbc4388b0437c00b281a, type: 2}

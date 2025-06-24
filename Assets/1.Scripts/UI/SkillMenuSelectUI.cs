@@ -36,9 +36,9 @@ public class SkillMenuSelectUI : MonoSingleton<SkillMenuSelectUI>
                 continue;
             }
             
+            int selectIndex = i;
             skillButton.SkillButton.onClick.AddListener(() =>
             {
-                int selectIndex = 0;
                 CurrentSelectIndex = selectIndex;
                 Debug.Log($"skillButtons[{selectIndex}] clicked");
                 menuSelected = true;
@@ -55,8 +55,6 @@ public class SkillMenuSelectUI : MonoSingleton<SkillMenuSelectUI>
         for(int i = 0; i < skillButtons.Length; i++)
         {
             var skillData = player.GetSkillDataByIndex(i);
-            if(skillData == null) continue;
-            
             skillButtons[i].SetUP(player,skillData);
         }
     }

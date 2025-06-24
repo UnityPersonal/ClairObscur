@@ -66,13 +66,13 @@ public class BattleMonster : BattleCharacter
     public void OnCounterBeginSignal()
     {
         currentAction.PauseAction();
-        Debug.Log($"<color=purple>BattleMonster</color> ::: OnCounterBeginSignal {Time.time}");
+        Debug.Log($"<color=purple>{CharacterName}</color> ::: OnCounterBeginSignal {Time.time}");
     }
     
     public void OnCounterEndSignal()
     {
         currentAction.ResumeAction();
-        Debug.Log($"<color=purple>BattleMonster</color> ::: OnCounterEndSignal {Time.time}");
+        Debug.Log($"<color=purple>{CharacterName}</color> ::: OnCounterEndSignal {Time.time}");
     }
 
     public override BattleCharacterLayer CharacterLayer => BattleCharacterLayer.Monster;

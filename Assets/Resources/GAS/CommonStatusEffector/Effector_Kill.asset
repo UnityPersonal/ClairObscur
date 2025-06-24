@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2621f3dfc70e47ee86214ab83e88924e, type: 3}
+  m_Name: Effector_Kill
+  m_EditorClassIdentifier: 
+  EffectorName: Kill
+  EffectorIcon: {fileID: 0}
+  Description: "\uC77C\uC815 \uCCB4\uB825 \uC774\uD558\uAC00 \uB418\uBA74 \uBC14\uB85C
+    \uC8FD\uB294\uB2E4."

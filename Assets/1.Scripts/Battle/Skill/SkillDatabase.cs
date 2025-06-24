@@ -10,7 +10,7 @@ public class SkillDatabase : MonoBehaviour
     
     [SerializeField] Sprite[] iconList; // 기본 스킬 아이콘, 필요시 변경 가능
     public ActionDataTable actionTable; // 액션 데이터, 필요시 변경 가능
-    public Dictionary<string,VersoSkillData> skillTable = new(); 
+    public Dictionary<string,SkillData> skillTable = new(); 
 
     public Dictionary<string, Sprite> iconTable = new();
         

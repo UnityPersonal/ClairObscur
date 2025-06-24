@@ -25,6 +25,18 @@ public class SkillEffectorHandler
     
     private int previousValue = 0;
 
+    bool IsValidEffector()
+    {
+        if(EffectorName.Equals("_") || 
+           EffectorName.Equals("") || 
+           EffectorName.Equals("None") || 
+           EffectorName.Equals("null"))
+        {
+            return false;
+        }
+        return true;
+    }
+
     public SkillEffectorHandler(){}
 
     
@@ -87,11 +99,15 @@ public class SkillEffectorHandler
 
     private void ApplySkillEffectToTarget(BattleCharacter character)
     {
+        if (IsValidEffector() == false) return;
+        
         if (character == null)
         {
             Debug.LogError("SkillEffectorHandler ::: ApplySkillEffectToTarget - Character is null");
             return;
         }
+        
+        
 
         var effector = character.StatusEffect(EffectorName);
         previousValue = effector.EffectorValue;
@@ -142,6 +158,9 @@ public class SkillEffectorHandler
     
     public void RemoveSkillEffectToTarget(BattleCharacter character)
     {
+        if (IsValidEffector() == false) return;
+           
+        
         if (character == null)
         {
             Debug.LogError("SkillEffectorHandler ::: ApplySkillEffectToTarget - Character is null");

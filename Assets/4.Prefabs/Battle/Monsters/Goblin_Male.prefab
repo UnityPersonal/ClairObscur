@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013cf27843686bd4aab897457f205f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStatus:
+    weaponDealEffector: physical
   focusRadius: 1
   currentAction: {fileID: 0}
   actionLUT: {fileID: 11400000, guid: 5b6f3fc2ed32f0c4c9f0e42b0583d61e, type: 2}
@@ -130,7 +132,7 @@ MonoBehaviour:
     - StatName: Health
       StatDescription: "\uCCB4\uB825"
       statValue: 100
-      maxValue: 10000
+      maxValue: 1000
     - StatName: AttackPower
       StatDescription: "\uACF5\uACA9\uB825"
       statValue: 10

@@ -42,6 +42,10 @@ public class BattlePlayer : BattleCharacter
     
     public void IncrementAP(int amount)
     {
+        if (StatusEffect("exhaust").EffectorValue > 0)
+        {
+            return; // Exhausted 상태에서는 AP를 증가시키지 않음
+        }
         var ap = Stat(GameStat.AP);
         ap.SetStatValue(ap.StatValue + amount);
     }
@@ -119,8 +123,6 @@ public class BattlePlayer : BattleCharacter
         BindState("death", new PlayerDeathState());
 
         
-        return;
-        
         
     }
 
@@ -131,7 +133,7 @@ public class BattlePlayer : BattleCharacter
     
     public override void OnCounterAttackSignal()
     {
-        Debug.Log($"<color=purple>BattlePlayer</color> ::: OnEmittedCounterAttackSignal {Time.time}");
+        Debug.Log($"<color=blue>{CharacterName}</color> ::: OnEmittedCounterAttackSignal {Time.time}");
         CounterEventArgs counterArgs = new CounterEventArgs
         (
             attacker: this,

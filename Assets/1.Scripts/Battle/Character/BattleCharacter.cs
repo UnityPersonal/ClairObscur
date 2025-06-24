@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -29,8 +30,9 @@ public abstract partial class BattleCharacter : MonoBehaviour
     
     [Header("Battle Character Settings")]
     public abstract CharacterStatus Status { get; } 
+    public WeaponStatus weaponStatus = new WeaponStatus();
 
-
+    List<StatusEffector> dealEffectors = new List<StatusEffector>();
     protected Dictionary<string, StatusEffector> statusEffects = new Dictionary<string, StatusEffector>();
     public Dictionary<string, StatusEffector> StatusEffects => statusEffects;
     
@@ -49,13 +51,25 @@ public abstract partial class BattleCharacter : MonoBehaviour
     
     public virtual void OnBeginAttackSignal()
     {
-        Debug.Log($"<color=green>BattleCharacter</color> ::: OnEmittedBeginAttackSignal {Time.time}");
+        Debug.Log($"<color=green>{CharacterName}</color> ::: OnEmittedBeginAttackSignal {Time.time}");
         AttackCount++;
+
+        // todo: 무기의 속성 가져오기
+        string attackEffector = weaponStatus.weaponDealEffector; // 기본 공격 효과
+        foreach (var deal in dealEffectors)
+        {
+            if(deal.EffectorValue > 0)
+            {
+                attackEffector = deal.EffectorName;
+                break;
+            }
+        }
+
         BattleEventManager.OnAttack( new AttackEventArgs
         (
             damage : GetCurrentDamage(),
             attackTime: Time.time,
-            attackType: CurrentAttackType, // todo: 공격 종류에 따라 다르게 설정
+            attackEffector: attackEffector, // todo: 공격 종류에 따라 다르게 설정
             attacker: this,
             target: Target
         ));
@@ -65,7 +79,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
     {
         if (StateMap.ContainsKey(stateName.ToLower()))
         {
-            Debug.LogWarning($"StateMap already contains key: {stateName}");
+            Debug.LogWarning($"{CharacterName} StateMap already contains key: {stateName}");
             return;
         }
         StateMap[stateName.ToLower()] = state;
@@ -176,6 +190,8 @@ public abstract partial class BattleCharacter : MonoBehaviour
     
     public virtual void Initialize()
     {
+        Status.BindCharacter(this);
+       
         var hp = Status.GetStat(GameStat.HEALTH);
         hp.StatValue = hp.MaxValue;
         foreach (var data in actionLUT.actionDataList)
@@ -193,22 +209,32 @@ public abstract partial class BattleCharacter : MonoBehaviour
     {
         Initialize();
         SwapState("wait");
-
+        
         foreach (var effectorAsset in AssetManager.Instance.CommonEffectorList)
         {
             var key = effectorAsset.EffectorName.ToLower();
-            statusEffects[key] = effectorAsset.CreateEffector(this);
+            var effector = effectorAsset.CreateEffector(this);
+            statusEffects[key] = effector;
+            
+            effector.BindCharacter(this);
         }
 
         foreach (var effectorAsset in AssetManager.Instance.dealEffectorTable.AssetList)
         {
             var key = effectorAsset.EffectorName.ToLower();
-            statusEffects[key] = effectorAsset.CreateEffector(this);
+            var effector = effectorAsset.CreateEffector(this);
+            statusEffects[key] = effector;
+            dealEffectors.Add(effector);
+            
+            effector.BindCharacter(this);
         }
         foreach (var effectorAsset in AssetManager.Instance.buffEffectorTable.AssetList)
         {
             var key = effectorAsset.EffectorName.ToLower();
-            statusEffects[key] = effectorAsset.CreateEffector(this);
+            var effector = effectorAsset.CreateEffector(this);
+            statusEffects[key] = effector;
+            
+            effector.BindCharacter(this);
         }
         
         WorldSpaceUISpawner.Instance.SpawnHpBar(this);
@@ -218,6 +244,26 @@ public abstract partial class BattleCharacter : MonoBehaviour
     protected void Update()
     {
         currentState.Execute();
+    }
+    
+    public void OnTakeHeal(int healAmount)
+    {
+        if (IsDead)
+        {
+            return; // already dead, no healing can be applied
+        }
+
+        if (StatusEffect("invert").EffectorValue > 0)
+        {
+            OnTakedDamage(healAmount);
+        }
+        else
+        {
+            var health = Status.GetStat(GameStat.HEALTH);
+            health.IncrementStatValue(healAmount);
+        }
+        
+        
     }
 
     protected virtual void OnTakedDamage(int damage)
@@ -236,7 +282,42 @@ public abstract partial class BattleCharacter : MonoBehaviour
             }
         }
         
+        var killEffector = StatusEffect("kill");
+        if (killEffector.EffectorValue > 0)
+        { 
+            var health = Status.GetStat(GameStat.HEALTH);
+            float hpRatio = (float)health.StatValue / (float)health.MaxValue;
+            float killRatio = killEffector.EffectorValue / 100f;
+            if (hpRatio <= killRatio)
+            { // apply kill effect
+                damage = health.MaxValue;
+            }
+        }
+        
+        { // apply mark effct
+            var markEffect = StatusEffect("mark");
+            if (markEffect.EffectorValue > 0)
+            {
+                damage += (int)(damage * 0.5f); // increase damage by mark effect percentage
+                markEffect.EffectorValue = 0; // reset mark effect after applying
+            }
+        }
+        
+        { // apply double hit effect
+            var doubleHit = StatusEffect("doubleHit");
+            if (doubleHit.EffectorValue > 0)
+            {
+                damage *= 2; // double the damage
+            }
+        }
+
+        { // todo: apply break effect (break gauge stat 추가 필요)
+            
+        }
+        
+        // apply damage to character's health
         Status.CurrentHP -= damage;
+        
         // 공격 적중
         TakeDamageEventArgs takeDamageArgs = new TakeDamageEventArgs(this, damage);
         // todo : 피격 애니메이션 실행
@@ -259,44 +340,50 @@ public abstract partial class BattleCharacter : MonoBehaviour
         if (args.Target.Equals(this) == true)
         {
             Debug.Log($"{args.Attacker.name} attacked {name} for {args.Damage} damage.");
-            DefendAttack(args.Damage, args.AttackTime, args.AttackType);
+            DefendAttack(args.Damage, args.AttackTime, args.AttackEffector);
         }
     }
     
-    public void DefendAttack(int damage, float attackTime, BattleAttackType attackType)
+    public void DefendAttack(int damage, float attackTime, string attackType)
     {
         if (IsDead == true) return;
 
+        if ((attackTime - DodgeActionTime) <= AttackDelay)
+        {
+            DodgeEventArgs dodgeArgs = new DodgeEventArgs(this, attackTime);
+            BattleEventManager.OnDodge(dodgeArgs);
+            OnDodged();
+            return;
+        }
+        if ((attackTime - ParryActionTime) <= ParryDelay)
+        {
+            ParryEventArgs parryArgs = new ParryEventArgs(this, attackTime);
+            BattleEventManager.OnParry(parryArgs);
+            OnParried();
+            return;
+        }
+        
         switch (attackType)
         {
-            case BattleAttackType.Normal:
-            case BattleAttackType.Skill:
-            {
-                if ((attackTime - DodgeActionTime) <= AttackDelay)
-                {
-                    DodgeEventArgs dodgeArgs = new DodgeEventArgs(this, attackTime);
-                    BattleEventManager.OnDodge(dodgeArgs);
-                    OnDodged();
-                    break;
-                }
-                if ((attackTime - ParryActionTime) <= ParryDelay)
-                {
-                    ParryEventArgs parryArgs = new ParryEventArgs(this, attackTime);
-                    BattleEventManager.OnParry(parryArgs);
-                    OnParried();
-                    break;
-                }
-               
-                
-                
-                OnTakedDamage(damage);
-                
+            case "fire":
+                var burn = StatusEffect("burn");
+                burn.EffectorValue = (burn.EffectorValue + 3);
                 break;
-            }
+            case "ice":
+                var freeze = StatusEffect("freeze");
+                freeze.EffectorValue = (freeze.EffectorValue + 3);
+                break;
+            case "physical":
+            case "light":
+            case "lightning":
+            case "dark":
+            case "void":
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(attackType), attackType, null);
         }
-        
+        OnTakedDamage(damage);
+
         Callbacks.OnStatusChanged?.Invoke();
         Callbacks.OnEffectorChanged?.Invoke();
         Callbacks.OnAttributeChanged?.Invoke();
@@ -317,14 +404,41 @@ public abstract partial class BattleCharacter : MonoBehaviour
     {
         Activated = false;
     }
-    
+
+    public void EndTurn()
+    {
+        {
+            // end turn event
+            EndTurnEventArgs args = new EndTurnEventArgs(character: this);
+            BattleEventManager.OnEndTurn(args);
+            Debug.Log($"{CharacterName} ::: EndTurn");
+        }
+
+        {
+            // reset double hit 
+            StatusEffect("doubleHit").EffectorValue = 0;
+            StatusEffect("kill").EffectorValue = 0;
+        }
+
+        {
+            // decrease effect
+            StatusEffect("regen").EffectorValue = 0;
+            StatusEffect("powerful").EffectorValue = 0;
+            StatusEffect("rush").EffectorValue = 0;
+            StatusEffect("shell").EffectorValue = 0;
+            StatusEffect("powerless").EffectorValue = 0;
+            StatusEffect("slow").EffectorValue = 0;
+            StatusEffect("defenceless").EffectorValue = 0;
+        }
+    }
+
     public void StartTurn()
     {
-        Debug.Log($"BattleCharacter ::: StartTurn {name}");
 
         {// start turn event
             StartTurnEventArgs args = new StartTurnEventArgs(character: this);
             BattleEventManager.OnStartTurn(args);
+            Debug.Log($"{CharacterName} ::: StartTurn");
         }
 
         {// apply curse effect

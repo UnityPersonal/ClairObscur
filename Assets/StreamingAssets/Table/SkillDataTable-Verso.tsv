@@ -1,25 +1,25 @@
 Key	SkillName	APCost	LearningCost	PreLearnSkill	DealEffector	DealRange	DealValue	BuffEffector	BuffGroup	BuffRange	BuffValue	UpgradeRank	UpgradeEffector	UpgradeValue	ActionPath	IconPath	Description
-Skill_ascending-assault-verso	Skill_ascending-assault-verso	5	4	Skill_blitz-verso	Weapon	Single	1	_	_	_	0	_	CostAP	2	skill	ascending-assault-verso	
-Skill_assault-zero-verso	Skill_assault-zero-verso	3	0	_	Weapon	Single	1	Perfection	Team	Self	1	B	Weapon	2	skill	assault-zero-verso	
-Skill_berserk-slash-verso	Skill_berserk-slash-verso	4	2	Skill_quick-strike-verso	Physical	Single	2	Bloody	Team	Self	1	C	Physical	4	skill	berserk-slash-verso	
-Skill_blitz-verso	Skill_blitz-verso	3	2	Skill_purification-verso	Physical	Single	1	Kill	Team	Self	10	B	Physical	2	skill	blitz-verso	
-Skill_burden-verso	Skill_burden-verso	1	4	Skill_berserk-slash-verso	Clean	All	1	GainRank	Team	Self	1	_	_	0	skill	burden-verso	
-Skill_defiant-strike-verso	Skill_defiant-strike-verso	3	6	Skill_berserk-slash-verso	Physical	Single	3	DoubleHit	Team	Self	1	B	Physical	6	skill	defiant-strike-verso	
-Skill_end-bringer-verso	Skill_end-bringer-verso	9	10	Skill_light-holder-verso|Skill_steeled-strike-verso	Physical	Single	4	IncreaseStunTarget	Team	Self	2	A	GainAP	1	skill	end-bringer-verso	
-Skill_follow-up-verso	Skill_follow-up-verso	5	4	Skill_purification-verso	Light	Single	2	IncreaseShotCount	Team	Self	1	S	CostAP	2	skill	follow-up-verso	
-Skill_from-fire-verso	Skill_from-fire-verso	4	0	_	Weapon	Single	2	Heal	Team	Self	20	B	Weapon	4	skill	from-fire-verso	
-Skill_leadership-verso	Skill_leadership-verso	3	4	Skill_powerful-verso	ReduceRank	Self	1	GainAP	Team	All	2	C	GainAP	4	skill	leadership-verso	
-Skill_light-holder-verso	Skill_light-holder-verso	4	6	Skill_radiant-slash-verso	Light	Single	2	GainRank	Team	Self	1	A	GainAP	2	skill	light-holder-verso	
-Skill_marking-shot-verso	Skill_marking-shot-verso	2	1	Skill_assault-zero-verso	Weapon	Single	1	Mark	Enemy	Single	1	C	Weapon	2	skill	marking-shot-verso	
-Skill_overload-verso	Skill_overload-verso	0	6	Skill_follow-up-verso|Skill_speed-burst-verso	GainRank|GainAP	Self	8	Health	Team	Self	1	_	_	0	skill	overload-verso	
-Skill_paradigm-shift-verso	Skill_paradigm-shift-verso	1	2	Skill_purification-verso|Skill_quick-strike-verso	Physical	Single	1	GainAP	Team	Self	3	C	GainAP	1	skill	paradigm-shift-verso	
-Skill_perfect-break-verso	Skill_perfect-break-verso	7	4	Skill_blitz-verso|Skill_berserk-slash-verso	Light	Single	4	Break	Enemy	Single	1	S	GanAP	5	skill	perfect-break-verso	
-Skill_perfect-recovery-verso	Skill_perfect-recovery-verso	3	1	Skill_from-fire-verso	Heal	Self	50	Perfection	Team	Self	2	C	Heal	100	skill	perfect-recovery-verso	
-Skill_phantom-stars-verso	Skill_phantom-stars-verso	9	8	Skill_burden-verso	Light	All	4	Break	Enemy	Single	1	S	CostAP	5	skill	phantom-stars-verso	
-Skill_powerful-verso	Skill_powerful-verso	3	2	Skill_quick-strike-verso	_	_	0	Powerful	Team	All	3	A	Powerful	5	skill	powerful-verso	
-Skill_purification-verso	Skill_purification-verso	5	2	Skill_perfect-recovery-verso	Light	Single	2	Clean	Team	Self	1	B	Light	4	skill	purification-verso	
-Skill_quick-strike-verso	Skill_quick-strike-verso	2	2	Skill_marking-shot-verso	Physical	Single	1	Perfection	Team	Self	0	D	Perfection	1	skill	quick-strike-verso	
-Skill_radiant-slash-verso	Skill_radiant-slash-verso	2	4	Skill_blitz-verso	Light	All	1	Break	Enemy	Single	1	C	Light	2	skill	radiant-slash-verso	
-Skill_speed-burst-verso	Skill_speed-burst-verso	6	6	Skill_ascending-assault-verso|Skill_overload-verso	Light	Single	3	_	_	_	0	C	Light	6	skill	speed-burst-verso	
-Skill_steeled-strike-verso	Skill_steeled-strike-verso	9	10	Skill_strike-storm-verso|Skill_end-bringer-verso	Physical	Single	4	_	_	_	0	S	Physical	8	skill	steeled-strike-verso	
-Skill_strike-storm-verso	Skill_strike-storm-verso	7	8	Skill_defiant-strike-verso	Weapon	Single	3	_	_	_	0	C	Weapon	6	skill	strike-storm-verso	
+Skill_ascending-assault-verso	ascending-assault	5	4	Skill_blitz-verso	Weapon	Single	1	_	_	_	0	_	CostAP	2	skill	ascending-assault-verso	Deals low single target damage 1 hit Uses weapon's element.\nIncrease damage at each cast. \ns : Costs 2 AP 
+Skill_assault-zero-verso	assault-zero	3	0	_	Weapon	Single	1	Perfection	Team	Self	1	B	Weapon	2	skill	assault-zero-verso	Critical generate 1 additional Perfection  \nb : Increased damage.
+Skill_berserk-slash-verso	berserk-slash	4	2	Skill_quick-strike-verso	Physical	Single	2	Bloody	Team	Self	1	C	Physical	4	skill	berserk-slash-verso	Deals medium single target Physical damage 3 hits.\n Damage is increased for each health Verso is missing. \nc : Increased damage
+Skill_blitz-verso	blitz	3	2	Skill_purification-verso	Physical	Single	1	Kill	Team	Self	10	B	Physical	2	skill	blitz-verso	Deals low single target Physical damage 1 hit.\nPlays a second time.\nKills non-boss enemies with less than 10% health. \nb : Increased damage.
+Skill_burden-verso	burden	1	4	Skill_berserk-slash-verso	Clean	All	1	GainRank	Team	Self	1	_	_	0	skill	burden-verso	Removes all Status Effects from all allies and applies them to Verso. \nGains 1 Rank.
+Skill_defiant-strike-verso	defiant-strike	3	6	Skill_berserk-slash-verso	Physical	Single	3	DoubleHit	Team	Self	1	B	Physical	6	skill	defiant-strike-verso	Deals high single target Physical damage that applies Mark 2 hits. Costs 30% of current Health. \nb : Increased damage.
+Skill_end-bringer-verso	end-bringer	9	10	Skill_light-holder-verso|Skill_steeled-strike-verso	Physical	Single	4	IncreaseStunTarget	Team	Self	2	A	GainAP	1	skill	end-bringer-verso	Deals extreme single target Physical damage. 6 hits. Increased damage if the target is Stunned \na : Can reapply Stun
+Skill_follow-up-verso	follow-up	5	4	Skill_purification-verso	Light	Single	2	IncreaseShotCount	Team	Self	1	S	CostAP	2	skill	follow-up-verso	Deals medium single target Light damage. 1 hit. Damage increased for each Free Aim shot this turn, up to 10 times. \ns : Costs 2 AP
+Skill_from-fire-verso	from-fire	4	0	_	Weapon	Single	2	Heal	Team	Self	20	B	Weapon	4	skill	from-fire-verso	Deals medium single target damage. 3 hits. Uses weapon's element. Heals self by 20% Health if the target Burns \nb : Increased damage.
+Skill_leadership-verso	leadership	3	4	Skill_powerful-verso	ReduceRank	Self	1	GainAP	Team	All	2	C	GainAP	4	skill	leadership-verso	Reduces current Rank. Gives 2-4 AP to other allies. c : +1 more AP other allies
+Skill_light-holder-verso	light-holder	4	6	Skill_radiant-slash-verso	Light	Single	2	GainRank	Team	Self	1	A	GainAP	2	skill	light-holder-verso	Medium single target Light damage. 5 hits. At completion, gains 1 Rank. a : +2 AP
+Skill_marking-shot-verso	marking-shot	2	1	Skill_assault-zero-verso	Weapon	Single	1	Mark	Enemy	Single	1	C	Weapon	2	skill	marking-shot-verso	Deals low single target damage. 1 hit. Uses weapon's element. Applies Mark c : Increased damage
+Skill_overload-verso	overload	0	6	Skill_follow-up-verso|Skill_speed-burst-verso	GainRank|GainAP	Self	8	Health	Team	Self	1	_	_	0	skill	overload-verso	Increases Rank and refills all AP but sets self-Health to 1.
+Skill_paradigm-shift-verso	paradigm-shift	1	2	Skill_purification-verso|Skill_quick-strike-verso	Physical	Single	1	GainAP	Team	Self	3	C	GainAP	1	skill	paradigm-shift-verso	Deals low Physical single target damage and gives 1-3 AP back. 3 hits. c :  +1 AP 
+Skill_perfect-break-verso	perfect-break	7	4	Skill_blitz-verso|Skill_berserk-slash-verso	Light	Single	4	Break	Enemy	Single	1	S	GanAP	5	skill	perfect-break-verso	Deals very high single target Light damage. 1 hit.  Can Break s on b : Costs 5 AP
+Skill_perfect-recovery-verso	perfect-recovery	3	1	Skill_from-fire-verso	Heal	Self	50	Perfection	Team	Self	2	C	Heal	100	skill	perfect-recovery-verso	Recovers 50% Health and dispels Status Effects. Gives 0-2 Perfection c : Increased heal to 100% Health.
+Skill_phantom-stars-verso	phantom-stars	9	8	Skill_burden-verso	Light	All	4	Break	Enemy	Single	1	S	CostAP	5	skill	phantom-stars-verso	Deals extreme Light damage to all enemies. 5 hits. Can Break s: Costs 5 AP
+Skill_powerful-verso	powerful	3	2	Skill_quick-strike-verso	_	_	0	Powerful	Team	All	3	A	Powerful	5	skill	powerful-verso	Applies Powerful to 1-3 Allies, increasing damage they deal for 3 turns. Gives 0-2 Perfection a : Duration increased to 5 turns.
+Skill_purification-verso	purification	5	2	Skill_perfect-recovery-verso	Light	Single	2	Clean	Team	Self	1	B	Light	4	skill	purification-verso	Deals single target medium Light damage. 2 hits. Dispels self Status Effects. b : Increased damage.
+Skill_quick-strike-verso	quick-strike	2	2	Skill_marking-shot-verso	Physical	Single	1	Perfection	Team	Self	0	D	Perfection	1	skill	quick-strike-verso	Deals low single target Physical damage. 1 hit. d : Gives more Perfection
+Skill_radiant-slash-verso	radiant-slash	2	4	Skill_blitz-verso	Light	All	1	Break	Enemy	Single	1	C	Light	2	skill	radiant-slash-verso	Deals low Light damage to all enemies. 1 hit. Can Break  c : Increased damage.
+Skill_speed-burst-verso	speed-burst	6	6	Skill_ascending-assault-verso|Skill_overload-verso	Light	Single	3	_	_	_	0	C	Light	6	skill	speed-burst-verso	Deals high single target Light damage. 5 hits. Damage increased by Speed difference with the target. c : Increased damage
+Skill_steeled-strike-verso	steeled-strike	9	10	Skill_strike-storm-verso|Skill_end-bringer-verso	Physical	Single	4	_	_	_	0	S	Physical	8	skill	steeled-strike-verso	After 1 turn, deals extreme single target Physical damage. 13 hits. Interrupted if any damage taken. s : Increased damage.
+Skill_strike-storm-verso	strike-storm	7	8	Skill_defiant-strike-verso	Weapon	Single	3	_	_	_	0	C	Weapon	6	skill	strike-storm-verso)	Deals very high single target damage. 5 hits. Uses weapon's element. Critical generate 2 additional Perfection c : Increased damage

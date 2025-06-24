@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013cf27843686bd4aab897457f205f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStatus:
+    weaponDealEffector: physical
   focusRadius: 1
   currentAction: {fileID: 0}
   actionLUT: {fileID: 11400000, guid: 390475e307e4d5c43bc3d7193a45bc90, type: 2}

@@ -8,16 +8,16 @@ public class BattleWarrior : BattlePlayer
     /// 공격 또는 방어에 성공하면 카운트를 획득한다.
     /// 피해을 받으면 카운트를 잃는다.
     /// </summary>
-    public const int MAX_GUARD_COUNT = 1; // D C B A S
-    public const int MAX_RANK_INDEX = 4; // D C B A S
-    public float CurrentGauge => PerfectionCount / (float)MAX_GUARD_COUNT; // 0 ~ 100
+    public const int MAX_PERFECTION_COUNT = 1; // D C B A S
+    public const int MAX_RANK = 4; // D C B A S
+    public float CurrentGauge => PerfectionCount / (float)MAX_PERFECTION_COUNT; // 0 ~ 100
     
     const string RANK = "Rank";
-    private const string PERFECTION_COUNT = "PerfectionCount";
+    private const string PERFECTION = "Perfection";
     public int PerfectionCount
     {
-        get => Stat(PERFECTION_COUNT).StatValue;
-        private set => Stat(PERFECTION_COUNT).StatValue = value;
+        get => Stat(PERFECTION).StatValue;
+        private set => Stat(PERFECTION).StatValue = value;
     }
 
     public int CurrentRankIndex
@@ -59,31 +59,31 @@ public class BattleWarrior : BattlePlayer
         return damage;
     }
 
-    public void ChangeGaurdCount(int value)
+    public void ChangePerfectionCount(int value)
     {
-        PerfectionCount = PerfectionCount + value;
+        PerfectionCount = (PerfectionCount + value);
         if(PerfectionCount < 0)
         {
             if (CurrentRankIndex != 0)
             {
-                CurrentRankIndex = CurrentRankIndex - 1;
-                PerfectionCount = MAX_GUARD_COUNT;
+                CurrentRankIndex = (CurrentRankIndex - 1);
+                PerfectionCount = MAX_PERFECTION_COUNT;
             }
             else
             {
                 PerfectionCount = 0; // 최소값은 0
             }
         }
-        else if(PerfectionCount > MAX_GUARD_COUNT)
+        else if(PerfectionCount > MAX_PERFECTION_COUNT)
         {
-            if (CurrentRankIndex < (MAX_RANK_INDEX) )
+            if (CurrentRankIndex < (MAX_RANK) )
             {
-                CurrentRankIndex = CurrentRankIndex + 1;
+                CurrentRankIndex = (CurrentRankIndex + 1);
                 PerfectionCount = 0;
             }
             else
             {
-                PerfectionCount = MAX_GUARD_COUNT; // 최대값은 MAX_GUARD_COUNT
+                PerfectionCount = MAX_PERFECTION_COUNT; // 최대값은 MAX_GUARD_COUNT
             }
         }
         WarriorUI.Instance.SetGauge(CurrentGauge);
@@ -94,32 +94,32 @@ public class BattleWarrior : BattlePlayer
     {
         if ((Activated == true) &&  (args.Target == PlayerTargetCharacter))
         {
-            ChangeGaurdCount(1);
+            ChangePerfectionCount(1);
         }
     }
     
     protected override void OnTakedDamage(int damage)
     {
         base.OnTakedDamage(damage);
-        ChangeGaurdCount(-1);
+        ChangePerfectionCount(-1);
     }
 
     protected override void OnDodged()
     {
         base.OnDodged();
-        ChangeGaurdCount(1);
+        ChangePerfectionCount(1);
     }
     
     protected override void OnParried()
     {
         base.OnParried();
-        ChangeGaurdCount(1);
+        ChangePerfectionCount(1);
     }
     
     protected override void OnJumped()
     {
         base.OnJumped();
-        ChangeGaurdCount(1);
+        ChangePerfectionCount(1);
     }
     
 }

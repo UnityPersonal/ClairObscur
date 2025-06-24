@@ -152,7 +152,7 @@ public class AttackEventArgs : GameEventArgs
 {
     public int Damage { get; private set; }
 
-    public BattleAttackType AttackType { get; private set; }
+    public string AttackEffector { get; private set; }
     public float AttackTime { get; private set; } = 0f; // 공격이 시작된 시간
     public BattleCharacter Attacker { get; private set; }
     public BattleCharacter Target { get; private set; }
@@ -160,14 +160,14 @@ public class AttackEventArgs : GameEventArgs
     public AttackEventArgs(
         int damage,
         float attackTime,
-        BattleAttackType attackType,
+        string attackEffector,
         BattleCharacter attacker,
         BattleCharacter target
         )
     {
         Damage = damage;
         AttackTime = attackTime;
-        AttackType = attackType;
+        AttackEffector = attackEffector;
         Attacker = attacker;
         Target = target;
     }
