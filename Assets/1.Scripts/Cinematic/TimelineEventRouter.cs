@@ -4,51 +4,32 @@ using UnityEngine.Timeline;
 
 public class TimelineEventRouter : MonoSingleton<TimelineEventRouter>
 {
-    public void OnDefendEndReceived()
+    public void OnSignalReceived(SignalAsset signalAsset)
     {
-        BattleManager.Instance.CurrentTurnCharacter.Target.OnEndDefendSignal();
-    }
-    
-    public void OnDefendReceived()
-    {
-        BattleManager.Instance.CurrentTurnCharacter.Target.OnBeginDefendSignal();
-    }
-
-    public void OnAttackReceived()
-    {
-        BattleManager.Instance.CurrentTurnCharacter.OnBeginAttackSignal();
-    }
-    
-    public void OnParrayingAttackReceived()
-    {
-        // Parraying Attack signal 수신 시 처리
-        BattleManager.Instance.CurrentTurnCharacter.Target.OnCounterAttackSignal();
-    }
-    
-    public void OnCoutnerBeginReceived()
-    {
-        // Counter Begin signal 수신 시 처리
-        Debug.Log("OnCoutnerBeginReceived");
-        if (BattleManager.Instance.CurrentTurnCharacter is BattleMonster monster)
+        string signal = signalAsset.name.ToLower();
+        switch (signal)
         {
-            monster.OnCounterBeginSignal();
+            case "qtepause" : QTESystem.Instance.OnQTEPauseReceived(); break;
+            case "defendbegin" : BattleManager.Instance.CurrentTurnCharacter.Target.OnBeginDefendSignal(); break;
+            case "defendend" : BattleManager.Instance.CurrentTurnCharacter.Target.OnEndDefendSignal(); break;
+            case "attackbegin" : BattleManager.Instance.CurrentTurnCharacter.OnBeginAttackSignal(); break;
+            case "counterbegin":
+            {
+                if (BattleManager.Instance.CurrentTurnCharacter is BattleMonster monster)
+                    monster.OnCounterBeginSignal();
+                break;
+            }
+            case "counterend":
+            {
+                if (BattleManager.Instance.CurrentTurnCharacter is BattleMonster monster)
+                    monster.OnCounterEndSignal();
+                break;
+            }
+            case "parryingattack": BattleManager.Instance.CurrentTurnCharacter.OnCounterAttackSignal(); break;
+            
+            default: 
+                throw new System.Exception("Unknown signal: " + signal);
         }
-    }
-    
-    public void OnCoutnerEndReceived()
-    {
-        // Counter End signal 수신 시 처리
-        Debug.Log("OnCoutnerEndReceived");
-        if (BattleManager.Instance.CurrentTurnCharacter is BattleMonster monster)
-        {
-            monster.OnCounterEndSignal();
-        }
-    }
-    
-    
-    public void OnSignalReceived(SignalAsset signal)
-    {
-        Debug.Log($"OnSignalReceived:  {signal.name}  ");
         // Signal 수신 시 처리
     }
 

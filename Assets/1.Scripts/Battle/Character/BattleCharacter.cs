@@ -40,7 +40,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
     public StatusEffector StatusEffect(string statName) { return statusEffects[statName.ToLower()]; }
     public string CharacterName => Status.CharacterName;
     
-    [Header("Character Location Settings")]
+    [Header("Character Cinematic Settings")]
     [SerializeField] protected float focusRadius = 1f;
     public float FocusRadius { get { return focusRadius; } }
     
@@ -48,6 +48,9 @@ public abstract partial class BattleCharacter : MonoBehaviour
     [SerializeField] protected BattleActionController currentAction;
     public TimelineActor Actor =>  currentAction.Actor;  
     [SerializeField] protected ActionDataTable actionLUT;
+    
+    public void PauseAction() { currentAction.PauseAction();}
+    public void ResumeAction() {  currentAction.ResumeAction(); }
     
     public virtual void OnBeginAttackSignal()
     {
@@ -88,8 +91,6 @@ public abstract partial class BattleCharacter : MonoBehaviour
     
     public abstract void OnBeginDefendSignal();
     public abstract void OnEndDefendSignal();
-    public abstract void OnCheckParriedSignal();
-    
     public virtual void OnCounterAttackSignal() {}
 
     public abstract  BattleCharacterLayer CharacterLayer { get; }

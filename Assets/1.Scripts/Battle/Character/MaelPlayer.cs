@@ -89,7 +89,8 @@ public class MaelPlayer : BattlePlayer
         stanceMap[MaelStanceType.Offense] = new OffenseStance();
         stanceMap[MaelStanceType.Virtusoe] = new VirtusoeStance();
         
-        foreach (var effectorAsset in AssetManager.Instance.maelleEffectorTable.AssetList)
+        var effectList = AssetManager.Instance.GetCharacterAssetTable(CharacterName).characterEffectorTable.AssetList;
+        foreach (var effectorAsset in effectList)
         {
             var key = effectorAsset.EffectorName.ToLower();
             statusEffects[key] = effectorAsset.CreateEffector(this);

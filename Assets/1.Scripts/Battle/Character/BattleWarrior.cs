@@ -29,7 +29,8 @@ public class BattleWarrior : BattlePlayer
     public override void ReadyBattle()
     {
         base.ReadyBattle();
-        foreach (var effectorAsset in AssetManager.Instance.versoEffectorTable.AssetList)
+        var effectList = AssetManager.Instance.GetCharacterAssetTable(CharacterName).characterEffectorTable.AssetList;
+        foreach (var effectorAsset in effectList)
         {
             var key = effectorAsset.EffectorName.ToLower();
             statusEffects[key] = effectorAsset.CreateEffector(this);

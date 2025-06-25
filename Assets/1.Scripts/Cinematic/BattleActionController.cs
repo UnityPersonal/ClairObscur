@@ -11,6 +11,8 @@ public class PlayActionArgs
     public BattleCharacter Actor { get; set; }
     public BattleCharacter Target { get; set; }
     
+    public QTESystem QteSystem { get; set; }
+    
     public Action<PlayableDirector> OnActionFinished { get; set; }
     
     public PlayActionArgs(
@@ -93,30 +95,31 @@ public class BattleActionController : MonoBehaviour
         director.Stop();
     }
     
-    public void PlayAction(
-        PlayActionArgs args
-        )
+    public void PlayAction(PlayActionArgs args)
     {
         if (tweenBind)
         {
-            if(startLocation != null && args.Actor != null)
+            if (startLocation != null && args.Actor != null)
+            {
                 startLocation.position = args.Actor.transform.position;
-        
-            if(endLocation != null && args.Target != null)
-                endLocation.position = args.Target.Actor.transform.position;    
+            }
+
+            if (endLocation != null && args.Target != null)
+            {
+                endLocation.position = args.Target.Actor.transform.position;
+            }
+                
         }
 
         if (targetGroup != null)
         {
-            var targetActor = args.Target.Actor;
+            var actor = targetGroup.Targets[0];
+            actor.Radius = args.Actor.FocusRadius;
             
-            targetGroup.Targets.Clear();
-            targetGroup.AddMember(actor.TrackTransform, actor.TrackWeight, actor.TrackRadius);
-            
-            targetGroup.AddMember(targetActor.TrackTransform, targetActor.TrackWeight, targetActor.TrackRadius);
+            var target = targetGroup.Targets[1];
+            target.Radius = args.Target.FocusRadius;
         }
-       
-        
+
         var timeline = director.playableAsset as TimelineAsset;
         // 2. 모든 트랙 순회
         foreach (var track in timeline.GetOutputTracks())

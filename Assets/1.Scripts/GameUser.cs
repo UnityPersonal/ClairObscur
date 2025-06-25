@@ -1,27 +1,46 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class GameUser : MonoBehaviour
+public class GameUser : MonoSingleton<GameUser>
 {
-    public static GameUser Instance { get; private set; }
-
     [SerializeField] public List<BattlePlayer>  playerSamples;
     [SerializeField] public List<BattleMonster> enemySamples;
     
     // 저장되어야할 유저 캐릭터 정보
     [SerializeField] PlayerStatus[] playerStatus;
-    
-    private void Awake()
+
+    public void UpdateStatus()
     {
-        if (Instance == null)
+        foreach (var status in playerStatus)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 게임 오브젝트를 파괴하지 않도록 설정
-        }
-        else
-        {
-            Destroy(gameObject); // 이미 인스턴스가 존재하면 중복 생성 방지
+            var level = status.GetStat(CharacterStatus.LEVEL); // 레벨 초기화
+            var exp =  status.GetStat(CharacterStatus.EXP); // 경험치 초기화
+            var nextExp = status.GetStat(CharacterStatus.NEXT_EXP); // 다음 레벨 경험치
+            var health = status.GetStat(CharacterStatus.HEALTH); // 체력
+            var attackPower = status.GetStat(CharacterStatus.ATTACK_POWER); // 공격력
+            var defense = status.GetStat(CharacterStatus.DEFENSE); // 방어력
+            var critical = status.GetStat(CharacterStatus.CRITICAL_RATE);
+            var speed = status.GetStat(CharacterStatus.SPEED); // 속도
+
+            CharacterLevelTable growthTable = AssetManager.Instance.GetCharacterAssetTable(status.CharacterName).characterLevelTable;
+            while (exp.StatValue >= nextExp.StatValue)
+            {
+                exp.StatValue = (exp.StatValue - nextExp.StatValue);
+                level.IncrementStatValue(1);
+                var growthData = growthTable.GetCharacterGrowthData(level.StatValue);
+                nextExp.SetStatValue(growthData.NextExp);
+                
+                health.MaxValue = growthData.Health;
+                health.SetStatValue(growthData.Health);
+                
+                attackPower.SetStatValue(growthData.AttackPower);
+                defense.SetStatValue(growthData.Defense);
+                critical.SetStatValue(growthData.CriticalRate);
+                speed.SetStatValue(growthData.Speed);
+            }
         }
     }
     
@@ -37,17 +56,5 @@ public class GameUser : MonoBehaviour
         Debug.LogWarning($"Character '{characterName}' not found in GameUser data.");
         return null; // 캐릭터가 없을 경우 null 반환
     }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

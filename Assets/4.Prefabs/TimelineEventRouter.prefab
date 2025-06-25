@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4426194992800669171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7767426380001214801}
+  - component: {fileID: 4848073612385832029}
+  - component: {fileID: 1675888756091066945}
+  m_Layer: 0
+  m_Name: TimelineEventRouter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7767426380001214801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4426194992800669171}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 980.24225, y: 847.3857, z: -176.52895}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4848073612385832029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4426194992800669171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1cf36bbdd7e49204da1451aac2d1c825, type: 2}
+    - {fileID: 11400000, guid: 0846ce1fd69441343aca52c40faa7565, type: 2}
+    - {fileID: 11400000, guid: 63bdfd3071d5a774b878a28592e6f0bc, type: 2}
+    - {fileID: 11400000, guid: 348cc7ce708a83943aebd2ea7822cd9e, type: 2}
+    - {fileID: 11400000, guid: 9e93f41825f6aa048805dbb6a0db35e0, type: 2}
+    - {fileID: 11400000, guid: da29823afe2185b4d8be2ca83c009cf8, type: 2}
+    - {fileID: 11400000, guid: 1fb38d7a966ea1a43853ae9c66773a49, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1675888756091066945}
+          m_TargetAssemblyTypeName: TimelineEventRouter, Assembly-CSharp
+          m_MethodName: OnSignalReceived
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 1cf36bbdd7e49204da1451aac2d1c825, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Timeline.SignalAsset, Unity.Timeline
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: attack
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1675888756091066945}
+          m_TargetAssemblyTypeName: TimelineEventRouter, Assembly-CSharp
+          m_MethodName: OnSignalReceived
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 0846ce1fd69441343aca52c40faa7565, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Timeline.SignalAsset, Unity.Timeline
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: DefendBegin
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1675888756091066945}
+          m_TargetAssemblyTypeName: TimelineEventRouter, Assembly-CSharp
+          m_MethodName: OnSignalReceived
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 63bdfd3071d5a774b878a28592e6f0bc, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Timeline.SignalAsset, Unity.Timeline
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1675888756091066945}
+          m_TargetAssemblyTypeName: TimelineEventRouter, Assembly-CSharp
+          m_MethodName: OnSignalReceived
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 348cc7ce708a83943aebd2ea7822cd9e, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Timeline.SignalAsset, Unity.Timeline
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1675888756091066945}
+          m_TargetAssemblyTypeName: TimelineEventRouter, Assembly-CSharp
+          m_MethodName: OnSignalReceived
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 9e93f41825f6aa048805dbb6a0db35e0, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Timeline.SignalAsset, Unity.Timeline
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1675888756091066945}
+          m_TargetAssemblyTypeName: TimelineEventRouter, Assembly-CSharp
+          m_MethodName: OnSignalReceived
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: da29823afe2185b4d8be2ca83c009cf8, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Timeline.SignalAsset, Unity.Timeline
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1675888756091066945}
+          m_TargetAssemblyTypeName: TimelineEventRouter, Assembly-CSharp
+          m_MethodName: OnSignalReceived
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 1fb38d7a966ea1a43853ae9c66773a49, type: 2}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Timeline.SignalAsset, Unity.Timeline
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1675888756091066945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4426194992800669171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bd42954ddbc7449a02253fcf6e6216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

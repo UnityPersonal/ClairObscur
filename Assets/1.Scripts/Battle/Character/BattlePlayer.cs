@@ -103,7 +103,6 @@ public class BattlePlayer : BattleCharacter
         }
     }
 
-    public override void OnCheckParriedSignal() {}
 
     public override void Initialize()
     {
@@ -123,7 +122,17 @@ public class BattlePlayer : BattleCharacter
         BindState("death", new PlayerDeathState());
 
         
-        
+        BattleEventManager.Callbacks.OnDeath += OnDeath;
+    }
+
+    private void OnDeath(DeathEventArgs args)
+    {
+        if (args.Target.CharacterLayer == BattleCharacterLayer.Monster)
+        { // gain exp from monster
+            var exp = Status.GetStat("Exp");
+            var monsterExp = args.Target.Status.GetStat("Exp");
+            exp.SetStatValue(exp.StatValue + monsterExp.StatValue);
+        }
     }
 
     int GetCoutnerDamage()

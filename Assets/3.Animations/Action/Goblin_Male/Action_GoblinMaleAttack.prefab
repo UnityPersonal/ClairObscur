@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1641216660265104630}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 2.3220415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48,12 +48,12 @@ MonoBehaviour:
   RotationMode: 0
   UpdateMethod: 2
   Targets:
-  - Object: {fileID: 7714480881037749540}
+  - Object: {fileID: 3998781110903687133}
     Weight: 1
-    Radius: 0.5
-  - Object: {fileID: 2896079619647498738}
+    Radius: 1
+  - Object: {fileID: 80822248620407921}
     Weight: 1
-    Radius: 0.5
+    Radius: 1
   m_LegacyTargets: []
 --- !u!1 &2257467044552749555
 GameObject:
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 350551553395052896}
   - component: {fileID: 9021107034365914611}
   m_Layer: 0
-  m_Name: CinemachineCameraZoomIn
+  m_Name: ZoomIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2257467044552749555}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.02631998, y: 0.94342613, z: -0.077263646, w: -0.3213796}
+  m_LocalRotation: {x: -0.006144555, y: 0.8943423, z: -0.012289075, w: -0.44717243}
   m_LocalPosition: {x: 4.241534, y: 2.4257336, z: 5.5031776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 5514106539190306041}
   - component: {fileID: 2777768419001987410}
   m_Layer: 0
-  m_Name: CinemachineCameraZoomOut
+  m_Name: ZoomOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872363495626400555}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.027952183, y: 0.9211293, z: -0.06733716, w: -0.38236797}
+  m_LocalRotation: {x: 0.0057214103, y: -0.8657704, z: 0.009900701, w: 0.50031084}
   m_LocalPosition: {x: 5.52, y: 2.4257336, z: 5.5031776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FramingMode: 2
-  FramingSize: 0.8
+  FramingSize: 0.3
   CenterOffset: {x: 0, y: 0}
   Damping: 2
   SizeAdjustment: 2
@@ -370,7 +370,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8253292605445134904}
+  - {fileID: 80822248620407921}
   m_Father: {fileID: 6966984157533723407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5821358298730608773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 80822248620407921}
+  m_Layer: 0
+  m_Name: TargetTrackRef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &80822248620407921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5821358298730608773}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2104149267135859843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7444871560540557069
 GameObject:
@@ -574,6 +606,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6966984157533723407}
     m_Modifications:
+    - target: {fileID: 37016019750892797, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+      propertyPath: m_Name
+      value: ActorTrackRef
+      objectReference: {fileID: 0}
     - target: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -639,6 +675,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de80f52befb9bd498d42d401c9c7d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3998781110903687133 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6824056881531236114, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}
+  m_PrefabInstance: {fileID: 7623870346609715407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7714480881037749540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 198786011797538283, guid: c73d258f1c00d254982fbdeaf7ef22f5, type: 3}

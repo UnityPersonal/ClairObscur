@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2550001116870834514}
   - component: {fileID: 6411738151807479062}
+  - component: {fileID: 9098029270446957661}
   m_Layer: 0
   m_Name: ActionCamera
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6971513762151726134}
+  m_Father: {fileID: 4658050147168538962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6411738151807479062
 MonoBehaviour:
@@ -75,6 +76,103 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &9098029270446957661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617545139325817379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28788538b820793469a6374f5cfb254f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OcclusionLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  IgnoreTag: 
+  MinimumDistanceFromTarget: 0.2
+  CameraRadius: 0
+  DistanceEvaluation:
+    Enabled: 0
+    OptimalDistance: 10
+    NearLimit: 5
+    FarLimit: 30
+    MaxQualityBoost: 0.2
+--- !u!1 &4191854969229821237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4658050147168538962}
+  - component: {fileID: 6791188495871393683}
+  m_Layer: 0
+  m_Name: Clear Shot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4658050147168538962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191854969229821237}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2550001116870834514}
+  m_Father: {fileID: 6971513762151726134}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6791188495871393683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191854969229821237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62f748f5292bb343be9e6b0c84416d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 0
+  m_LegacyPriority: 0
+  DefaultTarget:
+    Enabled: 0
+    Target:
+      TrackingTarget: {fileID: 0}
+      LookAtTarget: {fileID: 0}
+      CustomLookAtTarget: 0
+  DefaultBlend:
+    Style: 1
+    Time: 0.5
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
+  ActivateAfter: 0
+  MinDuration: 0
+  RandomizeChoice: 0
+  m_LegacyLookAt: {fileID: 0}
+  m_LegacyFollow: {fileID: 0}
 --- !u!1 &8598094326816659532
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,8 +243,11 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -6883044719165860768, guid: 55264e1deb31a0e488b37eff450d52c4, type: 2}
     value: {fileID: 3373570478085854801}
+  - key: {fileID: 2501618513589732979, guid: 55264e1deb31a0e488b37eff450d52c4, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
+    - d484f1df2c70e47458711ad84cec1152: {fileID: 6791188495871393683}
     - 878eae2e0dc719f47abd979d6d389bea: {fileID: 6411738151807479062}
 --- !u!1001 &7778442896842642783
 PrefabInstance:
@@ -1305,7 +1406,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 814410797533604201, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2550001116870834514}
+      addedObject: {fileID: 4658050147168538962}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
 --- !u!114 &773548208534496754 stripped

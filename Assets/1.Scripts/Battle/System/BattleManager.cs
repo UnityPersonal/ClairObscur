@@ -124,6 +124,8 @@ public class BattleManager : MonoSingleton<BattleManager>
             gameResultUI.UpdateUI();
             IsEndBattle = true;
         }
+        
+        GameManager.Instance.EndBattle();
     }
 
     IEnumerator UpdateBattleLoopCoroutine()
@@ -148,7 +150,6 @@ public class BattleManager : MonoSingleton<BattleManager>
             CheckEndTurn();
             yield return null;
         }
-        
     }
 
 

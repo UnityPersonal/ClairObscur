@@ -15,6 +15,11 @@ public class GameManager : DontDestorySingleton<GameManager>
         SceneManager.LoadScene(BATTLE_SCENE_INDEX, LoadSceneMode.Single);
 
     }
+
+    public void EndBattle()
+    {
+        GameUser.Instance.UpdateStatus();
+    }
     
     public void GoToWorldScene()
     {

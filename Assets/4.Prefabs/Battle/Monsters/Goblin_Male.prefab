@@ -132,7 +132,7 @@ MonoBehaviour:
     - StatName: Health
       StatDescription: "\uCCB4\uB825"
       statValue: 100
-      maxValue: 1000
+      maxValue: 100
     - StatName: AttackPower
       StatDescription: "\uACF5\uACA9\uB825"
       statValue: 10
@@ -149,6 +149,10 @@ MonoBehaviour:
       StatDescription: "\uCE58\uBA85\uD0C0\uC728"
       statValue: 0
       maxValue: 100
+    - StatName: Exp
+      StatDescription: "\uACBD\uD5D8\uCE58"
+      statValue: 100
+      maxValue: -1
   focusCamera: {fileID: 7919581010447045333}
   playerTargetCharacter: {fileID: 0}
 --- !u!1001 &1829610127227457197

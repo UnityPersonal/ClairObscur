@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class StatusEffector
+public partial class StatusEffector
 {
     public string EffectorName;
     public Sprite EffectorIcon;

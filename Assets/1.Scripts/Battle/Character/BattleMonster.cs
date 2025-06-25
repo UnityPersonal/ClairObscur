@@ -61,7 +61,6 @@ public class BattleMonster : BattleCharacter
 
     public override void OnBeginDefendSignal() {}
     public override void OnEndDefendSignal() {}
-    public override void OnCheckParriedSignal() {}
     
     public void OnCounterBeginSignal()
     {
