@@ -25,7 +25,7 @@ public class TimelineEventRouter : MonoSingleton<TimelineEventRouter>
                     monster.OnCounterEndSignal();
                 break;
             }
-            case "parryingattack": BattleManager.Instance.CurrentTurnCharacter.OnCounterAttackSignal(); break;
+            case "parryingattack": BattleManager.Instance.CurrentTurnCharacter.Target.OnCounterAttackSignal(); break;
             
             default: 
                 throw new System.Exception("Unknown signal: " + signal);

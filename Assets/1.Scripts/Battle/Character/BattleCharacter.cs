@@ -59,7 +59,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
 
         // todo: 무기의 속성 가져오기
         string attackEffector = weaponStatus.weaponDealEffector; // 기본 공격 효과
-        foreach (var deal in dealEffectors)
+        foreach (var deal in dealEffectors) // 활성화된 공격속성으로 오버라이드
         {
             if(deal.EffectorValue > 0)
             {
@@ -68,14 +68,22 @@ public abstract partial class BattleCharacter : MonoBehaviour
             }
         }
 
-        BattleEventManager.OnAttack( new AttackEventArgs
-        (
-            damage : GetCurrentDamage(),
+        AttackEventArgs args = new AttackEventArgs(
+            damage: GetCurrentDamage(),
             attackTime: Time.time,
             attackEffector: attackEffector, // todo: 공격 종류에 따라 다르게 설정
             attacker: this,
-            target: Target
-        ));
+            target: Target);
+
+        BattleEventManager.OnAttack(args);
+        { // apply double hit effect
+            var doubleHit = StatusEffect("doubleHit");
+            if (doubleHit.EffectorValue > 0)
+            {
+                BattleEventManager.OnAttack(args); 
+            }
+        }
+        
     }
     
     protected void BindState(string stateName, CharacterState state)
@@ -304,13 +312,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
             }
         }
         
-        { // apply double hit effect
-            var doubleHit = StatusEffect("doubleHit");
-            if (doubleHit.EffectorValue > 0)
-            {
-                damage *= 2; // double the damage
-            }
-        }
+       
 
         { // todo: apply break effect (break gauge stat 추가 필요)
             
