@@ -69,8 +69,6 @@ public class BattlePlayer : BattleCharacter
         IncrementAP(1);
     }
 
-    protected override void OnJumped() { IncrementAP(1);}
-
     protected override int GetCurrentDamage()
     {
         var attackDamage = Stat(GameStat.ATTACK_POWER);

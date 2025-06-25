@@ -334,7 +334,6 @@ public abstract partial class BattleCharacter : MonoBehaviour
     
     protected virtual void OnDodged() {}
     protected virtual void OnParried() {}
-    protected virtual void OnJumped() {}
 
     private void OnAttack(AttackEventArgs args)
     {

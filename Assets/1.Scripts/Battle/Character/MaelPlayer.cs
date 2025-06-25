@@ -141,13 +141,4 @@ public class MaelPlayer : BattlePlayer
         return damage;
     }
 
-    protected override void OnJumped()
-    {
-        base.OnJumped();
-        if (CurrentStanceType == MaelStanceType.None)
-        {
-            var ap = Stat(GameStat.AP);
-            ap.SetStatValue(ap.StatValue + 1);
-        }
-    }
 }

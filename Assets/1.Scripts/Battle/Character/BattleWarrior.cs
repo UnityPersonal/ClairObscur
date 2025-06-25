@@ -123,10 +123,4 @@ public class BattleWarrior : BattlePlayer
         ChangePerfectionCount(1);
     }
     
-    protected override void OnJumped()
-    {
-        base.OnJumped();
-        ChangePerfectionCount(1);
-    }
-    
 }
