@@ -20141,6 +20141,10 @@ MonoBehaviour:
       StatDescription: "\uC2A4\uD0AC \uD6C8\uB828 \uD3EC\uC778"
       statValue: 200
       maxValue: 200
+    - StatName: AttributePoint
+      StatDescription: "\uC18D\uC131 \uAC15\uD654 \uD3EC\uC778\uD2B8"
+      statValue: 200
+      maxValue: 200
     Attributes:
     - attributeName: Vitality
       attributeDescription: "\uD65C\uB825"
