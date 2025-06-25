@@ -52,10 +52,16 @@ public class BattleWarrior : BattlePlayer
         WarriorUI.Instance.gameObject.SetActive(false);
     }
 
+    protected override int GetCoutnerDamage()
+    {
+        int damage = base.GetCoutnerDamage();
+        damage += CurrentRankIndex * 5;
+        return damage;
+    }
+    
     protected override int GetCurrentDamage()
     {
         int damage = base.GetCurrentDamage();
-
         damage += CurrentRankIndex * 5;
         return damage;
     }

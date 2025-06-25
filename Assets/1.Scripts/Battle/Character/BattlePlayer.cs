@@ -145,7 +145,7 @@ public class BattlePlayer : BattleCharacter
         }
     }
 
-    int GetCoutnerDamage()
+    protected virtual int GetCoutnerDamage()
     {
         return GetCurrentDamage() * 2;
     }
