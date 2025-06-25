@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 
-public class SkillDatabase : MonoBehaviour
+public class SkillDatabase : MonoBehaviour , ILoadableAsset
 {
     [SerializeField] string databasePath = "Database/Skills";
     
@@ -13,8 +13,13 @@ public class SkillDatabase : MonoBehaviour
     public Dictionary<string,SkillData> skillTable = new(); 
 
     public Dictionary<string, Sprite> iconTable = new();
-        
+
     private void Start()
+    {
+        LoadAsset();
+    }
+
+    public void LoadAsset()
     {
         foreach (var icon in iconList)
         {
@@ -44,4 +49,5 @@ public class SkillDatabase : MonoBehaviour
     {
         return skillTable[skillName];
     }
+    
 }

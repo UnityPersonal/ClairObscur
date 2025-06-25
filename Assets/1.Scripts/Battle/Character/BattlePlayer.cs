@@ -76,7 +76,17 @@ public class BattlePlayer : BattleCharacter
         var attackDamage = Stat(GameStat.ATTACK_POWER);
         // todo: 어빌리티 값을 데미지에 반영
         // todo: 스킬, 장비, 상태, 직업, 데미지 연동
-        return attackDamage.StatValue ;
+        int damage = attackDamage.StatValue;
+        
+        // apply status effects to damage
+        var powerful = StatusEffect("powerful");
+        if (powerful != null && powerful.EffectorValue > 0)
+        {
+            int powerfulBonus = (int)(damage * 0.25f);
+            damage += powerfulBonus;
+        }
+        
+        return damage;
     }
 
     public BattleCharacter PlayerTargetCharacter { get; set; }= null;

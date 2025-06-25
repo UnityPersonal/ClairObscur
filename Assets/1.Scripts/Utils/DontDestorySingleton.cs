@@ -20,11 +20,13 @@ public class DontDestorySingleton<T> : MonoBehaviour where T : MonoBehaviour
                 DontDestroyOnLoad(instance.gameObject);
                 
                 DontDestorySingleton<T> singleton = instance.GetComponent<DontDestorySingleton<T>>();
-                singleton.singletonInitialized = true;
+                singleton.Initialize();
             }
             return instance;
         }
     }
+    
+    public virtual void Initialize() { singletonInitialized = true; }
     
     protected virtual void Awake()
     {
@@ -40,7 +42,7 @@ public class DontDestorySingleton<T> : MonoBehaviour where T : MonoBehaviour
         }
         else
         {
-            singletonInitialized = true;
+            Initialize();
             instance = this as T;
             DontDestroyOnLoad(gameObject);
         }

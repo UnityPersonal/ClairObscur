@@ -26,21 +26,42 @@ public class GameUser : MonoSingleton<GameUser>
             var speed = status.GetStat(CharacterStatus.SPEED); // 속도
 
             CharacterLevelTable growthTable = AssetManager.Instance.GetCharacterAssetTable(status.CharacterName).characterLevelTable;
-            while (exp.StatValue >= nextExp.StatValue)
-            {
-                exp.StatValue = (exp.StatValue - nextExp.StatValue);
-                level.IncrementStatValue(1);
-                var growthData = growthTable.GetCharacterGrowthData(level.StatValue);
-                nextExp.SetStatValue(growthData.NextExp);
-                
-                health.MaxValue = growthData.Health;
-                health.SetStatValue(growthData.Health);
-                
-                attackPower.SetStatValue(growthData.AttackPower);
-                defense.SetStatValue(growthData.Defense);
-                critical.SetStatValue(growthData.CriticalRate);
-                speed.SetStatValue(growthData.Speed);
+           
+            { // update level up
+                while (exp.StatValue >= nextExp.StatValue)
+                {
+                    exp.StatValue = (exp.StatValue - nextExp.StatValue);
+                    level.IncrementStatValue(1);
+                    var growthData = growthTable.GetCharacterGrowthData(level.StatValue);
+                    nextExp.SetStatValue(growthData.NextExp);
+                }
             }
+
+            {// update stat with attributes
+                var growthData = growthTable.GetCharacterGrowthData(level.StatValue);
+                
+                var vitalityAttr = status.GetAttribute("vitality");
+                var agilityAttr = status.GetAttribute("agility");
+                var mightAttr = status.GetAttribute("might");
+                var defenseAttr = status.GetAttribute("defense");
+                var luckAttr = status.GetAttribute("luck");
+                
+                int maxHP = growthData.Health + vitalityAttr.AttributeValue * 5;
+                int power = growthData.AttackPower + mightAttr.AttributeValue * 5;
+                int def = growthData.Defense + defenseAttr.AttributeValue * 2;
+                int crit = growthData.CriticalRate + luckAttr.AttributeValue;
+                int spd = growthData.Speed + agilityAttr.AttributeValue * 2;
+                
+                health.MaxValue = maxHP;
+                health.SetStatValue(maxHP);
+                attackPower.SetStatValue(power);
+                defense.SetStatValue(def);
+                critical.SetStatValue(crit);
+                speed.SetStatValue(spd);
+            }
+            
+           
+
         }
     }
     

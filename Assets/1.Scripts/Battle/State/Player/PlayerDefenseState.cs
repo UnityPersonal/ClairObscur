@@ -11,8 +11,6 @@ public class PlayerDefenseState : PlayerState
         Parry,
         ParryAttack,
         Dodge,
-        Jump,
-        JumpAttack,
     }
     public DefenseType defenseType = DefenseType.None;
 
@@ -52,12 +50,7 @@ public class PlayerDefenseState : PlayerState
             isActing = true;
             character.SwapAction("parry", (PlayableDirector _) => { OnEndDefenseAction();});
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            player.JumpActionTime = Time.time;
-            isActing = true;
-            character.SwapAction("jump", (PlayableDirector _) => { OnEndDefenseAction();});
-        }
+       
     }
 
     private void OnEndDefenseAction()

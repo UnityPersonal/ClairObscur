@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
+
+public interface ILoadableAsset
+{
+    void LoadAsset();
+}
 
 [Serializable]
 public class CharacterAssetTable
@@ -23,6 +27,7 @@ public class AssetManager : DontDestorySingleton<AssetManager>
     public StatusEffectorAssetTable buffEffectorTable;
     
     public List<CharacterAssetTable> characterAssetTables = new List<CharacterAssetTable>();
+
     public CharacterAssetTable GetCharacterAssetTable(string tableKey)
     {
         return characterAssetTables.FirstOrDefault(table => table.tableKey.Equals(tableKey, StringComparison.OrdinalIgnoreCase));

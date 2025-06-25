@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class SkillInventorySlot : MonoBehaviour, 
     IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler,
-    IPointerClickHandler
+    IPointerClickHandler , IPointerDownHandler
 {
     public string SkillKey { get; private set; }
     public Image skillIcon;
@@ -84,6 +84,11 @@ public class SkillInventorySlot : MonoBehaviour,
     }
 
     public void OnPointerClick(PointerEventData eventData)
+    {
+        CharacterSkillMenu.Instance.PointerClick(this);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
     {
         CharacterSkillMenu.Instance.PointerClick(this);
     }

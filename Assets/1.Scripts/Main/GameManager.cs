@@ -12,6 +12,8 @@ public class GameManager : DontDestorySingleton<GameManager>
     {
         // 배틀씬으로 넘어가는 로직 구현
         Debug.Log("Starting Battle with characters: " + battleCharacters.Count.ToString());
+        
+        GameUser.Instance.UpdateStatus();
         SceneManager.LoadScene(BATTLE_SCENE_INDEX, LoadSceneMode.Single);
 
     }

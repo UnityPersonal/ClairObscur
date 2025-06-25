@@ -132,7 +132,7 @@ MonoBehaviour:
     - StatName: Health
       StatDescription: "\uCCB4\uB825"
       statValue: 100
-      maxValue: 100
+      maxValue: 10000
     - StatName: AttackPower
       StatDescription: "\uACF5\uACA9\uB825"
       statValue: 10

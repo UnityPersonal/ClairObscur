@@ -39,12 +39,22 @@ public struct CharacterGrowthData
     public int Exp { get; set; } 
 }
 
-public class CharacterLevelTable : MonoBehaviour
+public class CharacterLevelTable : MonoBehaviour, ILoadableAsset
 {
     [SerializeField] string tablePath;
     private readonly List<CharacterGrowthData> characterGrowthDataList = new List<CharacterGrowthData>();
 
     private void Start()
+    {
+        LoadAsset();
+    }
+
+    public CharacterGrowthData GetCharacterGrowthData(int level)
+    {
+        return characterGrowthDataList[level];
+    }
+
+    public void LoadAsset()
     {
         //  load character growth data from CSV or other source
         TSVLoader.LoadTableAsync<CharacterGrowthCSVData>(tablePath, true).ContinueWith((taskResult) =>
@@ -59,10 +69,4 @@ public class CharacterLevelTable : MonoBehaviour
 
         });
     }
-
-    public CharacterGrowthData GetCharacterGrowthData(int level)
-    {
-        return characterGrowthDataList[level];
-    }
-
 }
