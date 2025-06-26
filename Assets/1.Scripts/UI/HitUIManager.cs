@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HitUIManager : MonoBehaviour
@@ -5,6 +6,10 @@ public class HitUIManager : MonoBehaviour
     [SerializeField] Canvas canvas;
     
     [SerializeField] HitUI hitUIPrefab;
+    [SerializeField] AudioClip hitSound;
+    [SerializeField] AudioClip dodgeSound;
+    [SerializeField] AudioClip parrySound;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,12 +25,15 @@ public class HitUIManager : MonoBehaviour
     {
         var hitUI = Instantiate(hitUIPrefab, canvas.transform);
         hitUI.Set( canvas, args.Character.transform, "PARRIED");
+        hitUI.audioSource.clip = parrySound; 
+        
     }
 
     private void OnDodged(DodgeEventArgs args)
     {
         var hitUI = Instantiate(hitUIPrefab, canvas.transform);
         hitUI.Set( canvas, args.Character.transform, "DODGED");
+        hitUI.audioSource.clip = dodgeSound;
     }
     
     private void OnJumped(JumpEventArgs args)
@@ -39,5 +47,6 @@ public class HitUIManager : MonoBehaviour
         var hitUI = Instantiate(hitUIPrefab, canvas.transform);
         string damageText = args.Damage.ToString();
         hitUI.Set( canvas, args.Target.transform, damageText);
+        hitUI.audioSource.clip = hitSound;
     }
 }

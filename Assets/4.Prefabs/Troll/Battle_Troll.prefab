@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1300482580625987880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135449706339677308}
+  - component: {fileID: 7897419996535030758}
+  m_Layer: 0
+  m_Name: Battle_Troll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2135449706339677308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300482580625987880}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.9715917, y: 1.7848885, z: 1.6410615}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8867313408071580836}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7897419996535030758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300482580625987880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013cf27843686bd4aab897457f205f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponStatus:
+    weaponDealEffector: physical
+  focusRadius: 2
+  currentAction: {fileID: 0}
+  actionLUT: {fileID: 11400000, guid: 7dbe0f3312faf774693464d427c85171, type: 2}
+  monsterStatus:
+    CharacterName: Troll
+    stats:
+    - StatName: Health
+      StatDescription: "\uCCB4\uB825"
+      statValue: 100
+      maxValue: 10000
+    - StatName: AttackPower
+      StatDescription: "\uACF5\uACA9\uB825"
+      statValue: 300
+      maxValue: 9999
+    - StatName: Defense
+      StatDescription: "\uBC29\uC5B4\uB825"
+      statValue: 10
+      maxValue: 100
+    - StatName: Speed
+      StatDescription: "\uC18D\uB3C4"
+      statValue: 10
+      maxValue: 100
+    - StatName: CritialRate
+      StatDescription: "\uCE58\uBA85\uD0C0\uC728"
+      statValue: 0
+      maxValue: 100
+    - StatName: Exp
+      StatDescription: "\uACBD\uD5D8\uCE58"
+      statValue: 100
+      maxValue: -1
+  focusCamera: {fileID: 3339081335600250652}
+  playerTargetCharacter: {fileID: 0}
+--- !u!1 &8575472762210798786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8867313408071580836}
+  - component: {fileID: 3339081335600250652}
+  m_Layer: 0
+  m_Name: TrollFocusCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8867313408071580836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575472762210798786}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.03946203, y: -0.9505126, z: 0.13519959, w: -0.27692917}
+  m_LocalPosition: {x: -4.55, y: 1.15, z: 1.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2135449706339677308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3339081335600250652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575472762210798786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 1
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0

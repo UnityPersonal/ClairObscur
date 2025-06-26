@@ -23,7 +23,8 @@ public class BattleMonster : BattleCharacter
         BattleEventManager.Callbacks.OnCounter += OnCounter;
         
         BindState("wait", new MonsterWaitState());
-        BindState("active", new MonsterAttackState());
+        BindState("active", new MonsterActiveState());
+        BindState("attack", new MonsterAttackState());
         BindState("death", new MonsterDeathState());
     }
     
@@ -82,22 +83,4 @@ public class BattleMonster : BattleCharacter
         get { return playerTargetCharacter; }
     }
 
-    private IEnumerator SelectTargetCoroutine()
-    {
-        var playerList = BattleManager.Instance.CharacterGroup[BattleCharacterLayer.Player];
-        foreach (var character in playerList)
-        {
-            if(character.IsDead == false)
-            {
-                playerTargetCharacter = character;
-                break;
-            }
-        }
-        
-        while (Input.GetKeyDown(KeyCode.Space) == false)
-        {
-            yield return null;
-        }
-    }
-    
 }

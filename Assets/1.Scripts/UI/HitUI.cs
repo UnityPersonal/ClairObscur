@@ -12,7 +12,8 @@ public class HitUI : MonoBehaviour
     private RectTransform rectTransform;
     private Canvas canvasComponent;
     [SerializeField] TMP_Text damageText;
-
+    public AudioSource audioSource;
+    
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
