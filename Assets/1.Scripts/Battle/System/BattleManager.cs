@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 public class BattleManager : MonoSingleton<BattleManager>
 {
     [SerializeField] GameResultUI gameResultUI;
+    [SerializeField] private BattlePlayerInfoUI[] playerInfoUIs;
+    
     [SerializeField] Transform[] playerSpawnPoints;
     [SerializeField] Transform[] enemySpawnPoints;
     
@@ -57,6 +59,9 @@ public class BattleManager : MonoSingleton<BattleManager>
             player.gameObject.SetActive(true);
             player.ReadyBattle();
             
+            playerInfoUIs[i].Setup(player);
+            playerInfoUIs[i].gameObject.SetActive(true);
+            
             battlePriorityQueue.Enqueue(player);
             
             if (characterGroup.TryGetValue(player.CharacterLayer, out var characterList))
@@ -95,6 +100,19 @@ public class BattleManager : MonoSingleton<BattleManager>
     {
         StartCoroutine(UpdateBattleLoopCoroutine());
     }
+
+    public void EndGame()
+    {
+        foreach (var ui in playerInfoUIs)
+        {
+            ui.gameObject.SetActive(false);
+        }
+        GameManager.Instance.EndBattle();
+        
+        gameResultUI.gameObject.SetActive(true);
+        gameResultUI.UpdateUI();
+        IsEndBattle = true;
+    }
     
     void CheckEndTurn()
     {
@@ -106,9 +124,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         
         if(playerDeadCount == players.Count)
         {
-            IsEndBattle = true;
-            Debug.Log("All players are dead. Battle ended.");
-            GameManager.Instance.GoToWorldScene();
+            EndGame();
             return;
         }
 
@@ -120,12 +136,9 @@ public class BattleManager : MonoSingleton<BattleManager>
 
         if (enemyDeadCount == enemies.Count)
         {
-            gameResultUI.gameObject.SetActive(true);
-            gameResultUI.UpdateUI();
-            IsEndBattle = true;
+            EndGame();
         }
         
-        GameManager.Instance.EndBattle();
     }
 
     IEnumerator UpdateBattleLoopCoroutine()

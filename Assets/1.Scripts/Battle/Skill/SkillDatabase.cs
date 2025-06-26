@@ -34,7 +34,6 @@ public class SkillDatabase : MonoBehaviour , ILoadableAsset
                 Debug.Log($"loaded {list.Count} Verso skills from {databasePath}");
                 foreach (var csvData in list)
                 {
-                    Debug.Log(csvData);
                     var skill = new VersoSkillData(csvData,this);
                     skillTable[skill.Key] = skill;
                 }

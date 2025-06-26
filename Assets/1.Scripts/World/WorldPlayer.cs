@@ -56,8 +56,10 @@ public class WorldPlayer : WorldCharacter
         
         transform.forward = Vector3.Slerp(transform.forward , moveDirection , Time.deltaTime * rotateSpeed);
         Vector3 move = transform.forward * (moveSpeed * Time.deltaTime);
-        characterController.Move(move);
         
+        if(!characterController.isGrounded)
+            move += Physics.gravity * Time.deltaTime;
+        characterController.Move(move);
         animator.SetFloat("MoveSpeed", movementInput.magnitude);
         
     }

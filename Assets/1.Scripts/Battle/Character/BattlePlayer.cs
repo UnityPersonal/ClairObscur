@@ -50,14 +50,6 @@ public class BattlePlayer : BattleCharacter
         ap.SetStatValue(ap.StatValue + amount);
     }
 
-    private void OnReceivedTakedDamage(TakeDamageEventArgs args)
-    {
-        if (Activated == false) return;
-        if (args.Target != Target) return;
-
-        IncrementAP(1);
-    }
-
     protected override void OnDodged()
     {
         IncrementAP(1);
