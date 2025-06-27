@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WorldMonster : WorldCharacter
 {
+    [SerializeField] private string monsterKey;
     // 월드 캐릭터에는 배틀씬으로 넘어갈때 스폰할 캐릭터의 정보를 들고 있다.
     [SerializeField] private BattleMonster[] battleCharacters;
     public List<BattleMonster> BattleCharacters => battleCharacters.ToList();

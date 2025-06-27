@@ -430,6 +430,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6861088159214715976}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2062222112090882726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6432851982515743845}
+  m_Layer: 0
+  m_Name: HitRef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6432851982515743845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062222112090882726}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 198786011797538283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2275091965790772687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +1796,7 @@ Transform:
   m_Children:
   - {fileID: 5049243942190533195}
   - {fileID: 6824056881531236114}
+  - {fileID: 6432851982515743845}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6916429479166698255
@@ -1780,6 +1812,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackTransform: {fileID: 6824056881531236114}
+  attackTransform: {fileID: 6432851982515743845}
+  TrackRadius: 1
+  TrackWeight: 1
 --- !u!1 &6687092797434720636
 GameObject:
   m_ObjectHideFlags: 0

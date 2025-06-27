@@ -34,8 +34,7 @@ public class CharacterSkillMenu : MonoSingleton<CharacterSkillMenu>
     public void Setup(string characterName)
     {
         characterNameText.text = characterName;
-        
-        currentDatabase = WorldPlayer.player.GetSkillDatabase(characterName);
+        currentDatabase = AssetManager.Instance.GetCharacterAssetTable(characterName).skillDatabase;
         exitButton.onClick.AddListener(()=>
         {
             gameObject.SetActive(false);

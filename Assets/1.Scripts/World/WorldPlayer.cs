@@ -15,20 +15,6 @@ public class WorldPlayer : WorldCharacter
     [SerializeField] private float rotateSpeed = 45f;
 
     [SerializeField] private CharacterSelectMenu characterSelectMenu;
-    [SerializeField] private SkillDatabase warriorSkillTable;
-    //[SerializeField] private SkillDatabase archerSkillTable;
-    public SkillDatabase GetSkillDatabase(string characterName)
-    {
-        switch (characterName)
-        {
-            case "Warrior":
-                return warriorSkillTable;
-            // case "Archer":
-            //     return archerSkillTable;
-            default:
-                throw new ArgumentException($"Unknown character name: {characterName}");
-        }
-    }
 
     protected override void Awake()
     {
@@ -75,7 +61,7 @@ public class WorldPlayer : WorldCharacter
 
     private void OnTriggerEnter(Collider other)
     {
-        if((other.gameObject.layer & LayerMask.NameToLayer("Monster")) != 0)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             // 배틀씬으로 넘어가는 로직 구현
             Debug.Log("Battle Trigger Entered");
@@ -84,6 +70,16 @@ public class WorldPlayer : WorldCharacter
             List<BattleCharacter> battleCharacters = new List<BattleCharacter>();
             GameManager.Instance.StartBattle(battleCharacters);
         }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Boss"))
+        {
+            Debug.Log("Battle Trigger Entered");
+            var monster = other.GetComponent<WorldMonster>();
+            GameUser.Instance.enemySamples = monster.BattleCharacters;
+            List<BattleCharacter> battleCharacters = new List<BattleCharacter>();
+            GameManager.Instance.StartBossBattle(battleCharacters);
+        }
+
     }
     
 

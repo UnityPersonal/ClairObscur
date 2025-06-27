@@ -20,6 +20,8 @@ public class SkillButtonUI : MonoBehaviour
             this.skillNameText.text = "No Skill";
             this.apCostText.text = "0";
             this.descriptionText.text = "No description available.";
+            skillButton.enabled = false;
+            skillNameText.color = Color.red; // Disable color
             return;
         }
         

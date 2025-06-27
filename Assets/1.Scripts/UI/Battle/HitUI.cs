@@ -14,15 +14,19 @@ public class HitUI : MonoBehaviour
     [SerializeField] TMP_Text damageText;
     public AudioSource audioSource;
     
+    private Vector3 attachPosition;
+    
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
     }
+    
 
     public void Set(Canvas canvas, Transform attacher, string damage)
     {
         this.canvasComponent = canvas;
         this.attacher = attacher;
+        attachPosition = attacher.position;
         damageText.text = damage;
     }
 
@@ -37,6 +41,6 @@ public class HitUI : MonoBehaviour
         }
         
         offset += Vector3.up * (Time.deltaTime * animationSpeed) ;
-        rectTransform.anchoredPosition = UIUtils.WorldToCanvasPosition(canvasComponent, attacher.position + offset);
+        rectTransform.anchoredPosition = UIUtils.WorldToCanvasPosition(canvasComponent, attachPosition + offset);
     }
 }

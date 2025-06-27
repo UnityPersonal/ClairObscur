@@ -80,6 +80,8 @@ public class BattleManager : MonoSingleton<BattleManager>
             var spawnPoint = enemySpawnPoints[i];
             var enemy = Instantiate(sample, spawnPoint.position, spawnPoint.rotation);
             enemy.gameObject.SetActive(true);
+            enemy.transform.position = spawnPoint.position;
+            enemy.transform.rotation = spawnPoint.rotation;
             
             battlePriorityQueue.Enqueue(enemy);
             enemy.ReadyBattle();

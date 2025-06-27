@@ -30,13 +30,13 @@ public class PlayerSkillActiveState : PlayerState
         var ap = player.Stat(GameStat.AP);
         ap.SetStatValue(ap.StatValue - skillData.ApCost);
         
-        skillData.dealEffectHandler.ApplySkillEffect();
+        skillData.dealEffectHandler.ApplyDealEffect(character);
         skillData.buffEffectHandler.ApplySkillEffect();
         
         // todo: 스킬 효과 적용
         character.SwapAction(action.ActionName, (PlayableDirector _) =>
         {
-            skillData.dealEffectHandler.RemoveSkillEffect();
+            skillData.dealEffectHandler.RemoveDealEffect(character);
             skillData.buffEffectHandler.RemoveSkillEffect();
             character.SwapState("wait");
         });

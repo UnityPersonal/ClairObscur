@@ -4,9 +4,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : DontDestorySingleton<GameManager>
 {
+    
     const int LOBBY_SCENE_INDEX = 0;
     const int WORLD_SCENE_INDEX = 1;
     const int BATTLE_SCENE_INDEX = 2;
+    const int BOSS_SCENE_INDEX = 3;
+
+    public void StartBossBattle(List<BattleCharacter> battleCharacters)
+    {
+        // 배틀씬으로 넘어가는 로직 구현
+        Debug.Log("Starting Battle with characters: " + battleCharacters.Count.ToString());
+        
+        GameUser.Instance.UpdateStatus();
+        SceneManager.LoadScene(BOSS_SCENE_INDEX, LoadSceneMode.Single);
+    }
+
     
     public void StartBattle(List<BattleCharacter> battleCharacters)
     {
@@ -15,7 +27,6 @@ public class GameManager : DontDestorySingleton<GameManager>
         
         GameUser.Instance.UpdateStatus();
         SceneManager.LoadScene(BATTLE_SCENE_INDEX, LoadSceneMode.Single);
-
     }
 
     public void EndBattle()

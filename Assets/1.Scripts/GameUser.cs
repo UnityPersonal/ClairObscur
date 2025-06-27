@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class GameUser : MonoSingleton<GameUser>
+public class GameUser : DontDestorySingleton<GameUser>
 {
     [SerializeField] public List<BattlePlayer>  playerSamples;
     [SerializeField] public List<BattleMonster> enemySamples;

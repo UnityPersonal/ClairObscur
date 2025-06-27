@@ -1,14 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Cinemachine;
-using UnityEditor;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Rendering;
-using UnityEngine.Timeline;
-using Random = UnityEngine.Random;
 
 
 [System.Serializable]
@@ -22,6 +15,12 @@ public enum BattleAttackType
 {
     Normal,
     Skill,
+}
+
+public enum BattleAttackRange
+{
+    SingleTarget, // 단일 대상
+    AllTargets, // 전체 대상
 }
 
 public abstract partial class BattleCharacter : MonoBehaviour
@@ -49,6 +48,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
     public TimelineActor Actor =>  currentAction.Actor;  
     [SerializeField] protected ActionDataTable actionLUT;
     
+    public BattleAttackRange AttackRange { get; set; } = BattleAttackRange.SingleTarget; // 기본 단일 대상 공격
     public void PauseAction() { currentAction.PauseAction();}
     public void ResumeAction() {  currentAction.ResumeAction(); }
     
@@ -57,32 +57,58 @@ public abstract partial class BattleCharacter : MonoBehaviour
         Debug.Log($"<color=green>{CharacterName}</color> ::: OnEmittedBeginAttackSignal {Time.time}");
         AttackCount++;
 
-        // todo: 무기의 속성 가져오기
-        string attackEffector = weaponStatus.weaponDealEffector; // 기본 공격 효과
+        int damage = GetCurrentDamage();
+        
+        string attackEffector = weaponStatus.weaponDealEffector.ToLower(); // 기본 공격 효과
         foreach (var deal in dealEffectors) // 활성화된 공격속성으로 오버라이드
         {
             if(deal.EffectorValue > 0)
             {
-                attackEffector = deal.EffectorName;
+                if(deal.EffectorName.Equals("weapon") == false)
+                    attackEffector = deal.EffectorName;
+                
+                damage *= deal.EffectorValue; // 공격력 증가
                 break;
             }
         }
 
-        AttackEventArgs args = new AttackEventArgs(
-            damage: GetCurrentDamage(),
-            attackTime: Time.time,
-            attackEffector: attackEffector, // todo: 공격 종류에 따라 다르게 설정
-            attacker: this,
-            target: Target);
-
-        BattleEventManager.OnAttack(args);
-        { // apply double hit effect
-            var doubleHit = StatusEffect("doubleHit");
-            if (doubleHit.EffectorValue > 0)
-            {
-                BattleEventManager.OnAttack(args); 
+        void InvokeAttack(BattleCharacter target)
+        {
+            AttackEventArgs args = new AttackEventArgs(
+                damage: damage,
+                attackTime: Time.time,
+                attackEffector: attackEffector, // todo: 공격 종류에 따라 다르게 설정
+                attacker: this,
+                target: Target);
+            
+            BattleEventManager.OnAttack(args);
+            { // apply double hit effect
+                var doubleHit = StatusEffect("doubleHit");
+                if (doubleHit.EffectorValue > 0)
+                {
+                    BattleEventManager.OnAttack(args); 
+                }
             }
         }
+        
+        
+        switch(AttackRange)
+        {
+            case BattleAttackRange.SingleTarget:
+                InvokeAttack(Target);
+                break;
+            case BattleAttackRange.AllTargets:
+            {
+                var allTargets = BattleManager.Instance.CharacterGroup[EnemyLayer];
+                foreach (var target in allTargets)
+                    InvokeAttack(target);
+                break;
+            }
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        
         
     }
     

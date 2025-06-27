@@ -17,7 +17,7 @@ public class SkillData
     public int LearnCost; // 스킬 사용 비용
     public string preLearnSkill; // 선행 스킬 키, 이 스킬을 배우기 전에 반드시 배워야 하는 스킬의 키
 
-    public SkillEffectorHandler dealEffectHandler;
+    public DealEffectorHandler dealEffectHandler;
     public SkillEffectorHandler buffEffectHandler;
     SkillEffectGroup ToGroup(string group)
     {
@@ -48,25 +48,23 @@ public class SkillData
     
     public SkillData(SkillCSVData skillCSVData, SkillDatabase skillDatabase)
     {
-        this.Key = skillCSVData.Key;
-        this.SkillName = skillCSVData.SkillName;
-        this.SkillDescription = skillCSVData.Description;
-        this.ApCost = skillCSVData.APCost;
-        this.LearnCost = skillCSVData.LearningCost;
-        this.SkillIcon = skillDatabase.iconTable[skillCSVData.IconPath];
-        this.action = skillDatabase.actionTable.GetActionData(skillCSVData.ActionPath);
+        Key = skillCSVData.Key;
+        SkillName = skillCSVData.SkillName;
+        SkillDescription = skillCSVData.Description;
+        ApCost = skillCSVData.APCost;
+        LearnCost = skillCSVData.LearningCost;
+        SkillIcon = skillDatabase.iconTable[skillCSVData.IconPath];
+        action = skillDatabase.actionTable.GetActionData(skillCSVData.ActionPath);
 
         preLearnSkill = skillCSVData.PreLearnSkill;
         
-        this.dealEffectHandler = new SkillEffectorHandler();
+        
+        dealEffectHandler = new DealEffectorHandler();
         dealEffectHandler.EffectorName = skillCSVData.DealEffector;
-        dealEffectHandler.EffectorGroup = SkillEffectGroup.Enemy;
         dealEffectHandler.EffectorRange = ToRange(skillCSVData.DealRange);
         dealEffectHandler.EffectorValue = skillCSVData.DealValue;
         
-        
-        
-        this.buffEffectHandler = new SkillEffectorHandler();
+        buffEffectHandler = new SkillEffectorHandler();
         buffEffectHandler.EffectorName = skillCSVData.BuffEffector;
         buffEffectHandler.EffectorGroup = ToGroup(skillCSVData.BuffEffector);
         buffEffectHandler.EffectorRange = ToRange(skillCSVData.BuffRange);

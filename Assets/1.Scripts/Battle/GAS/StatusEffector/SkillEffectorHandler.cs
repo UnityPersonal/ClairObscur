@@ -15,6 +15,72 @@ public enum SkillEffectRange
     Self, // 자신
 }
 
+public class DealEffectorHandler
+{
+    public string EffectorName { get; set; }
+    public SkillEffectRange EffectorRange { get; set; } // 적용 범위
+    public int EffectorValue { get; set; } // 효과 값
+    private int previousValue = 0;
+    private BattleAttackRange previousRange = BattleAttackRange.SingleTarget;
+    
+    bool IsValidEffector()
+    {
+        if(EffectorName.Equals("_") || 
+           EffectorName.Equals("") || 
+           EffectorName.Equals("None") || 
+           EffectorName.Equals("null"))
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    public void ApplyDealEffect(BattleCharacter character)
+    {
+        if (IsValidEffector() == false) return;
+        
+        if (character == null)
+        {
+            Debug.LogError("DealEffectorHandler ::: ApplyDealEffect - Character is null");
+            return;
+        }
+        
+        var effector = character.StatusEffect(EffectorName);
+        previousValue = effector.EffectorValue;
+        previousRange = character.AttackRange;
+        switch (EffectorRange)
+        {
+            case SkillEffectRange.SingleTarget:
+                break;
+            case SkillEffectRange.AllTargets:
+                character.AttackRange = BattleAttackRange.AllTargets;
+                break;
+            case SkillEffectRange.Self:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        effector.EffectorValue = EffectorValue;
+        
+    }
+    
+    public void RemoveDealEffect(BattleCharacter character)
+    {
+        if (IsValidEffector() == false) return;
+        
+        if (character == null)
+        {
+            Debug.LogError("DealEffectorHandler ::: RemoveDealEffect - Character is null");
+            return;
+        }
+        
+        var effector = character.StatusEffect(EffectorName);
+        effector.EffectorValue = previousValue;
+        character.AttackRange = previousRange;
+    }
+}
+
 public class SkillEffectorHandler
 {
     public string EffectorName { get; set; }

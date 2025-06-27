@@ -458,6 +458,8 @@ MonoBehaviour:
   director: {fileID: 2173836429960859140}
   startLocation: {fileID: 7747858324882781952}
   endLocation: {fileID: 8936596044206421597}
+  startReference: {fileID: 0}
+  endReference: {fileID: 0}
   actor: {fileID: 3652306191632339973}
   targetGroup: {fileID: 6642917510427161965}
   tweenBind: 1
@@ -493,6 +495,8 @@ PlayableDirector:
   - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 4733066907289176219, guid: fa27706f0584f3745b3410b0e3214c46, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:

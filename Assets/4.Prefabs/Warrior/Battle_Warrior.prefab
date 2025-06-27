@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponStatus:
-    weaponDealEffector: fire
+    weaponDealEffector: Physical
   focusRadius: 1
   currentAction: {fileID: 0}
   actionLUT: {fileID: 11400000, guid: 077304515b6bbbc4388b0437c00b281a, type: 2}
@@ -60,8 +60,8 @@ MonoBehaviour:
       maxValue: 10000
     - StatName: Ap
       StatDescription: "\uB9C8\uB825"
-      statValue: 8
-      maxValue: 8
+      statValue: 9
+      maxValue: 9
     - StatName: AttackPower
       StatDescription: "\uACF5\uACA9\uB825"
       statValue: 10

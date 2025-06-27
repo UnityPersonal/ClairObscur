@@ -33,12 +33,14 @@ public class BattleActionController : MonoBehaviour
     public string ActionName { get => actionName.ToLower(); }
     
     public PlayableDirector director;
-    public TimelineAsset timelineAsset => director.playableAsset as TimelineAsset;
     
     // 액션 움직임에 참고하기 위한 위치 정보
     // 액션을 재생할때 target의 위치를 참고하여 옮겨준다. 
     [SerializeField] private Transform startLocation;
     [SerializeField] private Transform endLocation;
+    
+    [SerializeField] private CinematicActorReference startReference;
+    [SerializeField] private CinematicActorReference endReference;
     
     [SerializeField] private TimelineActor actor;
     public TimelineActor Actor => actor;
@@ -106,7 +108,7 @@ public class BattleActionController : MonoBehaviour
 
             if (endLocation != null && args.Target != null)
             {
-                endLocation.position = args.Target.Actor.transform.position;
+                endLocation.position = args.Target.Actor.AttackTransform.position;
             }
                 
         }
@@ -117,6 +119,7 @@ public class BattleActionController : MonoBehaviour
             actor.Radius = args.Actor.FocusRadius;
             
             var target = targetGroup.Targets[1];
+            target.Object.position = args.Target.Actor.TrackTransform.position;
             target.Radius = args.Target.FocusRadius;
         }
 

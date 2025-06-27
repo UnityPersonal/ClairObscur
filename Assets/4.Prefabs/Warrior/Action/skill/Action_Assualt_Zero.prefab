@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653471947573395501}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.115480214, y: -0.46661642, z: 0.06160238, w: 0.87472206}
+  m_LocalRotation: {x: -0.11724608, y: -0.46649104, z: -0.06254436, w: 0.8744871}
   m_LocalPosition: {x: 1.533, y: 1.896, z: -1.028}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5997595576121670315}
+  m_Father: {fileID: 6547257985195560580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &892829752620795044
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653471947573395501}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f38bda98361e1de48a4ca2bd86ea3c17, type: 3}
   m_Name: 
@@ -322,6 +322,7 @@ Transform:
   - {fileID: 546058285769427529}
   - {fileID: 2607541686191813664}
   - {fileID: 8596581179557727723}
+  - {fileID: 5997595576121670315}
   - {fileID: 6547257985195560580}
   - {fileID: 1811028804845228496}
   m_Father: {fileID: 0}
@@ -342,6 +343,8 @@ MonoBehaviour:
   director: {fileID: 131780801452728609}
   startLocation: {fileID: 546058285769427529}
   endLocation: {fileID: 8596581179557727723}
+  startReference: {fileID: 0}
+  endReference: {fileID: 0}
   actor: {fileID: 3521660263708333888}
   targetGroup: {fileID: 7968826697008006228}
   tweenBind: 1
@@ -469,7 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 1
+    Enabled: 0
     m_Value: 30
   OutputChannel: 1
   StandbyUpdate: 2
@@ -566,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actorLocation: {fileID: 0}
   actorCameraTrackReference: {fileID: 0}
+  actorHitReference: {fileID: 0}
 --- !u!1 &5919775716421323091
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3798771903540568559}
   m_Layer: 0
-  m_Name: trackReference
+  m_Name: TargetTrackReference
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -821,9 +825,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8118023102001939493}
   - {fileID: 4789024537336450105}
-  m_Father: {fileID: 6547257985195560580}
+  m_Father: {fileID: 414577278094903959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7968826697008006228
 MonoBehaviour:
@@ -1293,7 +1296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 711237130290319747, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
       propertyPath: m_Name
-      value: trackReference
+      value: ActorTrackReference
       objectReference: {fileID: 0}
     - target: {fileID: 814410797533604201, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2375,8 +2378,8 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 814410797533604201, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5997595576121670315}
+      insertIndex: 1
+      addedObject: {fileID: 8118023102001939493}
     - targetCorrespondingSourceObject: {fileID: 814410797533604201, guid: 054b0800cad80b7439bf55ac10b0e13b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 180119658462147951}

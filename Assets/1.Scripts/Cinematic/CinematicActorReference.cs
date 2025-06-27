@@ -5,4 +5,5 @@ public class CinematicActorReference : MonoBehaviour
 {
     [SerializeField] private Transform actorLocation;
     [SerializeField] private Transform actorCameraTrackReference;
+    [SerializeField] private Transform actorHitReference;
 }
