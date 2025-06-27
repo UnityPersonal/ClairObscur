@@ -165,7 +165,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     {
         yield return null;
         
-        while (IsEndBattle == false)
+        while (gameObject.activeInHierarchy && IsEndBattle == false)
         {
             // 현재 턴의 캐릭터를 활성화 시킨다.
             // 플레이어는 수동 선택 액션,
