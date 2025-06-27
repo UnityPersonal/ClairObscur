@@ -10,22 +10,32 @@ public class GameManager : DontDestorySingleton<GameManager>
     const int BATTLE_SCENE_INDEX = 2;
     const int BOSS_SCENE_INDEX = 3;
 
+    private void StartGame(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Boss Battle Scene Loaded");
+        BattleManager.Instance.StartGame();
+        SceneManager.sceneLoaded -= StartGame;
+    }
+    
+
     public void StartBossBattle(List<BattleCharacter> battleCharacters)
     {
         // 배틀씬으로 넘어가는 로직 구현
         Debug.Log("Starting Battle with characters: " + battleCharacters.Count.ToString());
         
         GameUser.Instance.UpdateStatus();
+        SceneManager.sceneLoaded += StartGame;
         SceneManager.LoadScene(BOSS_SCENE_INDEX, LoadSceneMode.Single);
+
     }
 
-    
     public void StartBattle(List<BattleCharacter> battleCharacters)
     {
         // 배틀씬으로 넘어가는 로직 구현
         Debug.Log("Starting Battle with characters: " + battleCharacters.Count.ToString());
         
         GameUser.Instance.UpdateStatus();
+        SceneManager.sceneLoaded += StartGame;
         SceneManager.LoadScene(BATTLE_SCENE_INDEX, LoadSceneMode.Single);
     }
 

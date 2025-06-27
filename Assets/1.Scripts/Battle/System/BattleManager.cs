@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Serialization;
 
 public class BattleManager : MonoSingleton<BattleManager>
@@ -12,6 +13,8 @@ public class BattleManager : MonoSingleton<BattleManager>
     
     [SerializeField] Transform[] playerSpawnPoints;
     [SerializeField] Transform[] enemySpawnPoints;
+    
+    [SerializeField] private PlayableDirector introPlayableDirector;
     
     private bool IsEndBattle { get; set; } = false;
 
@@ -44,9 +47,8 @@ public class BattleManager : MonoSingleton<BattleManager>
     
     void Start()
     {
-        Setup(GameUser.Instance);
     }
-
+ 
     public void Setup(GameUser user)
     {
         for(int i = 0; i < user.playerSamples.Count; i++)
@@ -95,12 +97,28 @@ public class BattleManager : MonoSingleton<BattleManager>
                 characterGroup[enemy.CharacterLayer] = new List<BattleCharacter> { enemy };
             }
         }
-        StartGame();
     }
 
     public void StartGame()
     {
-        StartCoroutine(UpdateBattleLoopCoroutine());
+        if(introPlayableDirector != null)
+        {
+            Debug.Log("Starting intro playable director");
+            introPlayableDirector.stopped += (director) =>
+            {
+                Debug.Log("End intro playable director");
+                introPlayableDirector.gameObject.SetActive(false);
+                Setup(GameUser.Instance);
+                StartCoroutine(UpdateBattleLoopCoroutine());
+            };
+            introPlayableDirector.Play();
+        }
+        else
+        {
+            Setup(GameUser.Instance);
+            StartCoroutine(UpdateBattleLoopCoroutine());
+        }
+        
     }
 
     public void EndGame()
