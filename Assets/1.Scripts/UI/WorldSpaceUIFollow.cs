@@ -25,6 +25,7 @@ public class WorldSpaceUIFollow : MonoBehaviour
 
     void LateUpdate()
     {
+        if(character == null) return;
         var uiWorldPosition = character.Actor.transform.position + offset;
         transform.position = uiWorldPosition;
         transform.forward = -mainCamera.transform.forward;

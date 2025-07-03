@@ -50,6 +50,7 @@ public class PlayerTargetSelectState : PlayerState
         {
             alivedEnemyList[currentIndex].OnFocusOut();
             character.SwapState("mainmenu");
+            character.SwapAction("active");
         }
     }
 
@@ -66,6 +67,7 @@ public class PlayerTargetSelectState : PlayerState
         }
         currentIndex = 0;
         
+        character.SwapAction("wait");
     }
 
     public override void Exit()

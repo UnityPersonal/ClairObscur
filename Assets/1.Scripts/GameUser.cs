@@ -12,6 +12,11 @@ public class GameUser : DontDestorySingleton<GameUser>
     // 저장되어야할 유저 캐릭터 정보
     [SerializeField] PlayerStatus[] playerStatus;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     public void UpdateStatus()
     {
         foreach (var status in playerStatus)
@@ -25,6 +30,9 @@ public class GameUser : DontDestorySingleton<GameUser>
             var critical = status.GetStat(CharacterStatus.CRITICAL_RATE);
             var speed = status.GetStat(CharacterStatus.SPEED); // 속도
 
+            const int AttributePointBonus = 5;
+            var attributePoint = status.GetStat(CharacterStatus.ATTRIBUTE_POINT);
+            
             CharacterLevelTable growthTable = AssetManager.Instance.GetCharacterAssetTable(status.CharacterName).characterLevelTable;
            
             { // update level up
@@ -34,6 +42,8 @@ public class GameUser : DontDestorySingleton<GameUser>
                     level.IncrementStatValue(1);
                     var growthData = growthTable.GetCharacterGrowthData(level.StatValue);
                     nextExp.SetStatValue(growthData.NextExp);
+                    
+                    attributePoint.IncrementStatValue(AttributePointBonus);
                 }
             }
 

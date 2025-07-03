@@ -17,6 +17,8 @@ public class CharacterStatus
     public const string CRITICAL_RATE = "CriticalRate";
     public const string SPEED = "Speed";
     
+    public const string ATTRIBUTE_POINT = "AttributePoint";
+    
     public string CharacterName;
     public List<GameStat> stats = new List<GameStat>();
     public int CurrentHP

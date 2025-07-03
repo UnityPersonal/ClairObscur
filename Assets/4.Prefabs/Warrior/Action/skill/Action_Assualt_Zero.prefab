@@ -347,6 +347,9 @@ MonoBehaviour:
   endReference: {fileID: 0}
   actor: {fileID: 3521660263708333888}
   targetGroup: {fileID: 7968826697008006228}
+  qteInteractUIs:
+  - {fileID: 9106469451185857508}
+  - {fileID: 1018713845260339128}
   tweenBind: 1
 --- !u!320 &131780801452728609
 PlayableDirector:
@@ -2658,3 +2661,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1261927107419471699, guid: 6ed2a7e9854824547b768c8d24d69cc7, type: 3}
   m_PrefabInstance: {fileID: 8966797328413075714}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9106469451185857508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 148859712939133670, guid: 6ed2a7e9854824547b768c8d24d69cc7, type: 3}
+  m_PrefabInstance: {fileID: 8966797328413075714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7487778372838884810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c94883a4d60a6149a061130ca3b1499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

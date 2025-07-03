@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class ActorDesctructor : MonoBehaviour
@@ -38,7 +37,6 @@ public class ActorDesctructor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             DestroyActor();
-            EditorApplication.isPaused = true; // For testing purposes, pause the game after destruction
         }
         else if (StartDestruct)
         {

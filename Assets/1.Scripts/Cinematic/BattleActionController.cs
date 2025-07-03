@@ -47,6 +47,7 @@ public class BattleActionController : MonoBehaviour
     [SerializeField] private CinemachineTargetGroup targetGroup;
     
     private CinemachineCamera[] cameras;
+    public QTEInteractUI[] qteInteractUIs;
     
     [SerializeField] private bool tweenBind = true;
     private void Awake()

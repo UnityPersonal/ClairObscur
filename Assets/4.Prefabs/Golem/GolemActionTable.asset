@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GolemActionTable
   m_EditorClassIdentifier: 
   actionDataList:
-  - {fileID: 1655461432519733260, guid: de07514fde38aff43ae104ac9fa51239, type: 3}
+  - {fileID: 2488042444629224642, guid: 339f54f1eda40644282395343581afbb, type: 3}
   - {fileID: 2347754259917269105, guid: 1a1104a2725ede647be32216eb0eae3a, type: 3}
   - {fileID: 8564643986176834882, guid: cbbb9aed8bac25c4f9827d17c49cdc2d, type: 3}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.XR;
 
 public class WorldPlayer : WorldCharacter
@@ -14,13 +15,25 @@ public class WorldPlayer : WorldCharacter
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotateSpeed = 45f;
 
-    [SerializeField] private CharacterSelectMenu characterSelectMenu;
+    [FormerlySerializedAs("characterSelectMenu")] [SerializeField] private PlayerSelectMenu playerSelectMenu;
 
     protected override void Awake()
     {
         base.Awake();
         characterController = GetComponent<CharacterController>();
         WorldPlayer.player = this;
+    }
+
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    
+    private void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     protected override void UpdateMovement()
@@ -55,7 +68,9 @@ public class WorldPlayer : WorldCharacter
         base.Update();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            characterSelectMenu.gameObject.SetActive(true);
+            playerSelectMenu.gameObject.SetActive(true);
+            gameObject.SetActive(false);
+            
         }
     }
 

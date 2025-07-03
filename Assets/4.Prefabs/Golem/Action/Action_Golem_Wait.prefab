@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6447662242354012789
 Transform:
   m_ObjectHideFlags: 0
@@ -84,7 +84,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1091729041341108834, guid: a537709a44ab28448b09347dbac6338e, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'IndexFinger_02'\n\tTransform 'Finger_02
+        1'\n\tTransform 'Elbow_R'\n\tTransform 'Finger_02'\n\tTransform 'Finger_03'\n\tTransform
+        'Ball_L'\n\tTransform 'Finger_03 1'\n\tTransform 'Thumb_02'\n\tTransform
+        'Ball_R'\n\tTransform 'Clavicle_L'\n\tand more ..."
       objectReference: {fileID: 0}
     - target: {fileID: 3877896269644403746, guid: a537709a44ab28448b09347dbac6338e, type: 3}
       propertyPath: m_Name

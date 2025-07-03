@@ -32,7 +32,18 @@ public class BattleAttribute
         set
         {
             attributeValue = value;
-            character.Callbacks.OnAttributeChanged?.Invoke();
+            if(character != null)
+                character.Callbacks.OnAttributeChanged?.Invoke();
         }
+    }
+
+    public void IncrementAttributeValue(int i)
+    {
+        AttributeValue += i;
+    }
+
+    public void DecrementAttributeValue(int i)
+    {
+        AttributeValue -= i;
     }
 }

@@ -72,6 +72,13 @@ public abstract partial class BattleCharacter : MonoBehaviour
             }
         }
 
+        int qteBonusCount = 0;
+        foreach (var qte in currentAction.qteInteractUIs)
+        {
+            qteBonusCount += qte.IsSuccess ? 1 : 0;
+        }
+        damage *= (qteBonusCount + 1); // QTE 성공 횟수에 따라 공격력 증가
+
         void InvokeAttack(BattleCharacter target)
         {
             AttackEventArgs args = new AttackEventArgs(
@@ -491,8 +498,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
             var burnEffect = StatusEffect("burn");
             if (burnEffect.EffectorValue > 0)
             {
-                OnTakedDamage(10 * burnEffect.EffectorValue);
-                Debug.Log($"<color=red>{name}</color> ::: Burn effect applied, remaining value: {burnEffect.EffectorValue}");
+                OnTakedDamage(burnEffect.EffectorValue);
                 burnEffect.EffectorValue = (burnEffect.EffectorValue - 1); // reduce burn effect value
             }
         }
@@ -501,8 +507,6 @@ public abstract partial class BattleCharacter : MonoBehaviour
             var stunEffect = StatusEffect("stun");
             if (stunEffect.EffectorValue == 1)
             {
-                Debug.Log($"<color=red>{name}</color> ::: Stun effect Value," +
-                          $" Skip Turn");
                 stunEffect.EffectorValue = 0;
                 Deactivate();
                 return;

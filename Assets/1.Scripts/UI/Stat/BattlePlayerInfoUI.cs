@@ -10,7 +10,6 @@ public class BattlePlayerInfoUI : MonoBehaviour
     [SerializeField] TMP_Text hpText; // Text component to display the player's HP text
     [SerializeField] TMP_Text apText; // Text component to display the player's AP text
     [SerializeField] RectTransform apBar; // RectTransform for the AP bar
-    [SerializeField] Image systemImage; // Image component for the system image
 
     BattlePlayer player;
     

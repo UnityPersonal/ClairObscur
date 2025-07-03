@@ -47,6 +47,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     
     void Start()
     {
+        playerInfoUIs = FindObjectsOfType<BattlePlayerInfoUI>(true);
     }
  
     public void Setup(GameUser user)
@@ -101,6 +102,9 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     public void StartGame()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
         if(introPlayableDirector != null)
         {
             Debug.Log("Starting intro playable director");
