@@ -39,9 +39,7 @@ public abstract partial class BattleCharacter : MonoBehaviour
     public StatusEffector StatusEffect(string statName) { return statusEffects[statName.ToLower()]; }
     public string CharacterName => Status.CharacterName;
     
-    [Header("Character Cinematic Settings")]
-    [SerializeField] protected float focusRadius = 1f;
-    public float FocusRadius { get { return focusRadius; } }
+    public float FocusRadius { get { return currentAction.Actor.TrackRadius; } }
     
     [Space(10), Header("Character Action Settings")]
     [SerializeField] protected BattleActionController currentAction;

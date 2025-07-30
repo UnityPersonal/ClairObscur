@@ -369,7 +369,8 @@ MonoBehaviour:
   m_Name: TimeDilationPlayableAsset
   m_EditorClassIdentifier: 
   template:
-    timeScale: 0.84640616
+    timeScale: 1
+    OnlyTimelineDilation: 0
 --- !u!114 &-7698794215721765645
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2014,6 +2015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template:
     timeScale: 0.2
+    OnlyTimelineDilation: 0
 --- !u!114 &-2554346135920654838
 MonoBehaviour:
   m_ObjectHideFlags: 1
