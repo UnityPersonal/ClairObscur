@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [Serializable]
@@ -20,6 +21,7 @@ public class CharacterStatus
     public const string ATTRIBUTE_POINT = "AttributePoint";
     
     public string CharacterName;
+    [TableList()]
     public List<GameStat> stats = new List<GameStat>();
     public int CurrentHP
     {

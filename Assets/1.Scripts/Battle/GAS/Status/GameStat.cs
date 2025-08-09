@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [Serializable]
@@ -9,9 +10,12 @@ public partial class GameStat
     {
         owner = character;
     }
-    
+
+    [TableColumnWidth(20)]
     public string StatName = "Unnamed Stat";
+    [TableColumnWidth(20)]
     public string StatDescription = "No description provided.";
+    [TableColumnWidth(40)]
     [SerializeField] private int statValue = 0;
     [SerializeField] private int maxValue = -1; // -1 means no limit
 

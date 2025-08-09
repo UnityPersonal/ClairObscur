@@ -1,10 +1,14 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [System.Serializable]
 public class BattleAttribute
 {
+    [TableColumnWidth(20)]
     [SerializeField] string attributeName;
+    [TableColumnWidth(20)]
     [SerializeField] string attributeDescription;
+    [TableColumnWidth(20)]
     [SerializeField] int attributeValue;
 
     BattleCharacter character;

@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 [System.Serializable]
 public class PlayerStatus : CharacterStatus
 {
+    [TableList]
     [SerializeField] public List<BattleAttribute> Attributes = new List<BattleAttribute>();
     public BattleAttribute GetAttribute(string name)
     {
