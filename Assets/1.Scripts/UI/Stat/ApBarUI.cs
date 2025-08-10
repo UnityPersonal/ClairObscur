@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ApBarUI : MonoBehaviour
+public class ApBarUI : MonoBehaviour, IWorldUI
 {
     [SerializeField] private GameObject[] apTileList;
     
@@ -11,4 +11,6 @@ public class ApBarUI : MonoBehaviour
             apTileList[i].SetActive(i < ap);
         }
     }
+
+    public RectTransform RectTransform => transform as RectTransform; // Implementing IWorldUI interface
 }

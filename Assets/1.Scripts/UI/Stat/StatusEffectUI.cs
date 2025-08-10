@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class StatusEffectUI : WorldSpaceUIFollow
+public class StatusEffectUI : WorldSpaceUIFollow 
 {
     [SerializeField] StatusEffectTileUI tileUIPrefab;
     [SerializeField] RectTransform statusEffectContainer;

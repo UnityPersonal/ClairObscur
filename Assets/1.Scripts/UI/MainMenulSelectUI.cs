@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class MainMenulSelectUI : MonoSingleton<MainMenulSelectUI>
+public class MainMenulSelectUI : MonoSingleton<MainMenulSelectUI> , IWorldUI
 {
     [SerializeField] private Button attackButton;
     [SerializeField] private Button skillButton;
@@ -61,6 +61,7 @@ public class MainMenulSelectUI : MonoSingleton<MainMenulSelectUI>
             skillButton.enabled = true;
         }
     }
-    
 
+
+    public RectTransform RectTransform => transform as RectTransform; // Implementing IWorldUI interface
 }

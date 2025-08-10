@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WorldSpaceUIFollow : MonoBehaviour
+public class WorldSpaceUIFollow : MonoBehaviour , IWorldUI
 {
     public BattleCharacter character;
     public Camera mainCamera; // 카메라
@@ -23,12 +23,12 @@ public class WorldSpaceUIFollow : MonoBehaviour
         canvas = GetComponentInParent<Canvas>(true);
     }
 
-    void LateUpdate()
+    protected virtual void LateUpdate()
     {
         if(character == null) return;
         var uiWorldPosition = character.Actor.transform.position + offset;
         transform.position = uiWorldPosition;
-        transform.forward = -mainCamera.transform.forward;
+        transform.forward = mainCamera.transform.forward;
         
         //transform.localScale = Vector3.one;
         // 1. 타겟 오브젝트 위에 UI 배치
@@ -43,4 +43,6 @@ public class WorldSpaceUIFollow : MonoBehaviour
         //rectTransform.localScale = Vector3.one * scale;
         //slider.value = character.CurrentHp / character.MaxHp;
     }
+
+    public RectTransform RectTransform => transform as RectTransform; // Implementing IWorldUI interface
 }

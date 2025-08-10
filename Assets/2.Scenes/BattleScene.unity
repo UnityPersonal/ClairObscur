@@ -32791,6 +32791,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5593240860117886827, guid: b2007fa5f3dd8bc47b1a055f77ca5f12, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 1023
+      objectReference: {fileID: 0}
     - target: {fileID: 6009219821254976950, guid: b2007fa5f3dd8bc47b1a055f77ca5f12, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -32879,7 +32883,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1974815796843025407, guid: b2007fa5f3dd8bc47b1a055f77ca5f12, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -75791,6 +75796,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 411798, guid: cbbcdd5ff295f0746a106019e1246642, type: 3}
   m_PrefabInstance: {fileID: 1048738816}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &1049585052 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 8847644513033679493, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
+  m_PrefabInstance: {fileID: 1606738542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1050008872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115686,6 +115696,10 @@ PrefabInstance:
       propertyPath: character
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4012389132146494768, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1049585052}
     - target: {fileID: 4146618429246516264, guid: 87b974b7c4cc3d84bbe268e66c3e512c, type: 3}
       propertyPath: m_fontSize
       value: 35.75

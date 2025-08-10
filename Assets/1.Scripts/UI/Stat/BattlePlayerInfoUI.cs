@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattlePlayerInfoUI : MonoBehaviour
+public class BattlePlayerInfoUI : MonoBehaviour, IWorldUI
 {
     [SerializeField] TMP_Text playerNameText; // Text component to display the player's name
     [SerializeField] Slider hpSlider; // Text component to display the player's hp slider
@@ -12,6 +12,7 @@ public class BattlePlayerInfoUI : MonoBehaviour
     [SerializeField] RectTransform apBar; // RectTransform for the AP bar
 
     BattlePlayer player;
+    public RectTransform RectTransform => transform as RectTransform; // Implementing IWorldUI interface
     
     public void OnStatusChanged()
     {

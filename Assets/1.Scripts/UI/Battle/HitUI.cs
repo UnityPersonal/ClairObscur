@@ -3,7 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class HitUI : MonoBehaviour
+public class HitUI : MonoBehaviour, IWorldUI
 {
     private Transform attacher;
     [SerializeField] float animationSpeed = 1f; // Speed of the animation
@@ -16,8 +16,11 @@ public class HitUI : MonoBehaviour
     
     private Vector3 attachPosition;
     
+    private Camera mainCamera;
+    
     private void Awake()
     {
+        mainCamera = Camera.main;
         rectTransform = GetComponent<RectTransform>();
     }
     
@@ -31,7 +34,7 @@ public class HitUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    protected void LateUpdate()
     {
         life -= Time.deltaTime;
         if (life <= 0)
@@ -41,6 +44,11 @@ public class HitUI : MonoBehaviour
         }
         
         offset += Vector3.up * (Time.deltaTime * animationSpeed) ;
-        rectTransform.anchoredPosition = UIUtils.WorldToCanvasPosition(canvasComponent, attachPosition + offset);
+        transform.position = attachPosition + offset;
+        
+        transform.forward = mainCamera.transform.forward;
+        //rectTransform.anchoredPosition = UIUtils.WorldToCanvasPosition(canvasComponent, attachPosition + offset);
     }
+
+    public RectTransform RectTransform => transform as RectTransform;
 }
