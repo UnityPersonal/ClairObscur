@@ -12,8 +12,8 @@ public class PlayerTargetSelectState : PlayerState
     {
         var player = character as BattlePlayer;
         
-        alivedEnemyList[currentIndex].OnFocusIn();
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //alivedEnemyList[currentIndex].OnFocusIn();
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             alivedEnemyList[currentIndex].OnFocusOut();
                 
@@ -22,7 +22,7 @@ public class PlayerTargetSelectState : PlayerState
                 
             alivedEnemyList[currentIndex].OnFocusIn();
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             alivedEnemyList[currentIndex].OnFocusOut();
                 
@@ -66,7 +66,8 @@ public class PlayerTargetSelectState : PlayerState
             }
         }
         currentIndex = 0;
-        
+        alivedEnemyList[currentIndex].OnFocusIn();
+
         character.SwapAction("wait");
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5095554937889092103}
   - component: {fileID: 2533443287320139956}
   - component: {fileID: 7267399010844443200}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1308343607128925408}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 367741968156430155}
   - component: {fileID: 8458385839990031900}
   - component: {fileID: 1619193881227404769}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 9168427059899001065}
   - component: {fileID: 6568826102070433434}
   - component: {fileID: 8947575322003505658}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HpBarUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}

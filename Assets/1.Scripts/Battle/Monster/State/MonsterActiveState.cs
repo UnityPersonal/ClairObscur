@@ -6,7 +6,7 @@ public class MonsterActiveState : CharacterState
     public override void Execute()
     {
         waitTime += Time.deltaTime;
-        if (waitTime >= 2f)
+        if (waitTime >= 0.5f)
         {
             character.SwapState("attack");
         }

@@ -31,7 +31,7 @@ public class HitUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         life -= Time.deltaTime;
         if (life <= 0)

@@ -46,7 +46,7 @@ public class HitUIManager : MonoBehaviour
     {
         var hitUI = Instantiate(hitUIPrefab, canvas.transform);
         string damageText = args.Damage.ToString();
-        hitUI.Set( canvas, args.Target.transform, damageText);
+        hitUI.Set( canvas, args.Target.Actor.transform, damageText);
         hitUI.audioSource.clip = hitSound;
     }
 }

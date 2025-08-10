@@ -32,12 +32,14 @@ public class BattleMonster : BattleCharacter
     {
         base.OnFocusIn();
         focusCamera.Priority = 30;
+        Debug.Log($" <color=green>BattleMonster</color> ::: OnFocusIn {Time.time} {CharacterName}");
     }
     
     public override void OnFocusOut()
     {
         base.OnFocusOut();
         focusCamera.Priority = -10;
+        Debug.Log($" <color=green>BattleMonster</color> ::: OnFocusOut {Time.time} {CharacterName}");
     }
 
     protected override int GetCurrentDamage()
