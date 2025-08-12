@@ -18,7 +18,7 @@ public class SkillInventorySlot : MonoBehaviour,
     public TMP_Text apText;
     
     [SerializeField] private bool canDrag;
-    public void SetSlot(SkillData slotItem, bool canDrag = true)
+    public void SetSlot(SkillData slotItem, bool active, bool canDrag)
     {
         if (slotItem != null)
         {
@@ -27,7 +27,7 @@ public class SkillInventorySlot : MonoBehaviour,
             apText.text = slotItem.ApCost.ToString();
             this.canDrag = canDrag;
             
-            skillIcon.color = new Color(1,1,1,canDrag ? 1 : 0.5f);
+            skillIcon.color = new Color(1,1,1,active ? 1 : 0.5f);
             
             skillIcon.enabled = true;
             apBackground.enabled = true;

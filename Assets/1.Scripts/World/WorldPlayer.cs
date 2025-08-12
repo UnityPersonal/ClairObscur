@@ -76,23 +76,13 @@ public class WorldPlayer : WorldCharacter
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        if(other.TryGetComponent(out WorldMonster worldMonster))
         {
             // 배틀씬으로 넘어가는 로직 구현
             Debug.Log("Battle Trigger Entered");
-            var monster = other.GetComponent<WorldMonster>();
-            GameUser.Instance.enemySamples = monster.BattleCharacters;
-            List<BattleCharacter> battleCharacters = new List<BattleCharacter>();
-            GameManager.Instance.StartBattle(battleCharacters);
-        }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Boss"))
-        {
-            Debug.Log("Battle Trigger Entered");
-            var monster = other.GetComponent<WorldMonster>();
-            GameUser.Instance.enemySamples = monster.BattleCharacters;
-            List<BattleCharacter> battleCharacters = new List<BattleCharacter>();
-            GameManager.Instance.StartBossBattle(battleCharacters);
+            GameManager.Instance.StartBattle(
+                worldMonster.BattleCharacters,
+                worldMonster.battleScene);
         }
 
     }

@@ -67664,7 +67664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5551988190655120811
 Transform:
   m_ObjectHideFlags: 0
@@ -67705,6 +67705,7 @@ MonoBehaviour:
   endReference: {fileID: 0}
   actor: {fileID: 3652306191632339973}
   targetGroup: {fileID: 6642917510427161965}
+  qteInteractUIs: []
   tweenBind: 1
 --- !u!320 &2173836429960859140
 PlayableDirector:
@@ -68669,7 +68670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7536082115466814737
 Transform:
   m_ObjectHideFlags: 0

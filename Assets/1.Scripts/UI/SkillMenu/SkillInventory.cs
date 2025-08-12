@@ -18,7 +18,7 @@ public class SkillInventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].SetSlot(null);
+            slots[i].SetSlot(null, false, false);
         }
 
         if (items == null) return;
@@ -26,7 +26,7 @@ public class SkillInventory : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             if (slots.Length <= i - 1) break;
-            slots[i].SetSlot(items[i]);
+            slots[i].SetSlot(items[i], true ,true );
         }
     }
 

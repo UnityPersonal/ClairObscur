@@ -6,11 +6,7 @@ using UnityEngine;
 public partial class GameStat
 {
     BattleCharacter owner;
-    public void BindCharacter(BattleCharacter character)
-    {
-        owner = character;
-    }
-
+    
     [TableColumnWidth(20)]
     public string StatName = "Unnamed Stat";
     [TableColumnWidth(20)]
@@ -20,6 +16,12 @@ public partial class GameStat
     [SerializeField] private int maxValue = -1; // -1 means no limit
 
 
+    public void BindCharacter(BattleCharacter character)
+    {
+        owner = character;
+    }
+
+    
     public int StatValue
     {
         get

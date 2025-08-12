@@ -21660,11 +21660,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7555936521016011241, guid: 731ddde15cad24748a90f6c1575cce99, type: 3}
       propertyPath: playerStatus.Array.data[0].stats.Array.data[2].maxValue
-      value: 10
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555936521016011241, guid: 731ddde15cad24748a90f6c1575cce99, type: 3}
+      propertyPath: playerStatus.Array.data[0].stats.Array.data[2].statValue
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7555936521016011241, guid: 731ddde15cad24748a90f6c1575cce99, type: 3}
       propertyPath: playerStatus.Array.data[0].Attributes.Array.data[1].attributeValue
-      value: 0
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -90876,6 +90880,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8302677439116053924, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
+      propertyPath: battleScene
+      value: 2.Scenes/BattleScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302677439116053924, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
       propertyPath: battleCharacters.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -155775,7 +155783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b66845d0dd80848a9c260aedd1e459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterKey: 
+  battleScene: 2.Scenes/BossScene
   battleCharacters:
   - {fileID: -4644127641987257965, guid: 4cfd8d1ca8ced8940a1e9f1da367ebcf, type: 3}
 --- !u!1 &1545688783 stripped
@@ -186882,6 +186890,10 @@ PrefabInstance:
     - target: {fileID: 7814899003161358169, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302677439116053924, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
+      propertyPath: battleScene
+      value: 2.Scenes/BattleScene
       objectReference: {fileID: 0}
     - target: {fileID: 8302677439116053924, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
       propertyPath: 'battleCharacters.Array.data[0]'
@@ -225091,6 +225103,10 @@ PrefabInstance:
     - target: {fileID: 7814899003161358169, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302677439116053924, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
+      propertyPath: battleScene
+      value: 2.Scenes/BattleScene
       objectReference: {fileID: 0}
     - target: {fileID: 8302677439116053924, guid: 786c9b935875bc1439aff3fa70efd726, type: 3}
       propertyPath: 'battleCharacters.Array.data[0]'

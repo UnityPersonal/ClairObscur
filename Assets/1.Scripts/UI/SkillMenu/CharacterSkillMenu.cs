@@ -63,7 +63,11 @@ public class CharacterSkillMenu : MonoSingleton<CharacterSkillMenu>
         SourceSlot = source;
         var skill =currentDatabase.GetSkillData(source.SkillKey);
         dragSlot.gameObject.SetActive(true);
-        dragSlot.SetSlot(skill);
+        dragSlot.SetSlot(
+
+            slotItem: skill,
+            active: true,
+            canDrag: true); // 드래그 중에는 드래그가 불가능하도록 설정);
     }
 
     //드래그 중일때 드래그 중인 슬롯의 위치를 갱신하기 위한 함수 
@@ -114,7 +118,10 @@ public class CharacterSkillMenu : MonoSingleton<CharacterSkillMenu>
     private void ApplyItem(SkillInventorySlot source, SkillInventorySlot target)
     {
         var skill = currentDatabase.GetSkillData(source.SkillKey);
-        target.SetSlot(skill, false);
+        target.SetSlot(
+            slotItem: skill ,
+            active : true,
+            canDrag: true); // 드래그 중에는 드래그가 불가능하도록 설정
         // todo: target에 아이템을 적용하는 로직을 작성해야함
 
         var slots = equipmentSkillInventory.Slots;
