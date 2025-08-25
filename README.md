@@ -28,7 +28,7 @@
 # 3. Tech Stack [기술 스택]
 
 - **C#**
-- **Unity 2022.3.26**
+- **Unity 6000.0.50f1**
 - **ScriptableObject** (연출,스킬)
 - **Timeline** (연출)
 - **State Pattern** (전투 캐릭터 액션 제어)
