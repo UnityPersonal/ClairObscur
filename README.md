@@ -21,8 +21,10 @@
 - (Monster)[https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Battle/Monster/BattleMonster.cs]
 
 ### ⚔️ Battle Action
-- **BattleAction:** 다양한 스킬 연출 및 전투 시스템을 **Timeline** 기반으로 통합 관리  
-- **Signal Asset** 기반으로 전투와 연출을 상호작용  
+- **BattleAction:** 다양한 스킬 연출 및 전투 시스템을 **Timeline** 기반으로 통합 관리
+- [https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Cinematic/BattleActionController.cs]
+- **Signal Asset** 기반으로 전투와 연출을 상호작용
+- [https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Cinematic/TimelineEventRouter.cs]
 
 ### 🎭 Actor
 - Timeline 에서 동적으로 변경된 연출을 Actor 시스템을 통해 적용 가능  
