@@ -14,6 +14,9 @@
 
 ## ✨ Key Features [주요 기능]
 
+### ⚔️ Battle Character
+- **BattleCharacter:** 몬스터,캐릭터등 전투 클래스
+
 ### ⚔️ Battle Action
 - **BattleAction:** 다양한 스킬 연출 및 전투 시스템을 **Timeline** 기반으로 통합 관리  
 - **Signal Asset** 기반으로 전투와 연출을 상호작용  
