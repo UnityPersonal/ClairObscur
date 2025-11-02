@@ -27,13 +27,15 @@
 - [https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Cinematic/TimelineEventRouter.cs]
 
 ### 🎭 Actor
-- Timeline 에서 동적으로 변경된 연출을 Actor 시스템을 통해 적용 가능  
+- Timeline 에서 동적으로 변경된 연출을 Actor 시스템을 통해 적용 가능
+- [https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Cinematic/TimelineActor.cs]  
 
 ### 🪄 Skill
 - 태그 기반 스탯 조회를 통해 스킬 효과 부여  
 
 ### 🧩 Manager
-- **BattleEventManager:** 전투 상호작용 이벤트 관리  
+- **BattleEventManager:** 전투 상호작용 이벤트 관리
+- [https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Battle/System/BattleEventManager.cs]
 
 ---
 
