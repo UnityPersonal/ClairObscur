@@ -16,6 +16,9 @@
 
 ### ⚔️ Battle Character
 - **BattleCharacter:** 몬스터,캐릭터등 전투 클래스
+- (Base)[https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Battle/Character/BattleCharacter.cs]
+- (Player)[https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Battle/Player/BattlePlayer.cs]
+- (Monster)[https://github.com/UnityPersonal/ClairObscur/blob/main/Assets/1.Scripts/Battle/Monster/BattleMonster.cs]
 
 ### ⚔️ Battle Action
 - **BattleAction:** 다양한 스킬 연출 및 전투 시스템을 **Timeline** 기반으로 통합 관리  
